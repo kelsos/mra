@@ -1,7 +1,9 @@
 #ifndef XMLWRAPPER_H
 #define XMLWRAPPER_H
 
-#include <rapidxml/rapidxml.hpp>
+#include <libxml/parser.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/tree.h>
 #include <wx/wx.h>
 #include <wx/textfile.h>
 #include <iostream>
@@ -10,10 +12,9 @@
 #include <MangaInfo.h>
 #include <DbWrapper.h>
 
-using namespace rapidxml;
 using namespace std;
 
-/** TODO: Work on XML Logic with the RapidXML
+/** TODO: Work on XML Logic
  *
  *
  */
@@ -24,9 +25,14 @@ public:
     XmlWrapper();
     /** Default destructor */
     virtual ~XmlWrapper();
+    /** Opens an xmlfile with
+     * \param fileName */
     bool openXmlFile(wxString fileName);
+    /** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
     bool createApplicationSettings();
+    /** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
     bool saveApplicationSettings();
+    /** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
     bool loadApplicationSettings();
     bool saveUserReadingList();
     bool loadUserReadingList();
@@ -35,7 +41,6 @@ public:
 
 protected:
 private:
-    xml_document<> xmlDoc;
     void xmlParser(wxString fileName);
 
 

@@ -82,25 +82,6 @@ void DbWrapper::insertMangaData(MangaInfo* manga)
     st.Finalize();
 }
 
-void DbWrapper::insertMangaData2(unsigned int mangaId, wxString mangaName)
-{
-    static const char sql[]=
-        "INSERT INTO MANGA_INFO ( "
-        "MANGA_ID, "
-        "MANGA_TITLE "
-        " ) VALUES ( "
-        "?, ? "
-        ")";
-
-    wxSQLite3Statement st = mangaData->PrepareStatement(sql);
-
-    st.Bind(1,(int)mangaId);
-    st.Bind(2,mangaName);
-
-    st.ExecuteUpdate();
-    st.Finalize();
-}
-
 void DbWrapper::createMangaInfoTable()
 {
     static const char sql[]=
@@ -242,4 +223,38 @@ void DbWrapper::initDatabase()
     createMangaAuthorsTable();
     createMangaGenresTable();
     createReadingListTable();
+}
+
+void DbWrapper::getMangaData()
+{
+	static const char sql[] =
+			"SELECT * "
+			"FROM MANGA_INFO";
+
+	wxSQLite3ResultSet rs = mangaData->ExecuteQuery(sql);
+
+	while (rs.NextRow())
+	{
+		wxLogDebug(rs.GetString(wxT("MANGA_TITLE")));
+	}
+}
+
+
+void DbWrapper::insertMangaData2(unsigned int mangaId, wxString mangaName)
+{
+    static const char sql[]=
+        "INSERT INTO MANGA_INFO ( "
+        "MANGA_ID, "
+        "MANGA_TITLE "
+        " ) VALUES ( "
+        "?, ? "
+        ")";
+
+    wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+
+    st.Bind(1,(int)mangaId);
+    st.Bind(2,mangaName);
+
+    st.ExecuteUpdate();
+    st.Finalize();
 }

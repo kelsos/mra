@@ -32,6 +32,8 @@ public:
     void insertMangaAuthor(MangaAuthors maAuth);
     void insertMangaGenre(MangaGenres maGen);
     void insertReadingItem(ReadItem readItem);
+    /** Returns the mangaInfo */
+    void getMangaData();
 protected:
 private:
     wxSQLite3Database* mangaData;
