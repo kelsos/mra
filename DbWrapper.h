@@ -14,39 +14,37 @@
 #include "MangaGenres.h"
 #include "ReadItem.h"
 
-class DbWrapper
-{
+class DbWrapper {
 public:
-    DbWrapper();
-    virtual ~DbWrapper();
-    bool isDatabaseConnectionActive();
-    wxSQLite3ResultSet getUserReadingList();
-    int getMangaID(wxString mangaTitle);
-    void insertAuthorData(AuthorInfo author);
-    void insertGenreData(GenreInfo genre);
-    void insertPublisherData(PublisherInfo publisher);
-    void insertMangaData(MangaInfo* manga);
-    void insertMangaData2(unsigned int mangaId, wxString mangaName);
-    void insertNewsItem(NewsStorage newsItem);
-    void insertNewsSubscription(NewsSubscriptions subscription);
-    void insertMangaAuthor(MangaAuthors maAuth);
-    void insertMangaGenre(MangaGenres maGen);
-    void insertReadingItem(ReadItem readItem);
-    /** Returns the mangaInfo */
-    void getMangaData();
+	DbWrapper();
+	virtual ~DbWrapper();
+	bool isDatabaseConnectionActive();
+	wxSQLite3ResultSet getUserReadingList();
+	void insertAuthorData(AuthorInfo* author);
+	void insertGenreData(GenreInfo* genre);
+	void insertPublisherData(PublisherInfo* publisher);
+	void insertMangaData(MangaInfo* manga);
+	void insertNewsItem(NewsStorage* newsItem);
+	void insertNewsSubscription(NewsSubscriptions* subscription);
+	void insertMangaAuthor(MangaAuthors* maAuth);
+	void insertMangaGenre(MangaGenres* maGen);
+	void insertReadingItem(ReadItem* readItem);
+	/** Returns the mangaInfo */
+	void getMangaData();
 protected:
 private:
-    wxSQLite3Database* mangaData;
-    void createAuthorInfoTable();
-    void createGenreInfoTable();
-    void createPublisherInfoTable();
-    void createMangaInfoTable();
-    void createNewsStorageTable();
-    void createNewsSubscriptionsTable();
-    void createMangaAuthorsTable();
-    void createMangaGenresTable();
-    void createReadingListTable();
-    void initDatabase();
+	wxSQLite3Database* mangaData;
+	void createAuthorInfoTable();
+	void createGenreInfoTable();
+	void createPublisherInfoTable();
+	void createMangaInfoTable();
+	void createNewsStorageTable();
+	void createNewsSubscriptionsTable();
+	void createMangaAuthorsTable();
+	void createMangaGenresTable();
+	void createReadingListTable();
+	void initDatabase();
+	int getMangaID(wxString mangaTitle);
 
 };
 

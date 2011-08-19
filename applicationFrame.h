@@ -8,44 +8,43 @@
 #include "AboutBox.h"
 #include "XmlWrapper.h"
 
-class ApplicationFrame : public wxFrame
-{
+class ApplicationFrame: public wxFrame {
 public:
-  ApplicationFrame(const wxString& title);
+	ApplicationFrame(const wxString& title);
 
-  void OnQuit(wxCommandEvent& event);
-  void OnAbout(wxCommandEvent& event);
-  void OnClose(wxCommandEvent& event);
-  void OnTest(wxCommandEvent& event);
+	void OnQuit(wxCommandEvent& event);
+	void OnAbout(wxCommandEvent& event);
+	void OnClose(wxCommandEvent& event);
+	void OnTest(wxCommandEvent& event);
 private:
-  wxMenuBar *menubar;
+	wxMenuBar *menubar;
 
-  wxMenu *file;
-  wxMenu *options;
-  wxMenu *tools;
-  wxMenu *about;
+	wxMenu *file;
+	wxMenu *options;
+	wxMenu *tools;
+	wxMenu *about;
 
-  wxToolBar *toolbar;
-  wxPanel *mainPanel;
+	wxToolBar *toolbar;
+	wxPanel *mainPanel;
 
-  wxBoxSizer* topSizer;
-  wxBoxSizer* upperSizer;
-  wxBoxSizer* upperLeftSizer;
+	wxBoxSizer* topSizer;
+	wxBoxSizer* upperSizer;
+	wxBoxSizer* upperLeftSizer;
 
-  wxPanel *imagePanel;
+	wxPanel *imagePanel;
 
-  wxStaticBox* noteStaticBox;
-  wxNotebook* mangaNoteBook;
+	wxStaticBox* noteStaticBox;
+	wxNotebook* mangaNoteBook;
 
-  MyGrid *mangaListGrid;
+	MyGrid *mangaListGrid;
 
-  wxBoxSizer* lowerSizer;
-  wxStaticBox* rssTickerStaticBox;
-  wxStaticBox* descriptionStaticBox;
-  AboutBox* aboutBox;
+	wxBoxSizer* lowerSizer;
+	wxStaticBox* rssTickerStaticBox;
+	wxStaticBox* descriptionStaticBox;
+	AboutBox* aboutBox;
 
-  DbWrapper* sqlData;
-  XmlWrapper* xml;
+	DbWrapper* sqlData;
+	XmlWrapper* xml;
 };
 
 #endif // APPLICATIONFRAME_H_INCLUDED

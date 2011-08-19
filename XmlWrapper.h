@@ -11,6 +11,7 @@
 #include <fstream>
 #include <MangaInfo.h>
 #include <DbWrapper.h>
+#include <XmlSaxParser.h>
 
 using namespace std;
 
@@ -18,31 +19,30 @@ using namespace std;
  *
  *
  */
-class XmlWrapper
-{
+class XmlWrapper {
 public:
-    /** Default constructor */
-    XmlWrapper();
-    /** Default destructor */
-    virtual ~XmlWrapper();
-    /** Opens an xmlfile with
-     * \param fileName */
-    bool openXmlFile(wxString fileName);
-    /** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-    bool createApplicationSettings();
-    /** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-    bool saveApplicationSettings();
-    /** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-    bool loadApplicationSettings();
-    bool saveUserReadingList();
-    bool loadUserReadingList();
-    bool saveApplicationData();
-    bool loadApplicationData();
+	/** Default constructor */
+	XmlWrapper(DbWrapper* db);
+	/** Default destructor */
+	virtual ~XmlWrapper();
+	/** Opens an xmlfile with
+	 * \param fileName */
+	bool openXmlFile(wxString fileName);
+	/** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+	bool createApplicationSettings();
+	/** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+	bool saveApplicationSettings();
+	/** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+	bool loadApplicationSettings();
+	bool saveUserReadingList();
+	bool loadUserReadingList();
+	bool saveApplicationData();
+	bool loadApplicationData();
 
 protected:
 private:
-    void xmlParser(wxString fileName);
-
+	void xmlParser(wxString fileName);
+	DbWrapper* db;
 
 };
 

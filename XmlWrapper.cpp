@@ -1,40 +1,19 @@
 #include "XmlWrapper.h"
 
-XmlWrapper::XmlWrapper()
-{
-    //ctor
+XmlWrapper::XmlWrapper(DbWrapper* db) {
+	//ctor
+	this->db=db;
 }
 
-XmlWrapper::~XmlWrapper()
-{
-    //dtor
+XmlWrapper::~XmlWrapper() {
+	//dtor
 }
 
-void XmlWrapper::xmlParser(wxString fileName)
-{
-	wxLogDebug(wxT("I R IN YAR FUNCTION"));
-	xmlDocPtr doc;
-	xmlNodePtr currentNode;
-
-	doc = xmlParseFile("test.xml");
-	wxLogDebug(wxT("I HAS PARSE"));
-
-	if(doc == NULL){
-		wxLogDebug(wxT("Document Not Parsed"));
-		return;
-	}
-	currentNode = xmlDocGetRootElement(doc);
-
-	if(currentNode==NULL){
-		wxLogDebug(wxT("Empty Document"));
-		xmlFreeDoc(doc);
-		return;
-	}
-	wxLogDebug(wxT("I HAS FINISHED"));
-
+void XmlWrapper::xmlParser(wxString fileName) {
+	manga_parser_parse_file(fileName,db);
 }
 
-bool XmlWrapper::loadApplicationData()
-{
-	xmlParser(wxT("test"));
+bool XmlWrapper::loadApplicationData() {
+	xmlParser(wxT("test.xml"));
+	return (true);
 }

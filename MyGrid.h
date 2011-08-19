@@ -3,10 +3,9 @@
 #include <wx/notebook.h>
 #include <wx/grid.h>
 
-class MyGrid : public wxGrid
-{
+class MyGrid: public wxGrid {
 public:
-  MyGrid(wxNotebook *parent);
+	MyGrid(wxNotebook *parent);
 
 };
 

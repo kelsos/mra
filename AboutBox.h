@@ -9,33 +9,28 @@
 #include <wx/wx.h>
 #endif
 
-enum
-{
-  ID_ABOUT_WXBUTTONOK = 4101,
-  ID_ABOUT_WXBUTTONREGISTER = 4102,
+enum {
+	ID_ABOUT_WXBUTTONOK = 4101, ID_ABOUT_WXBUTTONREGISTER = 4102,
 };
-
 
 //AboutBox class
-class AboutBox : public wxDialog
-{
+class AboutBox: public wxDialog {
 public:
-  /** AboutBox constuctor
-  *   \param id the window ID.
-  */
-  AboutBox(wxWindowID id);
-  /** OnClose function handles the close event of the AboutBox dialog.
-  *   \param event
-  */
-  void OnClose( wxCommandEvent& event );
-  /** OnButtonOK function handles the OK button press event.
-  *   \param event
-  */
-  void OnButtonOK( wxCommandEvent& event );
+	/** AboutBox constuctor
+	 *   \param id the window ID.
+	 */
+	AboutBox(wxWindowID id);
+	/** OnClose function handles the close event of the AboutBox dialog.
+	 *   \param event
+	 */
+	void OnClose(wxCommandEvent& event);
+	/** OnButtonOK function handles the OK button press event.
+	 *   \param event
+	 */
+	void OnButtonOK(wxCommandEvent& event);
 private:
-  DECLARE_EVENT_TABLE();
+DECLARE_EVENT_TABLE()
+	;
 };
-
-
 
 #endif // ABOUTBOX_H
