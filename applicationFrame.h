@@ -8,13 +8,35 @@
 #include "AboutBox.h"
 #include "XmlWrapper.h"
 
+/**The Application main Frame
+ *
+ */
 class ApplicationFrame: public wxFrame {
 public:
+	/** Default constructor of the Application Main Frame.
+	 *
+	 * @param title
+	 */
 	ApplicationFrame(const wxString& title);
-
+	/**Represents the call of the Application Quit action.
+	 *
+	 * @param event
+	 */
 	void OnQuit(wxCommandEvent& event);
+	/**Represents the call of the application about menu call.
+	 *
+	 * @param event
+	 */
 	void OnAbout(wxCommandEvent& event);
+	/**Represents the application close event
+	 *
+	 * @param event
+	 */
 	void OnClose(wxCommandEvent& event);
+	/**Represents the call of a test event
+	 *
+	 * @param event
+	 */
 	void OnTest(wxCommandEvent& event);
 private:
 	wxMenuBar *menubar;

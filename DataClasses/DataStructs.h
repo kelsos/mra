@@ -4,9 +4,8 @@
 #ifndef DATASTRUCTS_H_
 #define DATASTRUCTS_H_
 
-
 typedef struct _Publisher Publisher;
-/* This struct defines a Publisher with the contained information
+/** This struct defines a Publisher with the contained information
  *
  */
 struct _Publisher
@@ -19,7 +18,7 @@ struct _Publisher
 };
 
 typedef struct _Genre Genre;
-/* This struct defines a Genre with the contained information
+/** This struct defines a Genre with the contained information
  *
  */
 struct _Genre
@@ -30,7 +29,7 @@ struct _Genre
 
 typedef struct _Author Author;
 
-/* This struct defines an Author with the contained information
+/** This struct defines an Author with the contained information
  *
  */
 struct _Author

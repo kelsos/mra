@@ -3,6 +3,7 @@
 //Include of the needed libraries.
 #include <wx/wx.h>
 #include <wx/wxsqlite3.h>
+#include <wx/file.h>
 //Include of the needed data classes.
 #include "AuthorInfo.h"
 #include "GenreInfo.h"
@@ -14,20 +15,67 @@
 #include "MangaGenres.h"
 #include "ReadItem.h"
 
+/**Class DbWrapper is the application layer responsible for the transactions with the SQLite3 database.
+ *
+ */
 class DbWrapper {
 public:
 	DbWrapper();
 	virtual ~DbWrapper();
+	/**Checks if there is an active connection to the database
+	 *
+	 * @return
+	 */
 	bool isDatabaseConnectionActive();
+	/** Gets the User's reading List
+	 *
+	 * @return
+	 */
 	wxSQLite3ResultSet getUserReadingList();
+	/**Inserts an entry representing an author to the database.
+	 *
+	 * @param author
+	 */
 	void insertAuthorData(AuthorInfo* author);
+	/**Inserts an entry representing a Genre to the database.
+	 *
+	 * @param genre
+	 */
 	void insertGenreData(GenreInfo* genre);
+	/**Inserts an entry representing a Publisher to the database.
+	 *
+	 * @param publisher
+	 */
 	void insertPublisherData(PublisherInfo* publisher);
+	/**Inserts an entry representing a Manga to the database.
+	 *
+	 * @param manga
+	 */
 	void insertMangaData(MangaInfo* manga);
+	/**Inserts an entry representing a NewsItem to the database.
+	 *
+	 * @param newsItem
+	 */
 	void insertNewsItem(NewsStorage* newsItem);
+	/**Inserts an entry representing an Rss subscription to the database.
+	 *
+	 * @param subscription
+	 */
 	void insertNewsSubscription(NewsSubscriptions* subscription);
+	/**Inserts an entry representing a Manga Author to the database.
+	 *
+	 * @param maAuth
+	 */
 	void insertMangaAuthor(MangaAuthors* maAuth);
+	/**Inserts an entry representing a Manga Genre to the database.
+	 *
+	 * @param maGen
+	 */
 	void insertMangaGenre(MangaGenres* maGen);
+	/**Inserts an entry representing a Read Item to the database.
+	 *
+	 * @param readItem
+	 */
 	void insertReadingItem(ReadItem* readItem);
 	/** Returns the mangaInfo */
 	void getMangaData();

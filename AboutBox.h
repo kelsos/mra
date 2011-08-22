@@ -13,7 +13,9 @@ enum {
 	ID_ABOUT_WXBUTTONOK = 4101, ID_ABOUT_WXBUTTONREGISTER = 4102,
 };
 
-//AboutBox class
+/**AboutBox class
+ * Represents the About Dialog of the application.
+ */
 class AboutBox: public wxDialog {
 public:
 	/** AboutBox constuctor

@@ -5,8 +5,10 @@ DbWrapper::DbWrapper() {
 	mangaData = new wxSQLite3Database();
 	mangaData->Open(wxT("mdb.db3"), wxEmptyString,
 			WXSQLITE_OPEN_READWRITE | WXSQLITE_OPEN_CREATE);
-	initDatabase();
-	//insertData();
+//	if (!wxFile::Exists("mdb.db3"))
+//	{
+		initDatabase();
+//	}
 }
 
 DbWrapper::~DbWrapper() {
@@ -46,19 +48,20 @@ int DbWrapper::getMangaID(wxString mangaTitle) {
 }
 
 void DbWrapper::insertMangaData(MangaInfo* manga) {
-	static const char sql[] = "INSERT INTO MANGA_INFO ( "
+	static const char sql[] = "INSERT INTO MANGA_INFO ("
 			"MANGA_ID, "
 			"MANGA_TITLE, "
 			"MANGA_DESCRIPTION, "
 			"MANGA_PUBLICATION_DATE, "
 			"MANGA_PUBLICATION_STATUS, "
 			"MANGA_PUBLISHER_ID, "
-			"MANGA_COVER "
-			" ) VALUES ( "
-			"?, ?, ?, ?, ?, ? ,?"
+			"MANGA_COVER"
+			") VALUES ("
+			"?, ?, ?, ?, ?, ?, ?"
 			")";
 
 	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+	wxDateTime toDate;
 
 	st.Bind(1, (int) manga->getMangaId());
 	st.Bind(2, manga->getMangaTitle());
@@ -72,23 +75,26 @@ void DbWrapper::insertMangaData(MangaInfo* manga) {
 }
 
 void DbWrapper::insertAuthorData(AuthorInfo* author) {
-	static const char sql[] = "INSERT INTO AUTHOR_INFO ("
-			"AUTHOR_ID,  "
-			"AUTHOR_NAME,  "
-			"AUTHOR_NATIONALITY,  "
-			"AUTHOR_BIRTHDAY DATE, "
+	static const char sql[] =
+			"INSERT INTO AUTHOR_INFO ("
+			"AUTHOR_ID, "
+			"AUTHOR_NAME, "
+			"AUTHOR_NATIONALITY, "
+			"AUTHOR_BIRTHDAY, "
 			"AUTHOR_WEBSITE "
-			") VALUES ( "
+			") VALUES ("
 			"?, ?, ?, ?, ?"
 			")";
 
+	wxDateTime date;
 	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
 
-	st.Bind(1, (int) author->getAuthorId());
+	st.Bind(1, (int)author->getAuthorId());
 	st.Bind(2, author->getAuthorName());
 	st.Bind(3, author->getAuthorNationality());
 	st.BindDateTime(4, author->getAuthorBirthday());
 	st.Bind(5, author->getAuthorWebsite());
+
 	st.ExecuteUpdate();
 	st.Finalize();
 
@@ -119,9 +125,7 @@ void DbWrapper::insertPublisherData(PublisherInfo* publisher) {
 			" ) values ( "
 			"?, ?, ?, ?, ?"
 			")";
-	wxLogDebug(wxString::Format(wxT("%i"),(int)publisher->getPublisherId()));
-	wxLogDebug(publisher->getPublisherName());
-	wxLogDebug(wxT("Stop Point"));
+
 	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
 
 	st.Bind(1, (int)publisher->getPublisherId());

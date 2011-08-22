@@ -34,9 +34,13 @@ public:
 	bool saveApplicationSettings();
 	/** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
 	bool loadApplicationSettings();
+	/** Saves the user's reading list */
 	bool saveUserReadingList();
+	/** Loads the user's reading list */
 	bool loadUserReadingList();
+	/** Saves the application data */
 	bool saveApplicationData();
+	/** Loads the application data */
 	bool loadApplicationData();
 
 protected:

@@ -19,6 +19,6 @@
 #ifndef XMLSAXPARSER_H_
 #define XMLSAXPARSER_H_
 
-void manga_parser_parse_file(const char* file,DbWrapper *db);
+void parseMangaData(const char* file,DbWrapper *db);
 
 #endif /* XMLSAXPARSER_H_ */

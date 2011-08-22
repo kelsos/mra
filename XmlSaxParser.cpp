@@ -53,12 +53,22 @@ struct _MangaParseState {
 	Manga man;
 	MangaGenre manGen;
 	MangaAuthor manAuth;
-	wxString coverBase64String;
+	std::string coverString;
 	DbWrapper* mdb;
 };
 
+/**TODO: Work on date parsing since I have issues and work out the
+ * image cover data parsing.
+ */
+
 static void manga_parser_start_document(MangaParseState *state) {
 	state->state = PARSER_START;
+	state->auth.birthday.SetYear(1900);
+	state->auth.birthday.SetMonth(wxDateTime::Jan);
+	state->auth.birthday.SetDay(1);
+	state->man.year.SetYear(1900);
+	state->man.year.SetMonth(wxDateTime::Jan);
+	state->man.year.SetDay(1);
 }
 
 static void manga_parser_end_document(MangaParseState *state) {
@@ -154,7 +164,6 @@ static void manga_parser_start_element(MangaParseState *state,
 	case PARSER_IN_MANGAS:
 		if (!strcmp((char*) name, "Manga")) {
 			state->state = PARSER_IN_MANGA;
-			state->coverBase64String = '\0';
 		} else if (!strcmp((char*) name, "MangaGenres")) {
 			state->state = PARSER_IN_MANGA_GENRES;
 		}
@@ -299,7 +308,9 @@ static void manga_parser_end_element(MangaParseState *state,
 		state->auth.name = "\0";
 		state->auth.country = "\0";
 		state->auth.website = "\0";
-		state->auth.birthday = wxDateTime().Inv_Year;
+		state->auth.birthday.SetYear(1900);
+		state->auth.birthday.SetMonth(wxDateTime::Jan);
+		state->auth.birthday.SetDay(1);
 		break;
 	case PARSER_IN_MANGAS:
 		break;
@@ -325,14 +336,19 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_MANGA_COVER:
 		state->state = PARSER_IN_MANGAS;
-		state->man.image = wxBase64Decode(state->coverBase64String);
+		state->man.image = wxBase64Decode(state->coverString);
+		wxLogDebug
+			(_(state->coverString));
 		state->mdb->insertMangaData(new MangaInfo(state->man));
 		state->man.id = 0;
 		state->man.pId = 0;
 		state->man.description = "\0";
-		state->man.status = "Ongoing";
+		state->man.status = "\0";
 		state->man.title = "\0";
-		state->coverBase64String = "\0";
+		state->coverString = "\0";
+		state->man.year.SetYear(1900);
+		state->man.year.SetMonth(wxDateTime::Jan);
+		state->man.year.SetDay(1);
 		break;
 	case PARSER_IN_MANGA_GENRES:
 		break;
@@ -418,14 +434,20 @@ static void manga_parser_characters(MangaParseState *state,
 		break;
 	case PARSER_IN_AUTHOR_NAME:
 		state->auth.name += wxString().FromUTF8(output);
-		;
 		break;
 	case PARSER_IN_AUTHOR_COUNTRY:
 		state->auth.country += wxString().FromUTF8(output);
 		break;
 	case PARSER_IN_AUTHOR_BIRTH:
-		dateData.ParseDateTime(output);
-		state->auth.birthday = dateData;
+		dateData.ParseFormat(output,"%Y-%m-%dT%T");
+		if (dateData.IsValid()) {
+			state->auth.birthday = dateData;
+		} else {
+			state->auth.birthday.SetYear(1900);
+			state->auth.birthday.SetMonth(wxDateTime::Jan);
+			state->auth.birthday.SetDay(1);
+		}
+		wxLogDebug(state->auth.birthday.FormatDate());
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
 		state->auth.website += wxString().FromUTF8(output);
@@ -439,11 +461,18 @@ static void manga_parser_characters(MangaParseState *state,
 		break;
 	case PARSER_IN_MANGA_TITLE:
 		state->man.title += wxString().FromUTF8(output);
-		;
 		break;
 	case PARSER_IN_MANGA_YEAR_OF_PUBLISH:
-		dateData.ParseDateTime(output);
-		state->man.year = dateData;
+		dateData.ParseFormat(output,"%Y-%m-%dT%T");
+		if (dateData.IsValid()) {
+			state->man.year = dateData;
+		} else {
+			state->man.year.SetYear(1900);
+			state->man.year.SetMonth(wxDateTime::Jan);
+			state->man.year.SetDay(1);
+		}
+		wxLogDebug(dateData.FormatDate());
+		wxLogDebug(state->man.year.FormatDate());
 		break;
 	case PARSER_IN_MANGA_STATUS:
 		state->man.status += wxString().FromUTF8(output);
@@ -457,7 +486,7 @@ static void manga_parser_characters(MangaParseState *state,
 		;
 		break;
 	case PARSER_IN_MANGA_COVER:
-		state->coverBase64String += output;
+		state->coverString += output;
 		break;
 	case PARSER_IN_MANGA_GENRES:
 		break;
@@ -510,7 +539,7 @@ static xmlSAXHandler manga_parser = { 0, /* internalSubset */
 0 /* fatalError */
 };
 
-void manga_parser_parse_file(const char* file, DbWrapper *db) {
+void parseMangaData(const char* file, DbWrapper *db) {
 	MangaParseState state = { };
 	state.mdb = db;
 
