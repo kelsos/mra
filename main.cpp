@@ -4,11 +4,15 @@
 IMPLEMENT_APP(MRApp)
 
 bool MRApp::OnInit() {
+	bool wxsOK = true;
 	wxInitAllImageHandlers();
 
-	ApplicationFrame *appFrame = new ApplicationFrame(
-			wxT("Manga Reading Assistant"));
+	if(wxsOK)
+	{
+	ApplicationFrame* appFrame = new ApplicationFrame(0);
 	appFrame->Show(true);
+	SetTopWindow(appFrame);
+	}
 
-	return true;
+	return wxsOK;
 }

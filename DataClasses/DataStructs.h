@@ -70,4 +70,5 @@ struct _MangaAuthor
 	unsigned int aId;
 };
 
+
 #endif /* DATASTRUCTS_H_ */

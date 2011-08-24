@@ -1,6 +1,7 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 #include <wx/wx.h>
+#include <wx/app.h>
 /**Represents the application.
  *
  */

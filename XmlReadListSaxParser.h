@@ -4,6 +4,7 @@
 #include <string>
 #include <wx/wx.h>
 #include "DbWrapper.h"
+#include "ReadItem.h"
 
 #ifndef XMLREADLISTSAXPARSER_H_
 #define XMLREADLISTSAXPARSER_H_

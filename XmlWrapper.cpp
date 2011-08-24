@@ -10,7 +10,7 @@ XmlWrapper::~XmlWrapper() {
 }
 
 void XmlWrapper::xmlParser(wxString fileName) {
-	manga_parser_parse_file(fileName,db);
+	parseMangaData(fileName,db);
 }
 
 bool XmlWrapper::loadApplicationData() {

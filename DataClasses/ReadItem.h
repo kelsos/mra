@@ -22,7 +22,7 @@ public:
 	/** Set mangaTitle
 	 * \param val New value to set
 	 */
-	void SetmangaTitle(wxString val) {
+	void setMangaTitle(wxString val) {
 		mangaTitle = val;
 	}
 	/** Access startingChapter
@@ -34,7 +34,7 @@ public:
 	/** Set startingChapter
 	 * \param val New value to set
 	 */
-	void SetstartingChapter(unsigned int val) {
+	void setStartingChapter(unsigned int val) {
 		startingChapter = val;
 	}
 	/** Access currentChapter
@@ -46,7 +46,7 @@ public:
 	/** Set currentChapter
 	 * \param val New value to set
 	 */
-	void SetcurrentChapter(unsigned int val) {
+	void setCurrentChapter(unsigned int val) {
 		currentChapter = val;
 	}
 	/** Access onlineUrl
@@ -58,7 +58,7 @@ public:
 	/** Set onlineUrl
 	 * \param val New value to set
 	 */
-	void SetonlineUrl(wxString val) {
+	void setOnlineUrl(wxString val) {
 		onlineUrl = val;
 	}
 	/** Access lastRead
@@ -70,7 +70,7 @@ public:
 	/** Set lastRead
 	 * \param val New value to set
 	 */
-	void SetlastRead(wxDateTime val) {
+	void setLastRead(wxDateTime val) {
 		lastRead = val;
 	}
 	/** Access readFinished
@@ -82,7 +82,7 @@ public:
 	/** Set readFinished
 	 * \param val New value to set
 	 */
-	void SetreadFinished(bool val) {
+	void setReadFinished(bool val) {
 		readFinished = val;
 	}
 protected:

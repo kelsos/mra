@@ -3,6 +3,9 @@
 #include <wx/wx.h>
 #include <wx/notebook.h>
 #include <wx/grid.h>
+#include <wx/toolbar.h>
+#include <wx/panel.h>
+#include <wx/frame.h>
 #include "MyGrid.h"
 #include "DbWrapper.h"
 #include "AboutBox.h"
@@ -17,7 +20,7 @@ public:
 	 *
 	 * @param title
 	 */
-	ApplicationFrame(const wxString& title);
+	ApplicationFrame(wxWindow* parent,wxWindowID id=-1);
 	/**Represents the call of the Application Quit action.
 	 *
 	 * @param event
