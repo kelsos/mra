@@ -47,6 +47,35 @@ int DbWrapper::getMangaID(wxString mangaTitle) {
 
 }
 
+void DbWrapper::insertReadItem(ReadItem* readItem)
+{
+	static const char sql[] =
+			"INSERT INTO READING_LIST ("
+					"ENTRY_ID, "
+					"MANGA_ID, "
+					"READ_STARTING_CHAPTER, "
+					"READ_CURRENT_CHAPTER, "
+					"READ_ONLINE_URL, "
+					"READ_IS_FINISHED, "
+					"READ_LAST_TIME, "
+					"READ_NOTE, "
+					"?, ?, ?, ?, ?, ?, ?, ?"
+					")";
+	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+
+	st.Bind(1, (int)readItem->getEntryId());
+	st.Bind(2, getMangaID(readItem->getMangaTitle()));
+	st.Bind(3, (int)readItem->getStartingChapter());
+	st.Bind(4, (int)readItem->getCurrentChapter());
+	st.Bind(5, readItem->getOnlineUrl());
+	st.BindBool(6, readItem->getReadFinished());
+	st.BindDateTime(7,readItem->getLastRead());
+	st.Bind(8, readItem->getMangaNote());
+
+	st.ExecuteUpdate();
+	st.Finalize();
+}
+
 void DbWrapper::insertMangaData(MangaInfo* manga) {
 	static const char sql[] = "INSERT INTO MANGA_INFO ("
 			"MANGA_ID, "

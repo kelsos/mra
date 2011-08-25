@@ -76,7 +76,7 @@ public:
 	 *
 	 * @param readItem
 	 */
-	void insertReadingItem(ReadItem* readItem);
+	void insertReadItem(ReadItem* readItem);
 	/** Returns the mangaInfo */
 	void getMangaData();
 protected:

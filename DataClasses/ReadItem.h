@@ -8,15 +8,15 @@ public:
 	/** Default constructor */
 	ReadItem();
 	/** Full Parameter Constructor */
-	ReadItem(wxString mangaTitle, unsigned intstartingChapter,
-			unsigned intcurrentChapter, wxString onlineUrl, wxDateTime lastRead,
-			bool readFinished);
+	ReadItem(unsigned int entryId, wxString mangaTitle, unsigned int startingChapter,
+			unsigned int currentChapter, wxString onlineUrl,
+			wxDateTime lastRead, bool readFinished);
 	/** Default destructor */
 	virtual ~ReadItem();
 	/** Access mangaTitle
 	 * \return The current value of mangaTitle
 	 */
-	wxString GetmangaTitle() {
+	wxString getMangaTitle() {
 		return mangaTitle;
 	}
 	/** Set mangaTitle
@@ -28,7 +28,7 @@ public:
 	/** Access startingChapter
 	 * \return The current value of startingChapter
 	 */
-	unsigned int GetstartingChapter() {
+	unsigned int getStartingChapter() {
 		return startingChapter;
 	}
 	/** Set startingChapter
@@ -40,7 +40,7 @@ public:
 	/** Access currentChapter
 	 * \return The current value of currentChapter
 	 */
-	unsigned int GetcurrentChapter() {
+	unsigned int getCurrentChapter() {
 		return currentChapter;
 	}
 	/** Set currentChapter
@@ -52,7 +52,7 @@ public:
 	/** Access onlineUrl
 	 * \return The current value of onlineUrl
 	 */
-	wxString GetonlineUrl() {
+	wxString getOnlineUrl() {
 		return onlineUrl;
 	}
 	/** Set onlineUrl
@@ -64,7 +64,7 @@ public:
 	/** Access lastRead
 	 * \return The current value of lastRead
 	 */
-	wxDateTime GetlastRead() {
+	wxDateTime getLastRead() {
 		return lastRead;
 	}
 	/** Set lastRead
@@ -76,7 +76,7 @@ public:
 	/** Access readFinished
 	 * \return The current value of readFinished
 	 */
-	bool GetreadFinished() {
+	bool getReadFinished() {
 		return readFinished;
 	}
 	/** Set readFinished
@@ -85,14 +85,51 @@ public:
 	void setReadFinished(bool val) {
 		readFinished = val;
 	}
+	/** Access mangaNote
+	 *
+	 * @return
+	 */
+	wxString getMangaNote() {
+		return mangaNote;
+	}
+	/** Set mangaNote
+	 *
+	 * @param val New value to set.
+	 */
+	void setMangaNote(wxString val) {
+		mangaNote = val;
+	}
+	/** Appends the val to the existing data of mangaNote
+	 *
+	 * @param val
+	 */
+	void appendMangaNote(wxString val) {
+		mangaNote += val;
+	}
+	/** Set entryId
+	 *
+	 * @param val
+	 */
+	void setEntryId(unsigned int val) {
+		entryId = val;
+	}
+	/** Access entryId
+	 *
+	 * @return
+	 */
+	unsigned int getEntryId() {
+		return entryId;
+	}
 protected:
 private:
+	unsigned int entryId; //!< Member variable "entryId"
 	wxString mangaTitle; //!< Member variable "mangaTitle"
 	unsigned int startingChapter; //!< Member variable "startingChapter"
 	unsigned int currentChapter; //!< Member variable "currentChapter"
 	wxString onlineUrl; //!< Member variable "onlineUrl"
 	wxDateTime lastRead; //!< Member variable "lastRead"
 	bool readFinished; //!< Member variable "readFinished"
+	wxString mangaNote; //!< Member variable "mangaNote"
 };
 
 #endif // READITEM_H

@@ -19,7 +19,7 @@ typedef struct _ReadingListParseState ReadingListParseState;
 struct _ReadingListParseState {
 	ParserState state;
 	ReadItem read;
-	DbWrapper* db;
+	DbWrapper* mdb;
 };
 
 void parserAtDocumentStart(ReadingListParseState* state) {
@@ -141,7 +141,7 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 		state->read.setCurrentChapter(wxAtoi(output));
 		break;
 	case PARSER_IN_MANGA_LAST_DATE:
-		dateData.ParseFormat(output,"%Y-%m-%dT%T");
+		dateData.ParseFormat(output, "%Y-%m-%dT%T");
 		if (dateData.IsValid()) {
 			state->read.setLastRead(dateData);
 		}
@@ -150,19 +150,56 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 		state->read.setOnlineUrl(wxString().FromUTF8(output));
 		break;
 	case PARSER_IN_MANGA_READING_STATUS:
-		if (!strcmp(output, "true")){
-		state->read.setReadFinished(true);
-		} else if (!strcmp(output, "false")){
+		if (!strcmp(output, "true")) {
+			state->read.setReadFinished(true);
+		} else if (!strcmp(output, "false")) {
 			state->read.setReadFinished(false);
-		}
-		else {
+		} else {
 			state->read.setReadFinished(false);
 		}
 		break;
 	case PARSER_IN_MANGA_NOTE:
-//		state->read.se(wxString().FromUTF8(output));
+		state->read.appendMangaNote(wxString().FromUTF8(output));
 		break;
 	case PARSER_AT_END:
 		break;
 	}
+}
+
+static xmlSAXHandler readingListParser = { 0, /* internalSubset */
+0, /* isStandalone */
+0, /* hasInternalSubset */
+0, /* hasExternalSubset */
+0, /* resolveEntity */
+0, /* getEntity */
+0, /* entityDecl */
+0, /* notationDecl */
+0, /* attributeDecl */
+0, /* elementDecl */
+0, /* unparsedEntityDecl */
+0, /* setDocumentLocator */
+(startDocumentSAXFunc) parserAtDocumentStart, /* startDocument */
+(endDocumentSAXFunc) parserAtDocumentEnd, /* endDocument */
+(startElementSAXFunc) parserAtElementStart, /* startElement */
+(endElementSAXFunc) parserAtElementEnd, /* endElement */
+0, /* reference */
+(charactersSAXFunc) parserAtCharacters, /* characters */
+0, /* ignorableWhitespace */
+0, /* processingInstruction */
+(commentSAXFunc) 0, /* comment */
+0, /*warning */
+0, /* error */
+0 /* fatalError */
+};
+
+void parseReadingList(const char* fileName, DbWrapper* db)
+{
+
+	ReadingListParseState state = { };
+	state.mdb = db;
+
+	if (xmlSAXUserParseFile(&readingListParser, &state, fileName) < 0) {
+		fprintf(stdout, "document not well formed");
+	}
+	return;
 }

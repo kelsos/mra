@@ -1,9 +1,9 @@
 #include "applicationFrame.h"
 
-ApplicationFrame::ApplicationFrame(wxWindow* parent, wxWindowID id)
-{
-    Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
-    SetClientSize(wxSize(920,470));
+ApplicationFrame::ApplicationFrame(wxWindow* parent, wxWindowID id) {
+	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize,
+			wxDEFAULT_FRAME_STYLE, _T("id"));
+	SetClientSize(wxSize(920, 470));
 	//The application size cannot grow lower than the specified size
 	SetMinSize(wxSize(920, 740));
 
@@ -44,52 +44,57 @@ ApplicationFrame::ApplicationFrame(wxWindow* parent, wxWindowID id)
 	wxBitmap dataReload(wxT("icons\\reload.png"), wxBITMAP_TYPE_PNG);
 	wxBitmap justReadIt(wxT("icons\\calendar.png"), wxBITMAP_TYPE_PNG);
 
-	toolbar= new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxNO_BORDER, _T("ID_TOOLBAR1"));
+	toolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
+			wxTB_HORIZONTAL | wxNO_BORDER, _T("ID_TOOLBAR1"));
 
-    wxToolBarToolBase* ToolBarItem1 = toolbar->AddTool(wxID_ANY, wxT("Web Browser"), wxBitmap(webBrowser));
-    wxToolBarToolBase* ToolBarItem2 = toolbar->AddTool(wxID_ANY, wxT("I Just Read It"), wxBitmap(justReadIt));
-    wxToolBarToolBase* ToolBarItem3 = toolbar->AddTool(wxID_ANY, wxT("Reload the List"), wxBitmap(dataReload));
+	wxToolBarToolBase* ToolBarItem1 = toolbar->AddTool(wxID_ANY,
+			wxT("Web Browser"), wxBitmap(webBrowser));
+	wxToolBarToolBase* ToolBarItem2 = toolbar->AddTool(wxID_ANY,
+			wxT("I Just Read It"), wxBitmap(justReadIt));
+	wxToolBarToolBase* ToolBarItem3 = toolbar->AddTool(wxID_ANY,
+			wxT("Reload the List"), wxBitmap(dataReload));
 	toolbar->Realize();
 	SetToolBar(toolbar);
 
 //Panel Layout
-	//mainPanel = new wxPanel(this, wxID_ANY,wxPoint(80,88),wxSize(400,400),wxTAB_TRAVERSAL,_T("PANEL"));
+	mainPanel = new wxPanel(this, wxID_ANY, wxPoint(80, 88), wxSize(400, 400),
+			wxTAB_TRAVERSAL, _T("PANEL"));
 
-//	topSizer = new wxBoxSizer(wxVERTICAL);
-//	mainPanel->SetSizer(topSizer);
-//
-//	upperSizer = new wxBoxSizer(wxHORIZONTAL);
-//	topSizer->Add(upperSizer, 2, wxGROW | wxALL | wxFIXED_MINSIZE, 2);
-//
-//	upperLeftSizer = new wxBoxSizer(wxVERTICAL);
-//	upperSizer->Add(upperLeftSizer, 1, wxGROW | wxALL, 5);
-//
-//	imagePanel = new wxPanel(mainPanel, wxID_ANY, wxDefaultPosition,
-//			wxSize(230, 160), wxTAB_TRAVERSAL, wxT("imagePanel"));
-//	upperLeftSizer->Add(imagePanel, 2, wxGROW | wxALL, 5);
-//
-//	noteStaticBox = new wxStaticBox(mainPanel, wxID_STATIC, wxT("Note"),
-//			wxDefaultPosition, wxDefaultSize, 0);
-//	upperLeftSizer->Add(noteStaticBox, 2, wxGROW | wxALL, 4);
-//
-//	mangaNoteBook = new wxNotebook(mainPanel, -1, wxPoint(-1, -1),
-//			wxSize(-1, -1), wxNB_TOP);
-//
-//	mangaListGrid = new MyGrid(mangaNoteBook);
-//	mangaNoteBook->AddPage(mangaListGrid, wxT("MangaList"));
-//
-//	upperSizer->Add(mangaNoteBook, 4, wxGROW | wxALL | wxFIXED_MINSIZE, 5);
-//
-//	lowerSizer = new wxBoxSizer(wxHORIZONTAL);
-//	topSizer->Add(lowerSizer, 1, wxGROW | wxALL | wxFIXED_MINSIZE, 5);
-//
-//	rssTickerStaticBox = new wxStaticBox(mainPanel, wxID_STATIC,
-//			wxT("RSS Ticker"), wxDefaultPosition, wxDefaultSize, 0);
-//	lowerSizer->Add(rssTickerStaticBox, 2, wxGROW | wxALL, 5);
-//
-//	descriptionStaticBox = new wxStaticBox(mainPanel, wxID_STATIC,
-//			wxT("Description"), wxDefaultPosition, wxDefaultSize, 0);
-//	lowerSizer->Add(descriptionStaticBox, 4, wxGROW | wxALL, 5);
+	topSizer = new wxBoxSizer(wxVERTICAL);
+	mainPanel->SetSizer(topSizer);
+
+	upperSizer = new wxBoxSizer(wxHORIZONTAL);
+	topSizer->Add(upperSizer, 2, wxGROW | wxALL | wxFIXED_MINSIZE, 2);
+
+	upperLeftSizer = new wxBoxSizer(wxVERTICAL);
+	upperSizer->Add(upperLeftSizer, 1, wxGROW | wxALL, 5);
+
+	imagePanel = new wxPanel(mainPanel, wxID_ANY, wxDefaultPosition,
+			wxSize(230, 160), wxTAB_TRAVERSAL, wxT("imagePanel"));
+	upperLeftSizer->Add(imagePanel, 2, wxGROW | wxALL, 5);
+
+	noteStaticBox = new wxStaticBox(mainPanel, wxID_STATIC, wxT("Note"),
+			wxDefaultPosition, wxDefaultSize, 0);
+	upperLeftSizer->Add(noteStaticBox, 2, wxGROW | wxALL, 4);
+
+	mangaNoteBook = new wxNotebook(mainPanel, -1, wxPoint(-1, -1),
+			wxSize(-1, -1), wxNB_TOP);
+
+	mangaListGrid = new MyGrid(mangaNoteBook);
+	mangaNoteBook->AddPage(mangaListGrid, wxT("MangaList"));
+
+	upperSizer->Add(mangaNoteBook, 4, wxGROW | wxALL | wxFIXED_MINSIZE, 5);
+
+	lowerSizer = new wxBoxSizer(wxHORIZONTAL);
+	topSizer->Add(lowerSizer, 1, wxGROW | wxALL | wxFIXED_MINSIZE, 5);
+
+	rssTickerStaticBox = new wxStaticBox(mainPanel, wxID_STATIC,
+			wxT("RSS Ticker"), wxDefaultPosition, wxDefaultSize, 0);
+	lowerSizer->Add(rssTickerStaticBox, 2, wxGROW | wxALL, 5);
+
+	descriptionStaticBox = new wxStaticBox(mainPanel, wxID_STATIC,
+			wxT("Description"), wxDefaultPosition, wxDefaultSize, 0);
+	lowerSizer->Add(descriptionStaticBox, 4, wxGROW | wxALL, 5);
 
 	Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED,
 			wxCommandEventHandler(ApplicationFrame::OnQuit));
