@@ -107,6 +107,7 @@ void parserAtElementEnd(ReadingListParseState* state, xmlChar* name) {
 		break;
 	case PARSER_IN_MANGA_NOTE:
 		state->state = PARSER_IN_MANGAREADINGLIST;
+		state->mdb->insertReadItem(&state->read);
 		break;
 	case PARSER_AT_END:
 		break;
@@ -164,6 +165,7 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 	case PARSER_AT_END:
 		break;
 	}
+	wxLogDebug(_(output));
 }
 
 static xmlSAXHandler readingListParser = { 0, /* internalSubset */

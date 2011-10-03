@@ -17,3 +17,7 @@ bool XmlWrapper::loadApplicationData() {
 	xmlParser(wxT("test.xml"));
 	return (true);
 }
+
+void XmlWrapper::loadUserReadingList(wxString fileName){
+    parseReadingList(fileName,db);
+}

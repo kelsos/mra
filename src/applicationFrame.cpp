@@ -127,8 +127,9 @@ void ApplicationFrame::OnClose(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void ApplicationFrame::OnTest(wxCommandEvent& WXUNUSED(event)) {
-	xml->loadApplicationData();
+	//xml->loadApplicationData();
 	sqlData->getMangaData();
+	xml->loadUserReadingList(wxT("read.xml"));
 //    if(xml->openXmlFile(wxT("test.xml")))
 //    {
 //        wxMessageBox( _("Load Is Ok"),

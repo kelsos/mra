@@ -51,7 +51,6 @@ void DbWrapper::insertReadItem(ReadItem* readItem)
 {
 	static const char sql[] =
 			"INSERT INTO READING_LIST ("
-					"ENTRY_ID, "
 					"MANGA_ID, "
 					"READ_STARTING_CHAPTER, "
 					"READ_CURRENT_CHAPTER, "
@@ -59,18 +58,18 @@ void DbWrapper::insertReadItem(ReadItem* readItem)
 					"READ_IS_FINISHED, "
 					"READ_LAST_TIME, "
 					"READ_NOTE, "
-					"?, ?, ?, ?, ?, ?, ?, ?"
+					"?, ?, ?, ?, ?, ?, ?"
 					")";
 	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
 
-	st.Bind(1, (int)readItem->getEntryId());
-	st.Bind(2, getMangaID(readItem->getMangaTitle()));
-	st.Bind(3, (int)readItem->getStartingChapter());
-	st.Bind(4, (int)readItem->getCurrentChapter());
-	st.Bind(5, readItem->getOnlineUrl());
-	st.BindBool(6, readItem->getReadFinished());
-	st.BindDateTime(7,readItem->getLastRead());
-	st.Bind(8, readItem->getMangaNote());
+	int i = 0;
+	st.Bind(++i, getMangaID(readItem->getMangaTitle()));
+	st.Bind(++i, (int)readItem->getStartingChapter());
+	st.Bind(++i, (int)readItem->getCurrentChapter());
+	st.Bind(++i, readItem->getOnlineUrl());
+	st.BindBool(++i, readItem->getReadFinished());
+	st.BindDateTime(++i,readItem->getLastRead());
+	st.Bind(++i, readItem->getMangaNote());
 
 	st.ExecuteUpdate();
 	st.Finalize();
@@ -240,6 +239,8 @@ void DbWrapper::insertMangaGenre(MangaGenres* maGen) {
 }
 
 void DbWrapper::createMangaInfoTable() {
+    if (mangaData->TableExists(wxT("MANGA_INFO")))
+        return;
 	static const char sql[] =
 			"CREATE TABLE MANGA_INFO ( "
 					"MANGA_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
@@ -256,6 +257,8 @@ void DbWrapper::createMangaInfoTable() {
 }
 
 void DbWrapper::createPublisherInfoTable() {
+    if (mangaData->TableExists(wxT("PUBLISHER_INFO")))
+        return;
 	static const char sql[] = "CREATE TABLE PUBLISHER_INFO ( "
 			"PUBLISHER_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"PUBLISHER_NAME NVARCHAR(150) NOT NULL, "
@@ -268,6 +271,8 @@ void DbWrapper::createPublisherInfoTable() {
 }
 
 void DbWrapper::createAuthorInfoTable() {
+    if (mangaData->TableExists(wxT("AUTHOR_INFO")))
+        return;
 	static const char sql[] = "CREATE TABLE AUTHOR_INFO ( "
 			"AUTHOR_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"AUTHOR_NAME NVARCHAR(100) NOT NULL, "
@@ -280,6 +285,8 @@ void DbWrapper::createAuthorInfoTable() {
 }
 
 void DbWrapper::createGenreInfoTable() {
+    if (mangaData->TableExists(wxT("GENRE_INFO")))
+        return;
 	static const char sql[] = "CREATE TABLE GENRE_INFO ( "
 			"GENRE_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"GENRE_NAME NVARCHAR(50) "
@@ -289,6 +296,8 @@ void DbWrapper::createGenreInfoTable() {
 }
 
 void DbWrapper::createNewsStorageTable() {
+    if (mangaData->TableExists(wxT("NEWS_STORAGE")))
+        return;
 	static const char sql[] = "CREATE TABLE NEWS_STORAGE ( "
 			"NEWSITEM_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"NEWSITEM_TITLE NVARCHAR(150), "
@@ -302,6 +311,8 @@ void DbWrapper::createNewsStorageTable() {
 }
 
 void DbWrapper::createNewsSubscriptionsTable() {
+    if (mangaData->TableExists(wxT("NEWS_SUBSCRIPTIONS")))
+        return;
 	static const char sql[] = "CREATE TABLE NEWS_SUBSCRIPTIONS ( "
 			"SUBSCRIPTION_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"SUBSCRIPTION_URL NVARCHAR(150) NOT NULL, "
@@ -312,6 +323,8 @@ void DbWrapper::createNewsSubscriptionsTable() {
 }
 
 void DbWrapper::createMangaAuthorsTable() {
+    if (mangaData->TableExists(wxT("MANGA_AUTHORS")))
+        return;
 	static const char sql[] =
 			"CREATE TABLE MANGA_AUTHORS ( "
 					"MANGA_ID INTEGER  NOT NULL, "
@@ -326,6 +339,8 @@ void DbWrapper::createMangaAuthorsTable() {
 }
 
 void DbWrapper::createMangaGenresTable() {
+    if (mangaData->TableExists(wxT("MANGA_GENRES")))
+        return;
 	static const char sql[] =
 			"CREATE TABLE MANGA_GENRES ( "
 					"MANGA_ID INTEGER NOT NULL, "
@@ -339,6 +354,8 @@ void DbWrapper::createMangaGenresTable() {
 }
 
 void DbWrapper::createReadingListTable() {
+    if (mangaData->TableExists(wxT("READING_LIST")))
+        return;
 	static const char sql[] =
 			"CREATE TABLE READING_LIST ( "
 					"ENTRY_ID INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT, "

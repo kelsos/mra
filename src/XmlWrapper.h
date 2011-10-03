@@ -12,6 +12,7 @@
 #include <MangaInfo.h>
 #include <DbWrapper.h>
 #include <XmlSaxParser.h>
+#include <XmlReadListSaxParser.h>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 	/** Saves the user's reading list */
 	bool saveUserReadingList();
 	/** Loads the user's reading list */
-	bool loadUserReadingList();
+	void loadUserReadingList(wxString fileName);
 	/** Saves the application data */
 	bool saveApplicationData();
 	/** Loads the application data */
