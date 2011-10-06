@@ -6,7 +6,7 @@
 #include <wx/toolbar.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
-#include "MyGrid.h"
+#include "DataGrid.h"
 #include "DbWrapper.h"
 #include "AboutBox.h"
 #include "XmlWrapper.h"
@@ -61,7 +61,7 @@ private:
 	wxStaticBox* noteStaticBox;
 	wxNotebook* mangaNoteBook;
 
-	MyGrid *mangaListGrid;
+	DataGrid *mangaListGrid;
 
 	wxBoxSizer* lowerSizer;
 	wxStaticBox* rssTickerStaticBox;

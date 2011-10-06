@@ -14,6 +14,7 @@
 #include "MangaAuthors.h"
 #include "MangaGenres.h"
 #include "ReadItem.h"
+#include "DataGrid.h"
 
 /**Class DbWrapper is the application layer responsible for the transactions with the SQLite3 database.
  *
@@ -31,7 +32,7 @@ public:
 	 *
 	 * @return
 	 */
-	wxSQLite3ResultSet getUserReadingList();
+	void getUserReadingList(DataGrid* grid);
 	/**Inserts an entry representing an author to the database.
 	 *
 	 * @param author
@@ -93,6 +94,12 @@ private:
 	void createReadingListTable();
 	void initDatabase();
 	int getMangaID(wxString mangaTitle);
+	/**Given the manga ID number the method returns the manga title.
+	 *
+	 * @param mangaId
+	 * @return Manga Title
+	 */
+	wxString getMangaTitle(int mangaId);
 
 };
 

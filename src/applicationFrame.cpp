@@ -7,7 +7,7 @@ ApplicationFrame::ApplicationFrame(wxWindow* parent, wxWindowID id) {
 	//The application size cannot grow lower than the specified size
 	SetMinSize(wxSize(920, 740));
 
-	menubar = new wxMenuBar;
+	menubar = new wxMenuBar();
 
 	file = new wxMenu;
 	options = new wxMenu;
@@ -80,7 +80,7 @@ ApplicationFrame::ApplicationFrame(wxWindow* parent, wxWindowID id) {
 	mangaNoteBook = new wxNotebook(mainPanel, -1, wxPoint(-1, -1),
 			wxSize(-1, -1), wxNB_TOP);
 
-	mangaListGrid = new MyGrid(mangaNoteBook);
+	mangaListGrid = new DataGrid(mangaNoteBook);
 	mangaNoteBook->AddPage(mangaListGrid, wxT("MangaList"));
 
 	upperSizer->Add(mangaNoteBook, 4, wxGROW | wxALL | wxFIXED_MINSIZE, 5);
@@ -128,8 +128,9 @@ void ApplicationFrame::OnClose(wxCommandEvent& WXUNUSED(event)) {
 
 void ApplicationFrame::OnTest(wxCommandEvent& WXUNUSED(event)) {
 	//xml->loadApplicationData();
-	sqlData->getMangaData();
-	xml->loadUserReadingList(wxT("read.xml"));
+	//sqlData->getMangaData();
+	//xml->loadUserReadingList(wxT("read.xml"));
+	sqlData->getUserReadingList(mangaListGrid);
 //    if(xml->openXmlFile(wxT("test.xml")))
 //    {
 //        wxMessageBox( _("Load Is Ok"),
