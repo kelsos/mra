@@ -31,13 +31,4 @@ void MangaInfo::clear() {
 	this->mangaCover = '\0';
 }
 
-MangaInfo::MangaInfo(Manga man) {
-	this->mangaId = man.id;
-	this->mangaTitle = man.title;
-	this->mangaDescription = man.description;
-	this->mangaPublicationDate = man.year;
-	this->mangaPublicationStatus = man.status;
-	this->mangaPublisherId = man.pId;
-	this->mangaCover = man.image;
-}
 

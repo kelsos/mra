@@ -18,7 +18,3 @@ void MangaGenres::clear() {
 	this->genreId = '\0';
 }
 
-MangaGenres::MangaGenres(MangaGenre manGen) {
-	this->mangaId = manGen.mId;
-	this->genreId = manGen.gId;
-}

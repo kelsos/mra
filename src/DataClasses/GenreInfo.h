@@ -4,15 +4,12 @@
 #include <qstring>
 #include <qdatetime>
 
-#include "DataStructs.h"
-
 class GenreInfo {
 public:
 	/** Default constructor */
 	GenreInfo();
 	/** Parametered constructor */
 	GenreInfo(unsigned int genreId, QString genreName);
-	GenreInfo(Genre gen);
 	/** Default destructor */
 	virtual ~GenreInfo();
 	/** Access genreId

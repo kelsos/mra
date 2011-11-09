@@ -3,14 +3,12 @@
 
 #include <qstring>
 #include <qdatetime>
-#include "DataStructs.h"
 
 class MangaGenres {
 public:
 	/** Default constructor */
 	MangaGenres();
 	MangaGenres(unsigned int mangaId, unsigned int genreId);
-	MangaGenres(MangaGenre manGen);
 	/** Default destructor */
 	virtual ~MangaGenres();
 	/** Access mangaId

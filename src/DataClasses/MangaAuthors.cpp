@@ -18,7 +18,3 @@ void MangaAuthors::clear() {
 	this->authorId = '\0';
 }
 
-MangaAuthors::MangaAuthors(MangaAuthor manAuth) {
-	this->mangaId = manAuth.mId;
-	this->authorId = manAuth.aId;
-}

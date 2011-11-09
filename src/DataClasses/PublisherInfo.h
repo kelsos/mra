@@ -4,8 +4,6 @@
 #include <qstring>
 #include <qdatetime>
 
-#include "DataStructs.h"
-
 class PublisherInfo {
 public:
 	/** Default constructor */
@@ -14,7 +12,6 @@ public:
 	PublisherInfo(unsigned int publisherId, QString publisherName,
 			QString publisherCountry, QString publisherWebsite,
 			QString publisherNote);
-	PublisherInfo(Publisher pub);
 	/** Default destructor */
 	virtual ~PublisherInfo();
 	/** Access publisherId

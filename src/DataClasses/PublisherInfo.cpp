@@ -13,14 +13,6 @@ PublisherInfo::PublisherInfo(unsigned int publisherId, QString publisherName,
 	this->publisherWebsite = publisherWebsite;
 	this->publisherNote = publisherNote;
 }
-PublisherInfo::PublisherInfo(Publisher pub)
-{
-	this->publisherId = pub.id;
-	this->publisherName = pub.name;
-	this->publisherCountry = pub.country;
-	this->publisherWebsite = pub.website;
-	this->publisherNote = pub.note;
-}
 
 PublisherInfo::~PublisherInfo() {
 	//dtor

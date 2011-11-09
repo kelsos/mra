@@ -8,7 +8,6 @@ QT += core \
     network \
     webkit
 HEADERS += src/DataClasses/AuthorInfo.h \
-    src/DataClasses/DataStructs.h \
     src/DataClasses/GenreInfo.h \
     src/DataClasses/MangaAuthors.h \
     src/DataClasses/MangaGenres.h \
@@ -37,7 +36,7 @@ SOURCES += src/DataClasses/AuthorInfo.cpp \
     src/XmlSaxParser.cpp \
     src/XmlWrapper.cpp \
     src/main.cpp \
-    src/mcra.cpp 
+    src/mcra.cpp
 FORMS += src/mcra.ui
 RESOURCES += 
 Debug:DESTDIR = debug
@@ -45,8 +44,8 @@ Debug:OBJECTS_DIR = debug/.obj
 Debug:MOC_DIR = debug/.moc
 Debug:RCC_DIR = debug/.rcc
 Debug:UI_DIR = debug/.ui
-INCLUDEPATH=lib/includes/libxml2 \
-	src \
-	src/DataClasses
-LIBS+= -Llib/libs/libxml2 \
-	-lxml2.dll
+INCLUDEPATH = lib/includes/libxml2 \
+    src \
+    src/DataClasses
+LIBS += -Llib/libs/libxml2 \
+    -lxml2.dll

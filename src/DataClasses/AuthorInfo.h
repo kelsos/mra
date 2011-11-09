@@ -4,8 +4,6 @@
 #include <qstring>
 #include <qdatetime>
 
-#include "DataStructs.h"
-
 class AuthorInfo {
 public:
 	/** Default constructor */
@@ -14,11 +12,6 @@ public:
 	AuthorInfo(unsigned int authorId, QString authorName,
 			QString authorNationality, QDateTime authorBirthday,
 			QString authorWebsite);
-	/** Constructor that gets an auth structure.
-	 *
-	 * @param auth
-	 */
-	AuthorInfo(Author auth);
 	/** Default destructor */
 	virtual ~AuthorInfo();
 	/** Access authorId

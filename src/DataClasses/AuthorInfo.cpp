@@ -26,12 +26,3 @@ void AuthorInfo::clear()
 	this->authorBirthday=QDateTime::currentDateTime() ;
 	this->authorWebsite = '\0';
 }
-
-AuthorInfo::AuthorInfo(Author auth)
-{
-	this->authorId = auth.id;
-	this->authorName = auth.name;
-	this->authorNationality = auth.country;
-	this->authorBirthday = auth.birthday;
-	this->authorWebsite = auth.website;
-}

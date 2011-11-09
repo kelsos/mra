@@ -5,9 +5,6 @@
 #include <qdatetime>
 #include <qbytearray>
 
-#include "DataStructs.h"
-
-
 class MangaInfo {
 public:
 	/** Default constructor */
@@ -17,7 +14,6 @@ public:
 			QString mangaPublicationStatus, unsigned int mangaPublisherId,
 			QByteArray mangaCover);
 	/** Default destructor */
-	MangaInfo(Manga man);
 	virtual ~MangaInfo();
 	/** Access mangaId
 	 * \return The current value of mangaId
@@ -102,6 +98,10 @@ public:
 	 */
 	QByteArray getMangaCover() {
 		return mangaCover;
+	}
+	void setMangaCover(QByteArray cover)
+	{
+		mangaCover=cover;
 	}
 	/** Nullifies current object values.
 	 *

@@ -4,14 +4,11 @@
 #include <qstring>
 #include <qdatetime>
 
-#include "DataStructs.h"
-
 class MangaAuthors {
 public:
 	/** Default constructor */
 	MangaAuthors();
 	MangaAuthors(unsigned int mangaId, unsigned int authorId);
-	MangaAuthors(MangaAuthor manAuth);
 	/** Default destructor */
 	virtual ~MangaAuthors();
 	/** Access mangaId
