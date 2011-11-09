@@ -3,8 +3,8 @@
 DbWrapper::DbWrapper() {
 	//Set database driver to QSQLITE
 	*mangaData = QSqlDatabase::addDatabase("QSQLITE");
-	mangaData->setDatabaseName("./mdb.db");
-	initDatabase();
+	mangaData->setDatabaseName("./mdb.db3");
+	//initDatabase();
 }
 
 DbWrapper::~DbWrapper() {
@@ -15,23 +15,13 @@ bool DbWrapper::isDatabaseConnectionActive() {
  return true;
 }
 
-void DbWrapper::getUserReadingList() {
-	QSqlQuery query;
-	query.exec("SELECT * "
-			"FROM READING_LIST");
+QSqlQueryModel* DbWrapper::getUserReadingList() {
+	QSqlQueryModel *model = new QSqlQueryModel;
+	model->setQuery("SELECT MANGA_TITLE, READ_STARTING_CHAPTER, READ_CURRENT_CHAPTER, READ_ONLINE_URL, READ_IS_FINISHED, READ_LAST_TIME"
+			"FROM MANGA_INFO, READING_LIST"
+			"WHERE MANGA_INFO.MANGA_ID = READING_LIST.MANGA_ID");
 
-	while (query.next()) {
-
-		ReadItem* newRead = new ReadItem();
-		int i = 0;
-		newRead->setMangaTitle(getMangaTitle(query.value(i++).toInt()));
-		newRead->setStartingChapter(query.value(i++).toInt());
-		newRead->setCurrentChapter(query.value(i++).toInt());
-		newRead->setOnlineUrl(query.value(i++).toString());
-		newRead->setReadFinished(query.value(i++).toBool());
-		newRead->setLastRead(query.value(i++).toDateTime());
-		//newRead->setMangaNote(queryResult.GetString(wxT("READ_NOTE")));
-	}
+	return model;
 }
 
 QString DbWrapper::getMangaTitle(int mangaId) {
@@ -391,4 +381,8 @@ void DbWrapper::getMangaData() {
 	while (query.next()) {
 
 	}
+}
+
+void DbWrapper::truncateAuthorInfoTable(){
+
 }

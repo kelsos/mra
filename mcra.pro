@@ -46,6 +46,7 @@ Debug:RCC_DIR = debug/.rcc
 Debug:UI_DIR = debug/.ui
 INCLUDEPATH = lib/includes/libxml2 \
     src \
-    src/DataClasses
+    src/DataClasses \
+    %QTDIR%\src\plugins\sqldrivers\sqlite\include
 LIBS += -Llib/libs/libxml2 \
     -lxml2.dll

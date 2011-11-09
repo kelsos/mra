@@ -46,13 +46,13 @@ typedef struct _MangaParseState MangaParseState;
 /*Describes the state of the parser, and also keeps info on the data parsed*/
 struct _MangaParseState {
 	ParserState state;
-	Publisher pub;
+	PublisherInfo pub;
 	QString pubName;
-	Genre gen;
-	Author auth;
-	Manga man;
-	MangaGenre manGen;
-	MangaAuthor manAuth;
+	GenreInfo gen;
+	AuthorInfo auth;
+	MangaInfo man;
+	MangaGenres manGen;
+	MangaAuthors manAuth;
 	QString coverString;
 	DbWrapper* mdb;
 };
@@ -260,12 +260,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_PUBLISHER_NOTE:
 		state->state = PARSER_IN_PUBLISHERS;
-		state->mdb->insertPublisherData(new PublisherInfo(state->pub));
-		state->pub.id = 0;
-		state->pub.name = "\0";
-		state->pub.country = "\0";
-		state->pub.website = "\0";
-		state->pub.note = "\0";
+		state->mdb->insertPublisherData(&state->pub);
+		state->pub.clear();
 		break;
 	case PARSER_IN_GENRES:
 		break;
@@ -276,9 +272,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_GENRE_NAME:
 		state->state = PARSER_IN_GENRES;
-		state->mdb->insertGenreData(new GenreInfo(state->gen));
-		state->gen.id = 0;
-		state->gen.name = "\0";
+		state->mdb->insertGenreData(&state->gen);
+		state->gen.clear();
 		break;
 	case PARSER_IN_AUTHORS:
 		break;
@@ -298,11 +293,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
 		state->state = PARSER_IN_AUTHORS;
-		state->mdb->insertAuthorData(new AuthorInfo(state->auth));
-		state->auth.id = 0;
-		state->auth.name = "\0";
-		state->auth.country = "\0";
-		state->auth.website = "\0";
+		state->mdb->insertAuthorData(&state->auth);
+		state->auth.clear();
 		break;
 	case PARSER_IN_MANGAS:
 		break;
@@ -329,13 +321,9 @@ static void manga_parser_end_element(MangaParseState *state,
 	case PARSER_IN_MANGA_COVER:
 		state->state = PARSER_IN_MANGAS;
 		ba.append(state->coverString);
-		state->man.image.fromBase64(ba);
-		state->mdb->insertMangaData(new MangaInfo(state->man));
-		state->man.id = 0;
-		state->man.pId = 0;
-		state->man.description = "\0";
-		state->man.status = "\0";
-		state->man.title = "\0";
+		state->man.setMangaCover(QByteArray::fromBase64(ba));
+		state->mdb->insertMangaData(&state->man);
+		state->man.clear();
 		state->coverString = "\0";
 		break;
 	case PARSER_IN_MANGA_GENRES:
@@ -347,9 +335,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_MG_GENRE_ID:
 		state->state = PARSER_IN_MANGA_GENRES;
-		state->mdb->insertMangaGenre(new MangaGenres(state->manGen));
-		state->manGen.gId = 0;
-		state->manGen.mId = 0;
+		state->mdb->insertMangaGenre(&state->manGen);
+		state->manGen.clear();
 		break;
 	case PARSER_IN_MANGA_AUTHORS:
 		break;
@@ -360,9 +347,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_MA_AUTHOR_ID:
 		state->state = PARSER_IN_MANGA_AUTHORS;
-		state->mdb->insertMangaAuthor(new MangaAuthors(state->manAuth));
-		state->manAuth.aId = 0;
-		state->manAuth.mId = 0;
+		state->mdb->insertMangaAuthor(&state->manAuth);
+		state->manAuth.clear();
 		break;
 	case PARSER_AT_END:
 		break;
@@ -390,75 +376,71 @@ static void manga_parser_characters(MangaParseState *state,
 	case PARSER_IN_PUBLISHER:
 		break;
 	case PARSER_IN_PUBLISHER_ID:
-		state->pub.id = atoi(output);
+		state->pub.setPublisherId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_PUBLISHER_NAME:
-		state->pub.name += QString::fromUtf8(output);
+		state->pub.setPublisherName(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_PUBLISHER_COUNTRY:
-		state->pub.country += QString::fromUtf8(output);
+		state->pub.setPublisherCountry(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_PUBLISHER_WEBSITE:
-		state->pub.website += QString::fromUtf8(output);
+		state->pub.setPublisherWebsite(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_PUBLISHER_NOTE:
-		state->pub.note += QString::fromUtf8(output);
+		state->pub.setPublisherNote(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_GENRES:
 	case PARSER_IN_GENRE:
 		break;
 	case PARSER_IN_GENRE_ID:
-		state->gen.id = atoi(output);
+		state->gen.setGenreId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_GENRE_NAME:
-		state->gen.name += QString::fromUtf8(output);
+		state->gen.setGenreName(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_AUTHORS:
 		break;
 	case PARSER_IN_AUTHOR:
 		break;
 	case PARSER_IN_AUTHOR_ID:
-		state->auth.id = atoi(output);
+		state->auth.setAuthorId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_AUTHOR_NAME:
-		state->auth.name += QString::fromUtf8(output);
+		state->auth.setAuthorName(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_AUTHOR_COUNTRY:
-		state->auth.country += QString::fromUtf8(output);
+		state->auth.setAuthorNationality(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_AUTHOR_BIRTH:
-		/*TODO: fix the data data parsing on QT
-		 *
-		 */
+		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		state->auth.setAuthorBirthday(dateData);
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
-		state->auth.website += QString::fromUtf8(output);
+		state->auth.setAuthorWebsite(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGAS:
 		break;
 	case PARSER_IN_MANGA:
 		break;
 	case PARSER_IN_MANGA_ID:
-		state->man.id = atoi(output);
+		state->man.setMangaId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_TITLE:
-		state->man.title += QString::fromUtf8(output);
+		state->man.setMangaTitle(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_YEAR_OF_PUBLISH:
-		/*TODO: fix the data data parsing on QT
-		 *
-		 */
+		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		state->man.setMangaPublicationDate(dateData);
 		break;
 	case PARSER_IN_MANGA_STATUS:
-		state->man.status += QString::fromUtf8(output);
-		;
+		state->man.setMangaPublicationStatus(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_PUBLISHER_ID:
-		state->man.pId = atoi(output);
+		state->man.setMangaPublisherId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_DESCRIPTION:
-		state->man.description += QString::fromUtf8(output);
-		;
+		state->man.setMangaDescription(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_COVER:
 		state->coverString += output;
@@ -468,20 +450,20 @@ static void manga_parser_characters(MangaParseState *state,
 	case PARSER_IN_MANGA_GENRE:
 		break;
 	case PARSER_IN_MG_MANGA_ID:
-		state->manGen.mId = atoi(output);
+		state->manGen.setMangaId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MG_GENRE_ID:
-		state->manGen.gId = atoi(output);
+		state->manGen.setGenreId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_AUTHORS:
 		break;
 	case PARSER_IN_MANGA_AUTHOR:
 		break;
 	case PARSER_IN_MA_MANGA_ID:
-		state->manAuth.mId = atoi(output);
+		state->manAuth.setMangaId((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MA_AUTHOR_ID:
-		state->manAuth.aId = atoi(output);
+		state->manAuth.setAuthorId((unsigned int)atoi(output));
 		break;
 	case PARSER_AT_END:
 		break;

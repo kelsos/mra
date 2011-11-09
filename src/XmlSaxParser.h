@@ -3,7 +3,6 @@
 #include <libxml/parser.h>
 #include <string>
 #include "DbWrapper.h"
-#include "DataStructs.h"
 //Data classes included.
 #include "AuthorInfo.h"
 #include "GenreInfo.h"

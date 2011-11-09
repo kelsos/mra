@@ -2,6 +2,8 @@
 #define SRCMCRA_H
 
 #include <QtGui/QMainWindow>
+#include <qsqltablemodel>
+#include <DbWrapper.h>
 #include "ui_mcra.h"
 
 class mcra : public QMainWindow
@@ -14,6 +16,7 @@ public:
 
 private:
     Ui::mcraClass ui;
+    DbWrapper* db;
 };
 
 #endif // SRCMCRA_H

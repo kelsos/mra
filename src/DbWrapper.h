@@ -3,6 +3,7 @@
 //Include of the needed libraries.
 #include <qsql.h>
 #include <qsqldatabase>
+#include <qsqlquerymodel>
 #include <qsqlquery>
 #include <qvariant>
 //Include of the needed data classes.
@@ -32,7 +33,7 @@ public:
 	 *
 	 * @return
 	 */
-	void getUserReadingList();
+	QSqlQueryModel* getUserReadingList();
 	/**Inserts an entry representing an author to the database.
 	 *
 	 * @param author
@@ -78,8 +79,10 @@ public:
 	 * @param readItem
 	 */
 	void insertReadItem(ReadItem* readItem);
+
 	/** Returns the mangaInfo */
 	void getMangaData();
+	void clearDatabase();
 protected:
 private:
 	QSqlDatabase* mangaData;
@@ -92,6 +95,15 @@ private:
 	void createMangaAuthorsTable();
 	void createMangaGenresTable();
 	void createReadingListTable();
+	void truncateAuthorInfoTable();
+	void truncateGenreInfoTable();
+	void truncatePublisherInfoTable();
+	void truncateMangaInfoTable();
+	void truncateNewsStorageTable();
+	void truncateNewsSubscriptionsTable();
+	void truncateMangaAuthorsTable();
+	void truncateMangaGenresTable();
+	void truncateReadingListTable();
 	void initDatabase();
 	int getMangaID(QString mangaTitle);
 	/**Given the manga ID number the method returns the manga title.
