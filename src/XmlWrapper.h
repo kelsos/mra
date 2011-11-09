@@ -4,6 +4,7 @@
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/tree.h>
+#include <string>
 #include <iostream>
 #include <vector>
 #include <fstream>

@@ -14,3 +14,10 @@ NewsSubscriptions::NewsSubscriptions(unsigned int subscriptionId,
 NewsSubscriptions::~NewsSubscriptions() {
 	//dtor
 }
+
+void NewsSubscriptions::clear()
+{
+	this->subscriptionId = '\0';
+	this->subscriptionUrl = '\0';
+	this->subscriptionChannelName = '\0';
+}

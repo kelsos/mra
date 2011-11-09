@@ -48,6 +48,10 @@ public:
 	void SetsubscriptionChannelName(QString val) {
 		subscriptionChannelName = val;
 	}
+	/** Clears the objects values
+	 *
+	 */
+	void clear();
 protected:
 private:
 	unsigned int subscriptionId; //!< Member variable "subscriptionId"

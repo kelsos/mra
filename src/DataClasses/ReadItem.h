@@ -121,6 +121,10 @@ public:
 	unsigned int getEntryId() {
 		return entryId;
 	}
+	/** Clears the object data.
+	 *
+	 */
+	void clear();
 protected:
 private:
 	unsigned int entryId; //!< Member variable "entryId"

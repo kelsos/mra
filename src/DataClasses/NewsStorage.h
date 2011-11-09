@@ -86,6 +86,10 @@ public:
 	void setNewsItemAquisitionDate(QDateTime val) {
 		newsItemAquisitionDate = val;
 	}
+	/** Clears the data inside the item.
+	 *
+	 */
+	void clear();
 protected:
 private:
 	unsigned int newsItemId; //!< Member variable "newsItemId"

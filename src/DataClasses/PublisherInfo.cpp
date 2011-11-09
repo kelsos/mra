@@ -28,7 +28,7 @@ PublisherInfo::~PublisherInfo() {
 
 void PublisherInfo::clear()
 {
-	this->publisherId = 0;
+	this->publisherId = '\0';
 	this->publisherName = '\0';
 	this->publisherCountry = '\0';
 	this->publisherWebsite = '\0';

@@ -236,6 +236,7 @@ static void manga_parser_start_element(MangaParseState *state,
 
 static void manga_parser_end_element(MangaParseState *state,
 		const xmlChar *name) {
+	QByteArray ba;
 	switch (state->state) {
 	case PARSER_START:
 		break;
@@ -327,10 +328,8 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_MANGA_COVER:
 		state->state = PARSER_IN_MANGAS;
-		QByteArray ba;
 		ba.append(state->coverString);
 		state->man.image.fromBase64(ba);
-
 		state->mdb->insertMangaData(new MangaInfo(state->man));
 		state->man.id = 0;
 		state->man.pId = 0;

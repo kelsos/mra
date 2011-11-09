@@ -10,7 +10,8 @@ XmlWrapper::~XmlWrapper() {
 }
 
 void XmlWrapper::xmlParser(QString fileName) {
-	parseMangaData((const char*)fileName,db);
+	QByteArray fArray = fileName.toAscii();
+	parseMangaData((const char*)fArray.data(),db);
 }
 
 bool XmlWrapper::loadApplicationData() {
@@ -19,5 +20,6 @@ bool XmlWrapper::loadApplicationData() {
 }
 
 void XmlWrapper::loadUserReadingList(QString fileName){
-    parseReadingList((const char*)fileName,db);
+	QByteArray fArray = fileName.toAscii();
+    parseReadingList((const char*)fArray.data(),db);
 }

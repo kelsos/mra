@@ -19,3 +19,14 @@ ReadItem::ReadItem(unsigned int entryId, QString mangaTitle, unsigned int starti
 ReadItem::~ReadItem() {
 	//dtor
 }
+
+void ReadItem::clear()
+{
+	this->entryId = '\0';
+	this->mangaTitle = '\0';
+	this->startingChapter = '\0';
+	this->currentChapter = '\0';
+	this->onlineUrl = '\0';
+	this->lastRead = QDateTime::currentDateTime();
+	this->readFinished = '\0';
+}

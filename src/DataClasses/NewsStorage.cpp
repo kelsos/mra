@@ -17,3 +17,12 @@ NewsStorage::NewsStorage(unsigned int newsItemId, QString newsItemTitle,
 NewsStorage::~NewsStorage() {
 	//dtor
 }
+void NewsStorage::clear()
+{
+	this->newsItemId = '\0';
+	this->newsItemTitle = "\0";
+	this->newsItemHyperLink = "\0";
+	this->newsItemDescription = "\0";
+	this->newsItemPublicationDate = QDateTime::currentDateTime();
+	this->newsItemAquisitionDate = QDateTime::currentDateTime();
+}
