@@ -1,18 +1,12 @@
-#include "main.h"
-#include "applicationFrame.h"
+#include "mcra.h"
 
-IMPLEMENT_APP(MRApp)
+#include <QtGui>
+#include <QApplication>
 
-bool MRApp::OnInit() {
-	bool wxsOK = true;
-	wxInitAllImageHandlers();
-
-	if(wxsOK)
-	{
-	ApplicationFrame* appFrame = new ApplicationFrame(0);
-	appFrame->Show(true);
-	SetTopWindow(appFrame);
-	}
-
-	return wxsOK;
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    mcra w;
+    w.show();
+    return a.exec();
 }
