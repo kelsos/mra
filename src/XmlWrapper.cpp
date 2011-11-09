@@ -9,15 +9,15 @@ XmlWrapper::~XmlWrapper() {
 	//dtor
 }
 
-void XmlWrapper::xmlParser(wxString fileName) {
-	parseMangaData(fileName,db);
+void XmlWrapper::xmlParser(QString fileName) {
+	parseMangaData((const char*)fileName,db);
 }
 
 bool XmlWrapper::loadApplicationData() {
-	xmlParser(wxT("test.xml"));
+	xmlParser("test.xml");
 	return (true);
 }
 
-void XmlWrapper::loadUserReadingList(wxString fileName){
-    parseReadingList(fileName,db);
+void XmlWrapper::loadUserReadingList(QString fileName){
+    parseReadingList((const char*)fileName,db);
 }

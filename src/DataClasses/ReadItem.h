@@ -1,28 +1,29 @@
 #ifndef READITEM_H
 #define READITEM_H
 
-#include <wx/wx.h>
+#include <qstring>
+#include <qdatetime>
 
 class ReadItem {
 public:
 	/** Default constructor */
 	ReadItem();
 	/** Full Parameter Constructor */
-	ReadItem(unsigned int entryId, wxString mangaTitle, unsigned int startingChapter,
-			unsigned int currentChapter, wxString onlineUrl,
-			wxDateTime lastRead, bool readFinished);
+	ReadItem(unsigned int entryId, QString mangaTitle, unsigned int startingChapter,
+			unsigned int currentChapter, QString onlineUrl,
+			QDateTime lastRead, bool readFinished);
 	/** Default destructor */
 	virtual ~ReadItem();
 	/** Access mangaTitle
 	 * \return The current value of mangaTitle
 	 */
-	wxString getMangaTitle() {
+	QString getMangaTitle() {
 		return mangaTitle;
 	}
 	/** Set mangaTitle
 	 * \param val New value to set
 	 */
-	void setMangaTitle(wxString val) {
+	void setMangaTitle(QString val) {
 		mangaTitle = val;
 	}
 	/** Access startingChapter
@@ -52,25 +53,25 @@ public:
 	/** Access onlineUrl
 	 * \return The current value of onlineUrl
 	 */
-	wxString getOnlineUrl() {
+	QString getOnlineUrl() {
 		return onlineUrl;
 	}
 	/** Set onlineUrl
 	 * \param val New value to set
 	 */
-	void setOnlineUrl(wxString val) {
+	void setOnlineUrl(QString val) {
 		onlineUrl = val;
 	}
 	/** Access lastRead
 	 * \return The current value of lastRead
 	 */
-	wxDateTime getLastRead() {
+	QDateTime getLastRead() {
 		return lastRead;
 	}
 	/** Set lastRead
 	 * \param val New value to set
 	 */
-	void setLastRead(wxDateTime val) {
+	void setLastRead(QDateTime val) {
 		lastRead = val;
 	}
 	/** Access readFinished
@@ -89,21 +90,21 @@ public:
 	 *
 	 * @return
 	 */
-	wxString getMangaNote() {
+	QString getMangaNote() {
 		return mangaNote;
 	}
 	/** Set mangaNote
 	 *
 	 * @param val New value to set.
 	 */
-	void setMangaNote(wxString val) {
+	void setMangaNote(QString val) {
 		mangaNote = val;
 	}
 	/** Appends the val to the existing data of mangaNote
 	 *
 	 * @param val
 	 */
-	void appendMangaNote(wxString val) {
+	void appendMangaNote(QString val) {
 		mangaNote += val;
 	}
 	/** Set entryId
@@ -123,13 +124,13 @@ public:
 protected:
 private:
 	unsigned int entryId; //!< Member variable "entryId"
-	wxString mangaTitle; //!< Member variable "mangaTitle"
+	QString mangaTitle; //!< Member variable "mangaTitle"
 	unsigned int startingChapter; //!< Member variable "startingChapter"
 	unsigned int currentChapter; //!< Member variable "currentChapter"
-	wxString onlineUrl; //!< Member variable "onlineUrl"
-	wxDateTime lastRead; //!< Member variable "lastRead"
+	QString onlineUrl; //!< Member variable "onlineUrl"
+	QDateTime lastRead; //!< Member variable "lastRead"
 	bool readFinished; //!< Member variable "readFinished"
-	wxString mangaNote; //!< Member variable "mangaNote"
+	QString mangaNote; //!< Member variable "mangaNote"
 };
 
 #endif // READITEM_H

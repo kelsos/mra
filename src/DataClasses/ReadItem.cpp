@@ -4,8 +4,8 @@ ReadItem::ReadItem() {
 	//ctor
 }
 
-ReadItem::ReadItem(unsigned int entryId, wxString mangaTitle, unsigned int startingChapter,
-		unsigned int currentChapter, wxString onlineUrl, wxDateTime lastRead,
+ReadItem::ReadItem(unsigned int entryId, QString mangaTitle, unsigned int startingChapter,
+		unsigned int currentChapter, QString onlineUrl, QDateTime lastRead,
 		bool readFinished) {
 	this->entryId = entryId;
 	this->mangaTitle = mangaTitle;

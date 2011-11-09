@@ -47,13 +47,13 @@ typedef struct _MangaParseState MangaParseState;
 struct _MangaParseState {
 	ParserState state;
 	Publisher pub;
-	wxString pubName;
+	QString pubName;
 	Genre gen;
 	Author auth;
 	Manga man;
 	MangaGenre manGen;
 	MangaAuthor manAuth;
-	std::string coverString;
+	QString coverString;
 	DbWrapper* mdb;
 };
 
@@ -63,12 +63,6 @@ struct _MangaParseState {
 
 static void manga_parser_start_document(MangaParseState *state) {
 	state->state = PARSER_START;
-	state->auth.birthday.SetYear(1900);
-	state->auth.birthday.SetMonth(wxDateTime::Jan);
-	state->auth.birthday.SetDay(1);
-	state->man.year.SetYear(1900);
-	state->man.year.SetMonth(wxDateTime::Jan);
-	state->man.year.SetDay(1);
 }
 
 static void manga_parser_end_document(MangaParseState *state) {
@@ -308,9 +302,6 @@ static void manga_parser_end_element(MangaParseState *state,
 		state->auth.name = "\0";
 		state->auth.country = "\0";
 		state->auth.website = "\0";
-		state->auth.birthday.SetYear(1900);
-		state->auth.birthday.SetMonth(wxDateTime::Jan);
-		state->auth.birthday.SetDay(1);
 		break;
 	case PARSER_IN_MANGAS:
 		break;
@@ -336,9 +327,10 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	case PARSER_IN_MANGA_COVER:
 		state->state = PARSER_IN_MANGAS;
-		state->man.image = wxBase64Decode(state->coverString);
-		wxLogDebug
-			(_(state->coverString));
+		QByteArray ba;
+		ba.append(state->coverString);
+		state->man.image.fromBase64(ba);
+
 		state->mdb->insertMangaData(new MangaInfo(state->man));
 		state->man.id = 0;
 		state->man.pId = 0;
@@ -346,9 +338,6 @@ static void manga_parser_end_element(MangaParseState *state,
 		state->man.status = "\0";
 		state->man.title = "\0";
 		state->coverString = "\0";
-		state->man.year.SetYear(1900);
-		state->man.year.SetMonth(wxDateTime::Jan);
-		state->man.year.SetDay(1);
 		break;
 	case PARSER_IN_MANGA_GENRES:
 		break;
@@ -385,7 +374,7 @@ static void manga_parser_characters(MangaParseState *state,
 	int i;
 
 	char output[len];
-	wxDateTime dateData;
+	QDateTime dateData;
 
 	for (i = 0; i < len; i++) {
 		output[i] = chars[i];
@@ -439,15 +428,9 @@ static void manga_parser_characters(MangaParseState *state,
 		state->auth.country += wxString().FromUTF8(output);
 		break;
 	case PARSER_IN_AUTHOR_BIRTH:
-		dateData.ParseFormat(output,"%Y-%m-%dT%T");
-		if (dateData.IsValid()) {
-			state->auth.birthday = dateData;
-		} else {
-			state->auth.birthday.SetYear(1900);
-			state->auth.birthday.SetMonth(wxDateTime::Jan);
-			state->auth.birthday.SetDay(1);
-		}
-		wxLogDebug(state->auth.birthday.FormatDate());
+		/*TODO: fix the data data parsing on QT
+		 *
+		 */
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
 		state->auth.website += wxString().FromUTF8(output);
@@ -463,16 +446,9 @@ static void manga_parser_characters(MangaParseState *state,
 		state->man.title += wxString().FromUTF8(output);
 		break;
 	case PARSER_IN_MANGA_YEAR_OF_PUBLISH:
-		dateData.ParseFormat(output,"%Y-%m-%dT%T");
-		if (dateData.IsValid()) {
-			state->man.year = dateData;
-		} else {
-			state->man.year.SetYear(1900);
-			state->man.year.SetMonth(wxDateTime::Jan);
-			state->man.year.SetDay(1);
-		}
-		wxLogDebug(dateData.FormatDate());
-		wxLogDebug(state->man.year.FormatDate());
+		/*TODO: fix the data data parsing on QT
+		 *
+		 */
 		break;
 	case PARSER_IN_MANGA_STATUS:
 		state->man.status += wxString().FromUTF8(output);

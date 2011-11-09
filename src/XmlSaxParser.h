@@ -1,9 +1,7 @@
 #include <stdio.h>
-#include <memory.h>
+#include <memory>
 #include <libxml/parser.h>
 #include <string>
-#include <wx/wx.h>
-#include <wx/base64.h>
 #include "DbWrapper.h"
 #include "DataStructs.h"
 //Data classes included.

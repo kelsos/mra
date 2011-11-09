@@ -1,7 +1,9 @@
 #ifndef MANGAAUTHORS_H
 #define MANGAAUTHORS_H
 
-#include <wx/wx.h>
+#include <qstring>
+#include <qdatetime>
+
 #include "DataStructs.h"
 
 class MangaAuthors {

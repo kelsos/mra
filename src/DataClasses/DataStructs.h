@@ -1,5 +1,5 @@
-#include <wx/wx.h>
-#include <string>
+#include <qstring>
+#include <qdatetime>
 
 #ifndef DATASTRUCTS_H_
 #define DATASTRUCTS_H_
@@ -11,10 +11,10 @@ typedef struct _Publisher Publisher;
 struct _Publisher
 {
 	unsigned int id;
-	wxString name;
-	wxString country;
-	wxString website;
-	wxString note;
+	QString name;
+	QString country;
+	QString website;
+	QString note;
 };
 
 typedef struct _Genre Genre;
@@ -24,7 +24,7 @@ typedef struct _Genre Genre;
 struct _Genre
 {
 	unsigned int id;
-	wxString name;
+	QString name;
 };
 
 typedef struct _Author Author;
@@ -35,10 +35,10 @@ typedef struct _Author Author;
 struct _Author
 {
 	unsigned int id;
-	wxString name;
-	wxString country;
-	wxDateTime birthday;
-	wxString website;
+	QString name;
+	QString country;
+	QDateTime birthday;
+	QString website;
 };
 
 typedef struct _Manga Manga;
@@ -46,12 +46,12 @@ typedef struct _Manga Manga;
 struct _Manga
 {
 	unsigned int id;
-	wxString title;
-	wxDateTime year;
-	wxString status;
+	QString title;
+	QDateTime year;
+	QString status;
 	unsigned int pId;
-	wxString description;
-	wxMemoryBuffer image;
+	QString description;
+	QByteArray image;
 };
 
 typedef struct _MangaGenre MangaGenre;

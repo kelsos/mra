@@ -1,6 +1,10 @@
 #ifndef MANGAINFO_H
 #define MANGAINFO_H
-#include <wx/wx.h>
+
+#include <qstring>
+#include <qdatetime>
+#include <qbytearray>
+
 #include "DataStructs.h"
 
 
@@ -8,10 +12,10 @@ class MangaInfo {
 public:
 	/** Default constructor */
 	MangaInfo();
-	MangaInfo(unsigned int mangaId, wxString mangaTitle,
-			wxString mangaDescription, wxDateTime mangaPublicationDate,
-			wxString mangaPublicationStatus, unsigned int mangaPublisherId,
-			wxMemoryBuffer mangaCover);
+	MangaInfo(unsigned int mangaId, QString mangaTitle,
+			QString mangaDescription, QDateTime mangaPublicationDate,
+			QString mangaPublicationStatus, unsigned int mangaPublisherId,
+			QByteArray mangaCover);
 	/** Default destructor */
 	MangaInfo(Manga man);
 	virtual ~MangaInfo();
@@ -30,53 +34,53 @@ public:
 	/** Access mangaTitle
 	 * \return The current value of mangaTitle
 	 */
-	wxString getMangaTitle() {
+	QString getMangaTitle() {
 		return mangaTitle;
 	}
 	/** Set mangaTitle
 	 * \param val New value to set
 	 */
-	void setMangaTitle(wxString val) {
+	void setMangaTitle(QString val) {
 		mangaTitle += val;
 	}
 	/** Access mangaDescription
 	 * \return The current value of mangaDescription
 	 */
-	wxString getMangaDescription() {
+	QString getMangaDescription() {
 		return mangaDescription;
 	}
 	/** Set mangaDescription
 	 * \param val New value to set
 	 */
-	void setMangaDescription(wxString val) {
+	void setMangaDescription(QString val) {
 		mangaDescription += val;
 	}
 	/** Returns the manga Publication date (aka Date of first publication of the manga).
 	 *
 	 * @return
 	 */
-	wxDateTime getMangaPublicationDate() {
+	QDateTime getMangaPublicationDate() {
 		return mangaPublicationDate;
 	}
 	/** Sets the manga publication status.
 	 *
 	 * @param val
 	 */
-	void setMangaPublicationDate(wxDateTime val) {
+	void setMangaPublicationDate(QDateTime val) {
 		mangaPublicationDate = val;
 	}
 	/** Returns the manga publication status.
 	 *
 	 * @return
 	 */
-	wxString getMangaPublicationStatus() {
+	QString getMangaPublicationStatus() {
 		return mangaPublicationStatus;
 	}
 	/** Sets the publisher ID related with the current manga.
 	 *
 	 * @param val
 	 */
-	void setMangaPublicationStatus(wxString val) {
+	void setMangaPublicationStatus(QString val) {
 		mangaPublicationStatus = val;
 	}
 	/** Returns the publisher ID related with the current manga.
@@ -96,7 +100,7 @@ public:
 	/** Returns the wxMemoryBuffer that represents the
 	 * stored image for the specified manga.
 	 */
-	wxMemoryBuffer getMangaCover() {
+	QByteArray getMangaCover() {
 		return mangaCover;
 	}
 	/** Nullifies current object values.
@@ -106,12 +110,12 @@ public:
 protected:
 private:
 	unsigned int mangaId; //!< Member variable "mangaId"
-	wxString mangaTitle; //!< Member variable "mangaTitle"
-	wxString mangaDescription; //!< Member variable "mangaDescription"
-	wxDateTime mangaPublicationDate; //!< Member variable "mangaPublicationDate"
-	wxString mangaPublicationStatus; //!< Member variable "mangaPublicationStatus"
+	QString mangaTitle; //!< Member variable "mangaTitle"
+	QString mangaDescription; //!< Member variable "mangaDescription"
+	QDateTime mangaPublicationDate; //!< Member variable "mangaPublicationDate"
+	QString mangaPublicationStatus; //!< Member variable "mangaPublicationStatus"
 	unsigned int mangaPublisherId; //!< Member variable "mangaPublisherId"
-	wxMemoryBuffer mangaCover;
+	QByteArray mangaCover;
 };
 
 #endif // MANGAINFO_H

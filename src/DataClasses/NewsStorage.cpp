@@ -3,9 +3,9 @@
 NewsStorage::NewsStorage() {
 	//ctor
 }
-NewsStorage::NewsStorage(unsigned int newsItemId, wxString newsItemTitle,
-		wxString newsItemHyperLink, wxString newsItemDescription,
-		wxDateTime newsItemPublicationDate, wxDateTime newsItemAquisitionDate) {
+NewsStorage::NewsStorage(unsigned int newsItemId, QString newsItemTitle,
+		QString newsItemHyperLink, QString newsItemDescription,
+		QDateTime newsItemPublicationDate, QDateTime newsItemAquisitionDate) {
 	this->newsItemId = newsItemId;
 	this->newsItemTitle = newsItemTitle;
 	this->newsItemHyperLink = newsItemHyperLink;

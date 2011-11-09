@@ -119,7 +119,7 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 	int i;
 
 	char output[len];
-	wxDateTime dateData;
+	QDateTime dateData;
 
 	for (i = 0; i < len; i++) {
 		output[i] = chars[i];
@@ -133,22 +133,20 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 	case PARSER_IN_MANGA:
 		break;
 	case PARSER_IN_MANGA_TITLE:
-		state->read.setMangaTitle(wxString().FromUTF8(output));
+		state->read.setMangaTitle(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_STARTING_CHAPTER:
-		state->read.setStartingChapter(wxAtoi(output));
+		state->read.setStartingChapter((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_CURRENT_CHAPTER:
-		state->read.setCurrentChapter(wxAtoi(output));
+		state->read.setCurrentChapter((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_LAST_DATE:
-		dateData.ParseFormat(output, "%Y-%m-%dT%T");
-		if (dateData.IsValid()) {
-			state->read.setLastRead(dateData);
-		}
+		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		state->read.setLastRead(dateData);
 		break;
 	case PARSER_IN_MANGA_ONLINE_URL:
-		state->read.setOnlineUrl(wxString().FromUTF8(output));
+		state->read.setOnlineUrl(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_READING_STATUS:
 		if (!strcmp(output, "true")) {
@@ -160,12 +158,11 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 		}
 		break;
 	case PARSER_IN_MANGA_NOTE:
-		state->read.appendMangaNote(wxString().FromUTF8(output));
+		state->read.appendMangaNote(QString::fromUtf8(output));
 		break;
 	case PARSER_AT_END:
 		break;
 	}
-	wxLogDebug(_(output));
 }
 
 static xmlSAXHandler readingListParser = { 0, /* internalSubset */

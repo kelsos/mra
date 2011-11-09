@@ -1,10 +1,9 @@
 #include "DbWrapper.h"
 
 DbWrapper::DbWrapper() {
-	//ctor
-	mangaData = new wxSQLite3Database();
-	mangaData->Open(wxT("mdb.db3"), wxEmptyString,
-			WXSQLITE_OPEN_READWRITE | WXSQLITE_OPEN_CREATE);
+	//Set database driver to QSQLITE
+	*mangaData = QSqlDatabase::addDatabase("QSQLITE");
+	mangaData->setDatabaseName("./mdb.db");
 	initDatabase();
 }
 
@@ -13,80 +12,66 @@ DbWrapper::~DbWrapper() {
 }
 
 bool DbWrapper::isDatabaseConnectionActive() {
-	if (mangaData->IsOpen()) {
-		return true;
-	} else {
-		return false;
-	}
+ return true;
 }
 
-void DbWrapper::getUserReadingList(DataGrid* grid) {
-	int line = 0;
-	grid->createGrid();
-	static const char sql[] = "SELECT * "
-			"FROM READING_LIST";
-	wxSQLite3ResultSet queryResult = mangaData->ExecuteQuery(sql);
+void DbWrapper::getUserReadingList() {
+	QSqlQuery query;
+	query.exec("SELECT * "
+			"FROM READING_LIST");
 
-	while (queryResult.NextRow()) {
-		wxLogDebug(wxString::Format(wxT("%i"),queryResult.GetInt(wxT("MANGA_ID"))));
-		wxLogDebug(getMangaTitle(queryResult.GetInt(wxT("MANGA_ID"))));
+	while (query.next()) {
 
 		ReadItem* newRead = new ReadItem();
-
-		newRead->setMangaTitle(getMangaTitle(queryResult.GetInt(wxT("MANGA_ID"))));
-		newRead->setStartingChapter(queryResult.GetInt(wxT("READ_STARTING_CHAPTER")));
-		newRead->setCurrentChapter(queryResult.GetInt(wxT("READ_CURRENT_CHAPTER")));
-		newRead->setOnlineUrl(queryResult.GetAsString(wxT("READ_ONLINE_URL")));
-		newRead->setReadFinished(queryResult.GetBool(wxT("READ_IS_FINISHED")));
-		newRead->setLastRead(queryResult.GetDateTime(wxT("READ_LAST_TIME")));
+		int i = 0;
+		newRead->setMangaTitle(getMangaTitle(query.value(i++).toInt()));
+		newRead->setStartingChapter(query.value(i++).toInt());
+		newRead->setCurrentChapter(query.value(i++).toInt());
+		newRead->setOnlineUrl(query.value(i++).toString());
+		newRead->setReadFinished(query.value(i++).toBool());
+		newRead->setLastRead(query.value(i++).toDateTime());
 		//newRead->setMangaNote(queryResult.GetString(wxT("READ_NOTE")));
-		wxLogDebug(newRead->getLastRead().FormatDate());
-		grid->addNewLine();
-		grid->populateGrid(newRead,line);
-		line++;
 	}
 }
 
-wxString DbWrapper::getMangaTitle(int mangaId) {
-	wxString mangaTitle;
-	static const char sql[] = "SELECT MANGA_TITLE "
+QString DbWrapper::getMangaTitle(int mangaId) {
+	QString mangaTitle;
+	QSqlQuery query;
+	query.prepare("SELECT MANGA_TITLE "
 			"FROM MANGA_INFO "
-			"WHERE MANGA_ID = ?";
+			"WHERE MANGA_ID = ?");
 
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+	query.bindValue(0, mangaId);
+	query.exec();
 
-	st.Bind(1, mangaId);
-
-	wxSQLite3ResultSet queryResult = st.ExecuteQuery();
-	while (queryResult.NextRow()) {
-		mangaTitle = queryResult.GetAsString(wxT("MANGA_TITLE"));
+	while (query.next()) {
+		mangaTitle = query.value(0).toString();
 	}
-	st.Finalize();
+
 	return mangaTitle;
 }
 
-int DbWrapper::getMangaID(wxString mangaTitle) {
+int DbWrapper::getMangaID(QString mangaTitle) {
 	int valueToReturn = -1;
-
-	static const char sql[] = "SELECT MANGA_ID "
+	QSqlQuery query;
+	query.prepare("SELECT MANGA_ID "
 			"FROM MANGA_INFO "
-			"WHERE MANGA_TITLE = ?";
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			"WHERE MANGA_TITLE = ?");
 
-	st.Bind(1, mangaTitle);
+	query.bindValue(0, mangaTitle);
+	query.exec();
 
-	wxSQLite3ResultSet queryResult = st.ExecuteQuery();
-	while (queryResult.NextRow()) {
-		valueToReturn = queryResult.GetInt(wxT("MANGA_ID"));
+	while (query.next()) {
+		valueToReturn = query.value(0).toInt();
 	}
-	st.Finalize();
 
 	return valueToReturn;
 
 }
 
 void DbWrapper::insertReadItem(ReadItem* readItem) {
-	static const char sql[] = "INSERT INTO READING_LIST ("
+	QSqlQuery query;
+	query.prepare("INSERT INTO READING_LIST ("
 			"MANGA_ID, "
 			"READ_STARTING_CHAPTER, "
 			"READ_CURRENT_CHAPTER, "
@@ -96,24 +81,23 @@ void DbWrapper::insertReadItem(ReadItem* readItem) {
 			"READ_NOTE"
 			") VALUES ("
 			"?, ?, ?, ?, ?, ?, ?"
-			")";
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, getMangaID(readItem->getMangaTitle()));
-	st.Bind(++i, (int) readItem->getStartingChapter());
-	st.Bind(++i, (int) readItem->getCurrentChapter());
-	st.Bind(++i, readItem->getOnlineUrl());
-	st.BindBool(++i, readItem->getReadFinished());
-	st.BindDateTime(++i, readItem->getLastRead());
-	st.Bind(++i, readItem->getMangaNote());
+	query.bindValue(i++, getMangaID(readItem->getMangaTitle()));
+	query.bindValue(i++, (int) readItem->getStartingChapter());
+	query.bindValue(i++, (int) readItem->getCurrentChapter());
+	query.bindValue(i++, readItem->getOnlineUrl());
+	query.bindValue(i++, readItem->getReadFinished());
+	query.bindValue(i++, readItem->getLastRead());
+	query.bindValue(i++, readItem->getMangaNote());
 
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.exec();
 }
 
 void DbWrapper::insertMangaData(MangaInfo* manga) {
-	static const char sql[] = "INSERT INTO MANGA_INFO ("
+	QSqlQuery query;
+	query.prepare("INSERT INTO MANGA_INFO ("
 			"MANGA_ID, "
 			"MANGA_TITLE, "
 			"MANGA_DESCRIPTION, "
@@ -123,25 +107,23 @@ void DbWrapper::insertMangaData(MangaInfo* manga) {
 			"MANGA_COVER"
 			") VALUES ("
 			"?, ?, ?, ?, ?, ?, ?"
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
-	wxDateTime toDate;
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) manga->getMangaId());
-	st.Bind(++i, manga->getMangaTitle());
-	st.Bind(++i, manga->getMangaDescription());
-	st.BindDateTime(++i, manga->getMangaPublicationDate());
-	st.Bind(++i, manga->getMangaPublicationStatus());
-	st.Bind(++i, (int) manga->getMangaPublisherId());
-	st.Bind(++i, manga->getMangaCover());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) manga->getMangaId());
+	query.bindValue(i++, manga->getMangaTitle());
+	query.bindValue(i++, manga->getMangaDescription());
+	query.bindValue(i++, manga->getMangaPublicationDate());
+	query.bindValue(i++, manga->getMangaPublicationStatus());
+	query.bindValue(i++, (int) manga->getMangaPublisherId());
+	query.bindValue(i++, manga->getMangaCover());
+
+	query.exec();
 }
 
 void DbWrapper::insertAuthorData(AuthorInfo* author) {
-	static const char sql[] = "INSERT INTO AUTHOR_INFO ("
+	QSqlQuery query;
+	query.prepare("INSERT INTO AUTHOR_INFO ("
 			"AUTHOR_ID, "
 			"AUTHOR_NAME, "
 			"AUTHOR_NATIONALITY, "
@@ -149,40 +131,36 @@ void DbWrapper::insertAuthorData(AuthorInfo* author) {
 			"AUTHOR_WEBSITE "
 			") VALUES ("
 			"?, ?, ?, ?, ?"
-			")";
+			")");
 
-	wxDateTime date;
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
 
 	int i = 0;
-	st.Bind(++i, (int) author->getAuthorId());
-	st.Bind(++i, author->getAuthorName());
-	st.Bind(++i, author->getAuthorNationality());
-	st.BindDateTime(++i, author->getAuthorBirthday());
-	st.Bind(++i, author->getAuthorWebsite());
+	query.bindValue(i++, (int) author->getAuthorId());
+	query.bindValue(i++, author->getAuthorName());
+	query.bindValue(i++, author->getAuthorNationality());
+	query.bindValue(i++, author->getAuthorBirthday());
+	query.bindValue(i++, author->getAuthorWebsite());
 
-	st.ExecuteUpdate();
-	st.Finalize();
-
+	query.exec();
 }
 void DbWrapper::insertGenreData(GenreInfo* genre) {
-	static const char sql[] = "INSERT INTO GENRE_INFO ("
+	QSqlQuery query;
+	query.prepare("INSERT INTO GENRE_INFO ("
 			"GENRE_ID, "
 			"GENRE_NAME "
 			") VALUES ( "
 			"?, ?"
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) genre->getGenreId());
-	st.Bind(++i, genre->getGenreName());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) genre->getGenreId());
+	query.bindValue(i++, genre->getGenreName());
+
+	query.exec();
 }
 void DbWrapper::insertPublisherData(PublisherInfo* publisher) {
-	static const char sql[] = "INSERT INTO PUBLISHER_INFO ( "
+	QSqlQuery query;
+	query.prepare("INSERT INTO PUBLISHER_INFO ( "
 			"PUBLISHER_ID, "
 			"PUBLISHER_NAME, "
 			"PUBLISHER_COUNTRY, "
@@ -190,23 +168,21 @@ void DbWrapper::insertPublisherData(PublisherInfo* publisher) {
 			"PUBLISHER_NOTE "
 			" ) values ( "
 			"?, ?, ?, ?, ?"
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) publisher->getPublisherId());
-	st.Bind(++i, publisher->getPublisherName());
-	st.Bind(++i, publisher->getPublisherCountry());
-	st.Bind(++i, publisher->getPublisherWebsite());
-	st.Bind(++i, publisher->getPublisherNote());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) publisher->getPublisherId());
+	query.bindValue(i++, publisher->getPublisherName());
+	query.bindValue(i++, publisher->getPublisherCountry());
+	query.bindValue(i++, publisher->getPublisherWebsite());
+	query.bindValue(i++, publisher->getPublisherNote());
 
+	query.exec();
 }
 
 void DbWrapper::insertNewsItem(NewsStorage* newsItem) {
-	static const char sql[] = "INSERT INTO NEWS_STORAGE ( "
+	QSqlQuery query;
+	query.prepare("INSERT INTO NEWS_STORAGE ( "
 			"NEWSITEM_ID, "
 			"NEWSITEM_TITLE, "
 			"NEWSITEM_HYPERLINK, "
@@ -215,77 +191,69 @@ void DbWrapper::insertNewsItem(NewsStorage* newsItem) {
 			"NEWSITEM_AQUISITION_DATE "
 			") VALUES ( "
 			"?, ?, ?, ?, ?, ?"
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) newsItem->getNewsItemId());
-	st.Bind(++i, newsItem->getNewsItemTitle());
-	st.Bind(++i, newsItem->getNewsItemHyperLink());
-	st.Bind(++i, newsItem->getNewsItemDescription());
-	st.BindDateTime(++i, newsItem->getNewsItemPublicationDate());
-	st.BindDateTime(++i, newsItem->getNewsItemAquisitionDate());
-	st.ExecuteUpdate();
-	st.Finalize();
-
+	query.bindValue(i++, (int) newsItem->getNewsItemId());
+	query.bindValue(i++, newsItem->getNewsItemTitle());
+	query.bindValue(i++, newsItem->getNewsItemHyperLink());
+	query.bindValue(i++, newsItem->getNewsItemDescription());
+	query.bindValue(i++, newsItem->getNewsItemPublicationDate());
+	query.bindValue(i++, newsItem->getNewsItemAquisitionDate());
+	query.exec();
 }
 void DbWrapper::insertNewsSubscription(NewsSubscriptions* subscription) {
-	static const char sql[] = "INSERT INTO NEWS_SUBSCRIPTIONS ( "
+	QSqlQuery query;
+	query.prepare("INSERT INTO NEWS_SUBSCRIPTIONS ( "
 			"SUBSCRIPTION_ID, "
 			"SUBSCRIPTION_URL, "
 			"SUBSCRIPTION_CHANNEL_NAME "
 			") VALUES ( "
 			"?, ?, ? "
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) subscription->getSubscriptionId());
-	st.Bind(++i, subscription->getSubscriptionUrl());
-	st.Bind(++i, subscription->getSubscriptionChannelName());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) subscription->getSubscriptionId());
+	query.bindValue(i++, subscription->getSubscriptionUrl());
+	query.bindValue(i++, subscription->getSubscriptionChannelName());
+	query.exec();
+
 }
 void DbWrapper::insertMangaAuthor(MangaAuthors* maAuth) {
-	static const char sql[] = "INSERT INTO MANGA_AUTHORS ( "
+	QSqlQuery query;
+	query.prepare("INSERT INTO MANGA_AUTHORS ( "
 			"MANGA_ID, "
 			"AUTHOR_ID "
 			") VALUES ( "
 			"?, ? "
-			")";
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) maAuth->getMangaId());
-	st.Bind(++i, (int) maAuth->getAuthorId());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) maAuth->getMangaId());
+	query.bindValue(i++, (int) maAuth->getAuthorId());
+
+	query.exec();
 }
 
 void DbWrapper::insertMangaGenre(MangaGenres* maGen) {
-	static const char sql[] = "INSERT INTO MANGA_GENRES ( "
+	QSqlQuery query;
+	query.prepare("INSERT INTO MANGA_GENRES ( "
 			"MANGA_ID, "
 			"GENRE_ID "
 			") VALUES ( "
 			"?, ? "
-			")";
-
-	wxSQLite3Statement st = mangaData->PrepareStatement(sql);
+			")");
 
 	int i = 0;
-	st.Bind(++i, (int) maGen->getMangaId());
-	st.Bind(++i, (int) maGen->getGenreId());
-	st.ExecuteUpdate();
-	st.Finalize();
+	query.bindValue(i++, (int) maGen->getMangaId());
+	query.bindValue(i++, (int) maGen->getGenreId());
+
+	query.exec();
 }
 
 void DbWrapper::createMangaInfoTable() {
-	if (mangaData->TableExists(wxT("MANGA_INFO")))
-		return;
-	static const char sql[] =
-			"CREATE TABLE MANGA_INFO ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE MANGA_INFO ( "
 					"MANGA_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 					"MANGA_TITLE NVARCHAR(400) NOT NULL, "
 					"MANGA_DESCRIPTION NVARCHAR(3000), "
@@ -294,113 +262,101 @@ void DbWrapper::createMangaInfoTable() {
 					"MANGA_PUBLISHER_ID INTEGER, "
 					"MANGA_COVER BLOB, "
 					"FOREIGN KEY (MANGA_PUBLISHER_ID) REFERENCES PUBLISHER_INFO(PUBLISHER_ID) ON DELETE CASCADE ON UPDATE CASCADE"
-					")";
+					")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createPublisherInfoTable() {
-	if (mangaData->TableExists(wxT("PUBLISHER_INFO")))
-		return;
-	static const char sql[] = "CREATE TABLE PUBLISHER_INFO ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE PUBLISHER_INFO ( "
 			"PUBLISHER_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"PUBLISHER_NAME NVARCHAR(150) NOT NULL, "
 			"PUBLISHER_COUNTRY NVARCHAR(40), "
 			"PUBLISHER_WEBSITE NVARCHAR(150), "
 			"PUBLISHER_NOTE NVARCHAR(500) "
-			")";
+			")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createAuthorInfoTable() {
-	if (mangaData->TableExists(wxT("AUTHOR_INFO")))
-		return;
-	static const char sql[] = "CREATE TABLE AUTHOR_INFO ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE AUTHOR_INFO ( "
 			"AUTHOR_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"AUTHOR_NAME NVARCHAR(100) NOT NULL, "
 			"AUTHOR_NATIONALITY NVARCHAR(40), "
 			"AUTHOR_BIRTHDAY DATE, "
 			"AUTHOR_WEBSITE NVARCHAR(150) "
-			")";
+			")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createGenreInfoTable() {
-	if (mangaData->TableExists(wxT("GENRE_INFO")))
-		return;
-	static const char sql[] = "CREATE TABLE GENRE_INFO ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE GENRE_INFO ( "
 			"GENRE_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"GENRE_NAME NVARCHAR(50) "
-			")";
+			")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createNewsStorageTable() {
-	if (mangaData->TableExists(wxT("NEWS_STORAGE")))
-		return;
-	static const char sql[] = "CREATE TABLE NEWS_STORAGE ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE NEWS_STORAGE ( "
 			"NEWSITEM_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"NEWSITEM_TITLE NVARCHAR(150), "
 			"NEWSITEM_HYPERLINK NVARCHAR(150), "
 			"NEWSITEM_DESCRIPTION NVARCHAR(1000), "
 			"NEWSITEM_PUBLICATION_DATE DATE, "
 			"NEWSITEM_AQUISITION_DATE DATE "
-			")";
+			")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createNewsSubscriptionsTable() {
-	if (mangaData->TableExists(wxT("NEWS_SUBSCRIPTIONS")))
-		return;
-	static const char sql[] = "CREATE TABLE NEWS_SUBSCRIPTIONS ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE NEWS_SUBSCRIPTIONS ( "
 			"SUBSCRIPTION_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 			"SUBSCRIPTION_URL NVARCHAR(150) NOT NULL, "
 			"SUBSCRIPTION_CHANNEL_NAME NVARCHAR(150) "
-			")";
+			")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createMangaAuthorsTable() {
-	if (mangaData->TableExists(wxT("MANGA_AUTHORS")))
-		return;
-	static const char sql[] =
-			"CREATE TABLE MANGA_AUTHORS ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE MANGA_AUTHORS ( "
 					"MANGA_ID INTEGER  NOT NULL, "
 					"AUTHOR_ID INTEGER  NOT NULL, "
 					"PRIMARY KEY (MANGA_ID,AUTHOR_ID), "
 					"FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE, "
 					"FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHOR_INFO(AUTHOR_ID) ON DELETE CASCADE ON UPDATE CASCADE "
-					")";
+					")");
 
-	mangaData->ExecuteUpdate(sql);
-
+	query.exec();
 }
 
 void DbWrapper::createMangaGenresTable() {
-	if (mangaData->TableExists(wxT("MANGA_GENRES")))
-		return;
-	static const char sql[] =
-			"CREATE TABLE MANGA_GENRES ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE MANGA_GENRES ( "
 					"MANGA_ID INTEGER NOT NULL, "
 					"GENRE_ID INTEGER NOT NULL, "
 					"PRIMARY KEY (MANGA_ID,GENRE_ID), "
 					"FOREIGN KEY (GENRE_ID) REFERENCES GENRE_INFO(GENRE_ID) ON DELETE CASCADE ON UPDATE CASCADE, "
 					"FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE "
-					")";
+					")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::createReadingListTable() {
-	if (mangaData->TableExists(wxT("READING_LIST")))
-		return;
-	static const char sql[] =
-			"CREATE TABLE READING_LIST ( "
+	QSqlQuery query;
+	query.prepare("CREATE TABLE READING_LIST ( "
 					"ENTRY_ID INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT, "
 					"MANGA_ID INTEGER  NOT NULL, "
 					"READ_STARTING_CHAPTER INTEGER, "
@@ -410,9 +366,9 @@ void DbWrapper::createReadingListTable() {
 					"READ_LAST_TIME DATE, "
 					"READ_NOTE NVARCHAR(400), "
 					"FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE "
-					")";
+					")");
 
-	mangaData->ExecuteUpdate(sql);
+	query.exec();
 }
 
 void DbWrapper::initDatabase() {
@@ -428,13 +384,11 @@ void DbWrapper::initDatabase() {
 }
 
 void DbWrapper::getMangaData() {
-	static const char sql[] = "SELECT * "
-			"FROM MANGA_INFO";
+	QSqlQuery query;
+	query.prepare("SELECT * "
+			"FROM MANGA_INFO");
 
-	wxSQLite3ResultSet rs = mangaData->ExecuteQuery(sql);
+	while (query.next()) {
 
-	while (rs.NextRow()) {
-		wxLogDebug
-			(rs.GetString(wxT("MANGA_TITLE")));
 	}
 }

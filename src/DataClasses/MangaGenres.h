@@ -1,7 +1,8 @@
 #ifndef MANGAGENRES_H
 #define MANGAGENRES_H
 
-#include <wx/wx.h>
+#include <qstring>
+#include <qdatetime>
 #include "DataStructs.h"
 
 class MangaGenres {

@@ -1,16 +1,19 @@
 #ifndef PUBLISHERINFO_H
 #define PUBLISHERINFO_H
-#include <wx/wx.h>
-#include <DataStructs.h>
+
+#include <qstring>
+#include <qdatetime>
+
+#include "DataStructs.h"
 
 class PublisherInfo {
 public:
 	/** Default constructor */
 	PublisherInfo();
 	/** Parametered constructor */
-	PublisherInfo(unsigned int publisherId, wxString publisherName,
-			wxString publisherCountry, wxString publisherWebsite,
-			wxString publisherNote);
+	PublisherInfo(unsigned int publisherId, QString publisherName,
+			QString publisherCountry, QString publisherWebsite,
+			QString publisherNote);
 	PublisherInfo(Publisher pub);
 	/** Default destructor */
 	virtual ~PublisherInfo();
@@ -29,49 +32,49 @@ public:
 	/** Access publisherName
 	 * \return The current value of publisherName
 	 */
-	wxString getPublisherName() {
+	QString getPublisherName() {
 		return publisherName;
 	}
 	/** Set publisherName
 	 * \param val New value to set
 	 */
-	void setPublisherName(wxString val) {
+	void setPublisherName(QString val) {
 		publisherName += val;
 	}
 	/** Access publisherCountry
 	 * \return The current value of publisherCountry
 	 */
-	wxString getPublisherCountry() {
+	QString getPublisherCountry() {
 		return publisherCountry;
 	}
 	/** Set publisherCountry
 	 * \param val New value to set
 	 */
-	void setPublisherCountry(wxString val) {
+	void setPublisherCountry(QString val) {
 		publisherCountry += val;
 	}
 	/** Access publisherWebsite
 	 * \return The current value of publisherWebsite
 	 */
-	wxString getPublisherWebsite() {
+	QString getPublisherWebsite() {
 		return publisherWebsite;
 	}
 	/** Set publisherWebsite
 	 * \param val New value to set
 	 */
-	void setPublisherWebsite(wxString val) {
+	void setPublisherWebsite(QString val) {
 		publisherWebsite += val;
 	}
 	/** Access publisherNote
 	 * \return The current value of publisherNote
 	 */
-	wxString getPublisherNote() {
+	QString getPublisherNote() {
 		return publisherNote;
 	}
 	/** Set publisherNote
 	 * \param val New value to set
 	 */
-	void setPublisherNote(wxString val) {
+	void setPublisherNote(QString val) {
 		publisherNote += val;
 	}
 	/**
@@ -81,10 +84,10 @@ public:
 protected:
 private:
 	unsigned int publisherId; //!< Member variable "publisherId"
-	wxString publisherName; //!< Member variable "publisherName"
-	wxString publisherCountry; //!< Member variable "publisherCountry"
-	wxString publisherWebsite; //!< Member variable "publisherWebsite"
-	wxString publisherNote; //!< Member variable "publisherNote"
+	QString publisherName; //!< Member variable "publisherName"
+	QString publisherCountry; //!< Member variable "publisherCountry"
+	QString publisherWebsite; //!< Member variable "publisherWebsite"
+	QString publisherNote; //!< Member variable "publisherNote"
 };
 
 #endif // PUBLISHERINFO_H

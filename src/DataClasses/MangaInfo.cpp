@@ -4,10 +4,10 @@ MangaInfo::MangaInfo() {
 	//ctor
 }
 
-MangaInfo::MangaInfo(unsigned int mangaId, wxString mangaTitle,
-		wxString mangaDescription, wxDateTime mangaPublicationDate,
-		wxString mangaPublicationStatus, unsigned int mangaPublisherId,
-		wxMemoryBuffer mangaCover) {
+MangaInfo::MangaInfo(unsigned int mangaId, QString mangaTitle,
+		QString mangaDescription, QDateTime mangaPublicationDate,
+		QString mangaPublicationStatus, unsigned int mangaPublisherId,
+		QByteArray mangaCover) {
 	this->mangaId = mangaId;
 	this->mangaTitle = mangaTitle;
 	this->mangaDescription = mangaDescription;
@@ -25,7 +25,7 @@ void MangaInfo::clear() {
 	this->mangaId = '\0';
 	this->mangaTitle = '\0';
 	this->mangaDescription = '\0';
-	this->mangaPublicationDate = '\0';
+	this->mangaPublicationDate = QDateTime::currentDateTime();
 	this->mangaPublicationStatus = '\0';
 	this->mangaPublisherId = '\0';
 	this->mangaCover = '\0';

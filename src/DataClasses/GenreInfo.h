@@ -1,6 +1,9 @@
 #ifndef GENREINFO_H
 #define GENREINFO_H
-#include <wx/wx.h>
+
+#include <qstring>
+#include <qdatetime>
+
 #include "DataStructs.h"
 
 class GenreInfo {
@@ -8,7 +11,7 @@ public:
 	/** Default constructor */
 	GenreInfo();
 	/** Parametered constructor */
-	GenreInfo(unsigned int genreId, wxString genreName);
+	GenreInfo(unsigned int genreId, QString genreName);
 	GenreInfo(Genre gen);
 	/** Default destructor */
 	virtual ~GenreInfo();
@@ -27,13 +30,13 @@ public:
 	/** Access genreName
 	 * \return The current value of genreName
 	 */
-	wxString getGenreName() {
+	QString getGenreName() {
 		return genreName;
 	}
 	/** Set genreName
 	 * \param val New value to set
 	 */
-	void setGenreName(wxString val) {
+	void setGenreName(QString val) {
 		genreName += val;
 	}
 	/** Nullifies the current object;
@@ -43,7 +46,7 @@ public:
 protected:
 private:
 	unsigned int genreId; //!< Member variable "genreId"
-	wxString genreName; //!< Member variable "genreName"
+	QString genreName; //!< Member variable "genreName"
 };
 
 #endif // GENREINFO_H

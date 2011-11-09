@@ -1,14 +1,15 @@
 #ifndef NEWSSUBSCRIPTIONS_H
 #define NEWSSUBSCRIPTIONS_H
 
-#include <wx/wx.h>
+#include <qstring>
+#include <qdatetime>
 
 class NewsSubscriptions {
 public:
 	/** Default constructor */
 	NewsSubscriptions();
-	NewsSubscriptions(unsigned int subscriptionId, wxString subscriptionUrl,
-			wxString subscriptionChannelName);
+	NewsSubscriptions(unsigned int subscriptionId, QString subscriptionUrl,
+			QString subscriptionChannelName);
 	/** Default destructor */
 	virtual ~NewsSubscriptions();
 	/** Access subscriptionId
@@ -26,32 +27,32 @@ public:
 	/** Access subscriptionUrl
 	 * \return The current value of subscriptionUrl
 	 */
-	wxString getSubscriptionUrl() {
+	QString getSubscriptionUrl() {
 		return subscriptionUrl;
 	}
 	/** Set subscriptionUrl
 	 * \param val New value to set
 	 */
-	void SetsubscriptionUrl(wxString val) {
+	void SetsubscriptionUrl(QString val) {
 		subscriptionUrl = val;
 	}
 	/** Access subscriptionChannelName
 	 * \return The current value of subscriptionChannelName
 	 */
-	wxString getSubscriptionChannelName() {
+	QString getSubscriptionChannelName() {
 		return subscriptionChannelName;
 	}
 	/** Set subscriptionChannelName
 	 * \param val New value to set
 	 */
-	void SetsubscriptionChannelName(wxString val) {
+	void SetsubscriptionChannelName(QString val) {
 		subscriptionChannelName = val;
 	}
 protected:
 private:
 	unsigned int subscriptionId; //!< Member variable "subscriptionId"
-	wxString subscriptionUrl; //!< Member variable "subscriptionUrl"
-	wxString subscriptionChannelName; //!< Member variable "subscriptionChannelName"
+	QString subscriptionUrl; //!< Member variable "subscriptionUrl"
+	QString subscriptionChannelName; //!< Member variable "subscriptionChannelName"
 };
 
 #endif // NEWSSUBSCRIPTIONS_H

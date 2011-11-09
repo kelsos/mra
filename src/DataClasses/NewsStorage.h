@@ -1,16 +1,17 @@
 #ifndef NEWSSTORAGE_H
 #define NEWSSTORAGE_H
 
-#include <wx/wx.h>
+#include <qstring>
+#include <qdatetime>
 
 class NewsStorage {
 public:
 	/** Default constructor */
 	NewsStorage();
-	NewsStorage(unsigned int newsItemId, wxString newsItemTitle,
-			wxString newsItemHyperLink, wxString newsItemDescription,
-			wxDateTime newsItemPublicationDate,
-			wxDateTime newsItemAquisitionDate);
+	NewsStorage(unsigned int newsItemId, QString newsItemTitle,
+			QString newsItemHyperLink, QString newsItemDescription,
+			QDateTime newsItemPublicationDate,
+			QDateTime newsItemAquisitionDate);
 	/** Default destructor */
 	virtual ~NewsStorage();
 	/** Access newsItemId
@@ -28,71 +29,71 @@ public:
 	/** Access newsItemTitle
 	 * \return The current value of newsItemTitle
 	 */
-	wxString getNewsItemTitle() {
+	QString getNewsItemTitle() {
 		return newsItemTitle;
 	}
 	/** Set newsItemTitle
 	 * \param val New value to set
 	 */
-	void setNewsItemTitle(wxString val) {
+	void setNewsItemTitle(QString val) {
 		newsItemTitle = val;
 	}
 	/** Access newsItemHyperLink
 	 * \return The current value of newsItemHyperLink
 	 */
-	wxString getNewsItemHyperLink() {
+	QString getNewsItemHyperLink() {
 		return newsItemHyperLink;
 	}
 	/** Set newsItemHyperLink
 	 * \param val New value to set
 	 */
-	void setNewsItemHyperLink(wxString val) {
+	void setNewsItemHyperLink(QString val) {
 		newsItemHyperLink = val;
 	}
 	/** Access newsItemDescription
 	 * \return The current value of newsItemDescription
 	 */
-	wxString getNewsItemDescription() {
+	QString getNewsItemDescription() {
 		return newsItemDescription;
 	}
 	/** Set newsItemDescription
 	 * \param val New value to set
 	 */
-	void setNewsItemDescription(wxString val) {
+	void setNewsItemDescription(QString val) {
 		newsItemDescription = val;
 	}
 	/** Access newsItemPublicationDate
 	 * \return The current value of newsItemPublicationDate
 	 */
-	wxDateTime getNewsItemPublicationDate() {
+	QDateTime getNewsItemPublicationDate() {
 		return newsItemPublicationDate;
 	}
 	/** Set newsItemPublicationDate
 	 * \param val New value to set
 	 */
-	void setNewsItemPublicationDate(wxDateTime val) {
+	void setNewsItemPublicationDate(QDateTime val) {
 		newsItemPublicationDate = val;
 	}
 	/** Access newsItemAquisitionDate
 	 * \return The current value of newsItemAquisitionDate
 	 */
-	wxDateTime getNewsItemAquisitionDate() {
+	QDateTime getNewsItemAquisitionDate() {
 		return newsItemAquisitionDate;
 	}
 	/** Set newsItemAquisitionDate
 	 * \param val New value to set
 	 */
-	void setNewsItemAquisitionDate(wxDateTime val) {
+	void setNewsItemAquisitionDate(QDateTime val) {
 		newsItemAquisitionDate = val;
 	}
 protected:
 private:
 	unsigned int newsItemId; //!< Member variable "newsItemId"
-	wxString newsItemTitle; //!< Member variable "newsItemTitle"
-	wxString newsItemHyperLink; //!< Member variable "newsItemHyperLink"
-	wxString newsItemDescription; //!< Member variable "newsItemDescription"
-	wxDateTime newsItemPublicationDate; //!< Member variable "newsItemPublicationDate"
-	wxDateTime newsItemAquisitionDate; //!< Member variable "newsItemAquisitionDate"
+	QString newsItemTitle; //!< Member variable "newsItemTitle"
+	QString newsItemHyperLink; //!< Member variable "newsItemHyperLink"
+	QString newsItemDescription; //!< Member variable "newsItemDescription"
+	QDateTime newsItemPublicationDate; //!< Member variable "newsItemPublicationDate"
+	QDateTime newsItemAquisitionDate; //!< Member variable "newsItemAquisitionDate"
 };
 
 #endif // NEWSSTORAGE_H

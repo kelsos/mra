@@ -4,8 +4,6 @@
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/tree.h>
-#include <wx/wx.h>
-#include <wx/textfile.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -28,7 +26,7 @@ public:
 	virtual ~XmlWrapper();
 	/** Opens an xmlfile with
 	 * \param fileName */
-	bool openXmlFile(wxString fileName);
+	bool openXmlFile(QString fileName);
 	/** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
 	bool createApplicationSettings();
 	/** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
@@ -38,7 +36,7 @@ public:
 	/** Saves the user's reading list */
 	bool saveUserReadingList();
 	/** Loads the user's reading list */
-	void loadUserReadingList(wxString fileName);
+	void loadUserReadingList(QString fileName);
 	/** Saves the application data */
 	bool saveApplicationData();
 	/** Loads the application data */
@@ -46,7 +44,7 @@ public:
 
 protected:
 private:
-	void xmlParser(wxString fileName);
+	void xmlParser(QString fileName);
 	DbWrapper* db;
 
 };

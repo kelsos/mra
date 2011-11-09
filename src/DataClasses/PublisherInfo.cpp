@@ -4,9 +4,9 @@ PublisherInfo::PublisherInfo() {
 	//ctor
 }
 
-PublisherInfo::PublisherInfo(unsigned int publisherId, wxString publisherName,
-		wxString publisherCountry, wxString publisherWebsite,
-		wxString publisherNote) {
+PublisherInfo::PublisherInfo(unsigned int publisherId, QString publisherName,
+		QString publisherCountry, QString publisherWebsite,
+		QString publisherNote) {
 	this->publisherId = publisherId;
 	this->publisherName = publisherName;
 	this->publisherCountry = publisherCountry;

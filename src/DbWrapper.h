@@ -1,20 +1,20 @@
 #ifndef DBWRAPPER_H
 #define DBWRAPPER_H
 //Include of the needed libraries.
-#include <wx/wx.h>
-#include <wx/wxsqlite3.h>
-#include <wx/file.h>
+#include <qsql.h>
+#include <qsqldatabase>
+#include <qsqlquery>
+#include <qvariant>
 //Include of the needed data classes.
-#include "AuthorInfo.h"
-#include "GenreInfo.h"
-#include "PublisherInfo.h"
-#include "MangaInfo.h"
-#include "NewsStorage.h"
-#include "NewsSubscriptions.h"
-#include "MangaAuthors.h"
-#include "MangaGenres.h"
-#include "ReadItem.h"
-#include "DataGrid.h"
+#include "DataClasses/AuthorInfo.h"
+#include "DataClasses/GenreInfo.h"
+#include "DataClasses/PublisherInfo.h"
+#include "DataClasses/MangaInfo.h"
+#include "DataClasses/NewsStorage.h"
+#include "DataClasses/NewsSubscriptions.h"
+#include "DataClasses/MangaAuthors.h"
+#include "DataClasses/MangaGenres.h"
+#include "DataClasses/ReadItem.h"
 
 /**Class DbWrapper is the application layer responsible for the transactions with the SQLite3 database.
  *
@@ -32,7 +32,7 @@ public:
 	 *
 	 * @return
 	 */
-	void getUserReadingList(DataGrid* grid);
+	void getUserReadingList();
 	/**Inserts an entry representing an author to the database.
 	 *
 	 * @param author
@@ -82,7 +82,7 @@ public:
 	void getMangaData();
 protected:
 private:
-	wxSQLite3Database* mangaData;
+	QSqlDatabase* mangaData;
 	void createAuthorInfoTable();
 	void createGenreInfoTable();
 	void createPublisherInfoTable();
@@ -93,13 +93,13 @@ private:
 	void createMangaGenresTable();
 	void createReadingListTable();
 	void initDatabase();
-	int getMangaID(wxString mangaTitle);
+	int getMangaID(QString mangaTitle);
 	/**Given the manga ID number the method returns the manga title.
 	 *
 	 * @param mangaId
 	 * @return Manga Title
 	 */
-	wxString getMangaTitle(int mangaId);
+	QString getMangaTitle(int mangaId);
 
 };
 

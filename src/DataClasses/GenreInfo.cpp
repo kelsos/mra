@@ -4,7 +4,7 @@ GenreInfo::GenreInfo() {
 	//ctor
 }
 
-GenreInfo::GenreInfo(unsigned int genreId, wxString genreName) {
+GenreInfo::GenreInfo(unsigned int genreId, QString genreName) {
 	this->genreId = genreId;
 	this->genreName = genreName;
 }

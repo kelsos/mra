@@ -4,9 +4,9 @@ AuthorInfo::AuthorInfo() {
 	//ctor
 }
 
-AuthorInfo::AuthorInfo(unsigned int authorId, wxString authorName,
-		wxString authorNationality, wxDateTime authorBirthday,
-		wxString authorWebsite) {
+AuthorInfo::AuthorInfo(unsigned int authorId, QString authorName,
+		QString authorNationality, QDateTime authorBirthday,
+		QString authorWebsite) {
 	this->authorId = authorId;
 	this->authorName = authorName;
 	this->authorNationality = authorNationality;
@@ -23,7 +23,7 @@ void AuthorInfo::clear()
 	this->authorId = '\0';
 	this->authorName = '\0';
 	this->authorNationality = '\0';
-	this->authorBirthday = '\0';
+	this->authorBirthday=QDateTime::currentDateTime() ;
 	this->authorWebsite = '\0';
 }
 
