@@ -391,41 +391,41 @@ static void manga_parser_characters(MangaParseState *state,
 	case PARSER_IN_PUBLISHER:
 		break;
 	case PARSER_IN_PUBLISHER_ID:
-		state->pub.id = wxAtoi(output);
+		state->pub.id = atoi(output);
 		break;
 	case PARSER_IN_PUBLISHER_NAME:
-		state->pub.name += wxString().FromUTF8(output);
+		state->pub.name += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_PUBLISHER_COUNTRY:
-		state->pub.country += wxString().FromUTF8(output);
+		state->pub.country += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_PUBLISHER_WEBSITE:
-		state->pub.website += wxString().FromUTF8(output);
+		state->pub.website += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_PUBLISHER_NOTE:
-		state->pub.note += wxString().FromUTF8(output);
+		state->pub.note += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_GENRES:
 	case PARSER_IN_GENRE:
 		break;
 	case PARSER_IN_GENRE_ID:
-		state->gen.id = wxAtoi(output);
+		state->gen.id = atoi(output);
 		break;
 	case PARSER_IN_GENRE_NAME:
-		state->gen.name += wxString().FromUTF8(output);
+		state->gen.name += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_AUTHORS:
 		break;
 	case PARSER_IN_AUTHOR:
 		break;
 	case PARSER_IN_AUTHOR_ID:
-		state->auth.id = wxAtoi(output);
+		state->auth.id = atoi(output);
 		break;
 	case PARSER_IN_AUTHOR_NAME:
-		state->auth.name += wxString().FromUTF8(output);
+		state->auth.name += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_AUTHOR_COUNTRY:
-		state->auth.country += wxString().FromUTF8(output);
+		state->auth.country += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_AUTHOR_BIRTH:
 		/*TODO: fix the data data parsing on QT
@@ -433,17 +433,17 @@ static void manga_parser_characters(MangaParseState *state,
 		 */
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
-		state->auth.website += wxString().FromUTF8(output);
+		state->auth.website += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_MANGAS:
 		break;
 	case PARSER_IN_MANGA:
 		break;
 	case PARSER_IN_MANGA_ID:
-		state->man.id = wxAtoi(output);
+		state->man.id = atoi(output);
 		break;
 	case PARSER_IN_MANGA_TITLE:
-		state->man.title += wxString().FromUTF8(output);
+		state->man.title += QString::fromUtf8(output);
 		break;
 	case PARSER_IN_MANGA_YEAR_OF_PUBLISH:
 		/*TODO: fix the data data parsing on QT
@@ -451,14 +451,14 @@ static void manga_parser_characters(MangaParseState *state,
 		 */
 		break;
 	case PARSER_IN_MANGA_STATUS:
-		state->man.status += wxString().FromUTF8(output);
+		state->man.status += QString::fromUtf8(output);
 		;
 		break;
 	case PARSER_IN_MANGA_PUBLISHER_ID:
-		state->man.pId = wxAtoi(output);
+		state->man.pId = atoi(output);
 		break;
 	case PARSER_IN_MANGA_DESCRIPTION:
-		state->man.description += wxString().FromUTF8(output);
+		state->man.description += QString::fromUtf8(output);
 		;
 		break;
 	case PARSER_IN_MANGA_COVER:
@@ -469,20 +469,20 @@ static void manga_parser_characters(MangaParseState *state,
 	case PARSER_IN_MANGA_GENRE:
 		break;
 	case PARSER_IN_MG_MANGA_ID:
-		state->manGen.mId = wxAtoi(output);
+		state->manGen.mId = atoi(output);
 		break;
 	case PARSER_IN_MG_GENRE_ID:
-		state->manGen.gId = wxAtoi(output);
+		state->manGen.gId = atoi(output);
 		break;
 	case PARSER_IN_MANGA_AUTHORS:
 		break;
 	case PARSER_IN_MANGA_AUTHOR:
 		break;
 	case PARSER_IN_MA_MANGA_ID:
-		state->manAuth.mId = wxAtoi(output);
+		state->manAuth.mId = atoi(output);
 		break;
 	case PARSER_IN_MA_AUTHOR_ID:
-		state->manAuth.aId = wxAtoi(output);
+		state->manAuth.aId = atoi(output);
 		break;
 	case PARSER_AT_END:
 		break;
