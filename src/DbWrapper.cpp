@@ -2,8 +2,13 @@
 
 DbWrapper::DbWrapper() {
 	//Set database driver to QSQLITE
-	*mangaData = QSqlDatabase::addDatabase("QSQLITE");
-	mangaData->setDatabaseName("./mdb.db3");
+	mangaData = QSqlDatabase::addDatabase("QSQLITE");
+	mangaData.setHostName("localhost");
+	mangaData.setDatabaseName("mdb.db3");
+	if(!mangaData.isOpen())
+	{
+		qDebug("Error");
+	}
 	//initDatabase();
 }
 
@@ -16,10 +21,16 @@ bool DbWrapper::isDatabaseConnectionActive() {
 }
 
 QSqlQueryModel* DbWrapper::getUserReadingList() {
-	QSqlQueryModel *model = new QSqlQueryModel;
-	model->setQuery("SELECT MANGA_TITLE, READ_STARTING_CHAPTER, READ_CURRENT_CHAPTER, READ_ONLINE_URL, READ_IS_FINISHED, READ_LAST_TIME"
-			"FROM MANGA_INFO, READING_LIST"
-			"WHERE MANGA_INFO.MANGA_ID = READING_LIST.MANGA_ID");
+	if(!mangaData.isOpen())
+	{
+		mangaData.open();
+	}
+	QSqlQueryModel *model = new QSqlQueryModel();
+	QString query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME, RL.READ_IS_FINISHED "
+			"FROM MANGA_INFO MI, READING_LIST RL "
+			"WHERE MI.MANGA_ID = RL.MANGA_ID";
+	model->setQuery(query,mangaData);
+
 
 	return model;
 }

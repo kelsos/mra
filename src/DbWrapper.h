@@ -3,10 +3,10 @@
 //Include of the needed libraries.
 #include <qsql.h>
 #include <qsqldatabase>
-#include <qsqlquerymodel>
+#include <qsqlquerymodel.h>
 #include <qsqlquery>
 #include <qvariant>
-//Include of the needed data classes.
+///Include of the needed data classes.
 #include "DataClasses/AuthorInfo.h"
 #include "DataClasses/GenreInfo.h"
 #include "DataClasses/PublisherInfo.h"
@@ -85,7 +85,7 @@ public:
 	void clearDatabase();
 protected:
 private:
-	QSqlDatabase* mangaData;
+	QSqlDatabase mangaData;
 	void createAuthorInfoTable();
 	void createGenreInfoTable();
 	void createPublisherInfoTable();

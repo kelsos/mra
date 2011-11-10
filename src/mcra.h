@@ -4,6 +4,7 @@
 #include <QtGui/QMainWindow>
 #include <qsqltablemodel>
 #include <DbWrapper.h>
+#include <XmlWrapper.h>
 #include "ui_mcra.h"
 
 class mcra : public QMainWindow
@@ -14,9 +15,15 @@ public:
     mcra(QWidget *parent = 0);
     ~mcra();
 
+
 private:
     Ui::mcraClass ui;
     DbWrapper* db;
+    XmlWrapper* xmlWrap;
+
+public slots:
+	void update();
+	void getReadingListFromXml();
 };
 
 #endif // SRCMCRA_H

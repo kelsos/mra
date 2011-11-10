@@ -47,6 +47,8 @@ Debug:UI_DIR = debug/.ui
 INCLUDEPATH = lib/includes/libxml2 \
     src \
     src/DataClasses \
-    %QTDIR%\src\plugins\sqldrivers\sqlite\include
-LIBS += -Llib/libs/libxml2 \
-    -lxml2.dll
+    lib/includes
+win32:LIBS += -Llib/libs/libxml2 \
+    -lxml2.dll \
+    -LC:/QtSDK/Desktop/Qt/4.7.4/mingw/plugins/sqldrivers \
+    -lqsqlited4
