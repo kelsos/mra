@@ -6,6 +6,7 @@
 #include <qsqlquerymodel.h>
 #include <qsqlquery>
 #include <qvariant>
+#include <qthread.h>
 ///Include of the needed data classes.
 #include "DataClasses/AuthorInfo.h"
 #include "DataClasses/GenreInfo.h"
@@ -20,7 +21,7 @@
 /**Class DbWrapper is the application layer responsible for the transactions with the SQLite3 database.
  *
  */
-class DbWrapper {
+class DbWrapper{
 public:
 	DbWrapper();
 	virtual ~DbWrapper();
@@ -83,6 +84,15 @@ public:
 	/** Returns the mangaInfo */
 	void getMangaData();
 	void clearDatabase();
+	void truncateAuthorInfoTable();
+	void truncateGenreInfoTable();
+	void truncatePublisherInfoTable();
+	void truncateMangaInfoTable();
+	void truncateNewsStorageTable();
+	void truncateNewsSubscriptionsTable();
+	void truncateMangaAuthorsTable();
+	void truncateMangaGenresTable();
+	void truncateReadingListTable();
 protected:
 private:
 	QSqlDatabase mangaData;
@@ -95,15 +105,7 @@ private:
 	void createMangaAuthorsTable();
 	void createMangaGenresTable();
 	void createReadingListTable();
-	void truncateAuthorInfoTable();
-	void truncateGenreInfoTable();
-	void truncatePublisherInfoTable();
-	void truncateMangaInfoTable();
-	void truncateNewsStorageTable();
-	void truncateNewsSubscriptionsTable();
-	void truncateMangaAuthorsTable();
-	void truncateMangaGenresTable();
-	void truncateReadingListTable();
+
 	void initDatabase();
 	int getMangaID(QString mangaTitle);
 	/**Given the manga ID number the method returns the manga title.

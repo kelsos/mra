@@ -30,6 +30,13 @@ QSqlQueryModel* DbWrapper::getUserReadingList() {
 			"FROM MANGA_INFO MI, READING_LIST RL "
 			"WHERE MI.MANGA_ID = RL.MANGA_ID";
 	model->setQuery(query,mangaData);
+	int i = 0;
+	model->setHeaderData(i++,Qt::Horizontal,"Manga Title");
+	model->setHeaderData(i++,Qt::Horizontal,"Starting Chapter");
+	model->setHeaderData(i++,Qt::Horizontal,"Current Chapter");
+	model->setHeaderData(i++,Qt::Horizontal,"Online URL");
+	model->setHeaderData(i++,Qt::Horizontal,"Last Read");
+	model->setHeaderData(i++,Qt::Horizontal,"Finished Reading?");
 
 
 	return model;
@@ -386,7 +393,7 @@ void DbWrapper::initDatabase() {
 
 void DbWrapper::getMangaData() {
 	QSqlQuery query;
-	query.prepare("SELECT * "
+	query.exec("SELECT * "
 			"FROM MANGA_INFO");
 
 	while (query.next()) {
@@ -395,5 +402,51 @@ void DbWrapper::getMangaData() {
 }
 
 void DbWrapper::truncateAuthorInfoTable(){
+	QSqlQuery query;
+	query.exec("DELETE FROM AUTHOR_INFO");
+}
 
+void DbWrapper::truncateGenreInfoTable(){
+	QSqlQuery query;
+	query.exec("DELETE FROM GENRE_INFO");
+}
+
+void DbWrapper::truncateMangaAuthorsTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM MANGA_AUTHORS");
+}
+
+void DbWrapper::truncateMangaGenresTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM MANGA_GENRES");
+}
+
+void DbWrapper::truncateMangaInfoTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM MANGA_INFO");
+}
+
+void DbWrapper::truncateNewsStorageTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM NEWS_STORAGE");
+}
+
+void DbWrapper::truncateNewsSubscriptionsTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM NEWS_SUBSCRIPTIONS");
+}
+void DbWrapper::truncatePublisherInfoTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM PUBLISHER_INFO");
+}
+void DbWrapper::truncateReadingListTable()
+{
+	QSqlQuery query;
+	query.exec("DELETE FROM READING_LIST");
 }

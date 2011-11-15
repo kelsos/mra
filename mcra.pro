@@ -7,7 +7,8 @@ QT += core \
     xmlpatterns \
     network \
     webkit
-HEADERS += src/DataClasses/AuthorInfo.h \
+HEADERS += src/XmlDataSaxParser.h \
+    src/DataClasses/AuthorInfo.h \
     src/DataClasses/GenreInfo.h \
     src/DataClasses/MangaAuthors.h \
     src/DataClasses/MangaGenres.h \
@@ -18,11 +19,11 @@ HEADERS += src/DataClasses/AuthorInfo.h \
     src/DataClasses/ReadItem.h \
     src/DbWrapper.h \
     src/XmlReadListSaxParser.h \
-    src/XmlSaxParser.h \
     src/XmlWrapper.h \
     src/mcra.h \
     src/version.h
-SOURCES += src/DataClasses/AuthorInfo.cpp \
+SOURCES += src/XmlDataSaxParser.cpp \
+    src/DataClasses/AuthorInfo.cpp \
     src/DataClasses/GenreInfo.cpp \
     src/DataClasses/MangaAuthors.cpp \
     src/DataClasses/MangaGenres.cpp \
@@ -33,7 +34,6 @@ SOURCES += src/DataClasses/AuthorInfo.cpp \
     src/DataClasses/ReadItem.cpp \
     src/DbWrapper.cpp \
     src/XmlReadListSaxParser.cpp \
-    src/XmlSaxParser.cpp \
     src/XmlWrapper.cpp \
     src/main.cpp \
     src/mcra.cpp

@@ -27,4 +27,5 @@ void mcra::update()
 void mcra::getReadingListFromXml()
 {
 	xmlWrap->loadUserReadingList("test.xml");
+	//db->truncateReadingListTable();
 }

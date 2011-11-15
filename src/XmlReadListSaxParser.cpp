@@ -142,7 +142,7 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 		state->read.setCurrentChapter((unsigned int)atoi(output));
 		break;
 	case PARSER_IN_MANGA_LAST_DATE:
-		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		dateData = QDateTime::fromString(output, Qt::ISODate);
 		state->read.setLastRead(dateData);
 		break;
 	case PARSER_IN_MANGA_ONLINE_URL:

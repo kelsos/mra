@@ -4,22 +4,21 @@
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/tree.h>
-#include <string>
+#include <string.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <MangaInfo.h>
 #include <DbWrapper.h>
-#include <XmlSaxParser.h>
+#include <XmlDataSaxParser.h>
 #include <XmlReadListSaxParser.h>
 
 using namespace std;
-
-/** TODO: Work on XML Logic
+/**TODO: Work on XML Logic
  *
  *
  */
-class XmlWrapper {
+class XmlWrapper  {
 public:
 	/** Default constructor */
 	XmlWrapper(DbWrapper* db);

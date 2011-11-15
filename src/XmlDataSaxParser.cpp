@@ -1,4 +1,4 @@
-#include "XmlSaxParser.h"
+#include "XmlDataSaxParser.h"
 
 //States of the parser
 typedef enum {
@@ -61,14 +61,14 @@ struct _MangaParseState {
  * image cover data parsing.
  */
 
-static void manga_parser_start_document(MangaParseState *state) {
+static void startDocumentMangaParser(MangaParseState *state) {
 	state->state = PARSER_START;
 }
 
-static void manga_parser_end_document(MangaParseState *state) {
+static void endDocumentMangaParser(MangaParseState *state) {
 }
 
-static void manga_parser_start_element(MangaParseState *state,
+static void startElementMangaParser(MangaParseState *state,
 		const xmlChar *name, xmlChar** attrs) {
 	switch (state->state) {
 	case PARSER_START:
@@ -234,7 +234,7 @@ static void manga_parser_start_element(MangaParseState *state,
 	}
 }
 
-static void manga_parser_end_element(MangaParseState *state,
+static void endElementMangaParser(MangaParseState *state,
 		const xmlChar *name) {
 	QByteArray ba;
 	switch (state->state) {
@@ -354,7 +354,7 @@ static void manga_parser_end_element(MangaParseState *state,
 		break;
 	}
 }
-static void manga_parser_characters(MangaParseState *state,
+static void charactersMangaParser(MangaParseState *state,
 		const xmlChar *chars, int len) {
 	int i;
 
@@ -413,7 +413,7 @@ static void manga_parser_characters(MangaParseState *state,
 		state->auth.setAuthorNationality(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_AUTHOR_BIRTH:
-		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		dateData.fromString(output, Qt::ISODate);
 		state->auth.setAuthorBirthday(dateData);
 		break;
 	case PARSER_IN_AUTHOR_WEBSITE:
@@ -430,7 +430,7 @@ static void manga_parser_characters(MangaParseState *state,
 		state->man.setMangaTitle(QString::fromUtf8(output));
 		break;
 	case PARSER_IN_MANGA_YEAR_OF_PUBLISH:
-		dateData.fromString(output, "yyyy-MM-ddTHH:mm:ss");
+		dateData.fromString(output, Qt::ISODate);
 		state->man.setMangaPublicationDate(dateData);
 		break;
 	case PARSER_IN_MANGA_STATUS:
@@ -482,12 +482,12 @@ static xmlSAXHandler manga_parser = { 0, /* internalSubset */
 0, /* elementDecl */
 0, /* unparsedEntityDecl */
 0, /* setDocumentLocator */
-(startDocumentSAXFunc) manga_parser_start_document, /* startDocument */
-(endDocumentSAXFunc) manga_parser_end_document, /* endDocument */
-(startElementSAXFunc) manga_parser_start_element, /* startElement */
-(endElementSAXFunc) manga_parser_end_element, /* endElement */
+(startDocumentSAXFunc) startDocumentMangaParser, /* startDocument */
+(endDocumentSAXFunc) endDocumentMangaParser, /* endDocument */
+(startElementSAXFunc) startElementMangaParser, /* startElement */
+(endElementSAXFunc) endElementMangaParser, /* endElement */
 0, /* reference */
-(charactersSAXFunc) manga_parser_characters, /* characters */
+(charactersSAXFunc) charactersMangaParser, /* characters */
 0, /* ignorableWhitespace */
 0, /* processingInstruction */
 (commentSAXFunc) 0, /* comment */

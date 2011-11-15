@@ -1,12 +1,16 @@
 #ifndef XMLREADLISTSAXPARSER_H_
 #define XMLREADLISTSAXPARSER_H_
-
-#include <stdio.h>
-#include <memory>
-#include <string>
-#include "DbWrapper.h"
+//Including external library header files.
 #include <libxml/parser.h>
+#include <stdio.h>
+#include <memory.h>
+#include <string.h>
+//Including project headers.
+#include "DbWrapper.h"
 #include <ReadItem.h>
+
+using namespace std;
+
 void parseReadingList(const char* fileName, DbWrapper* db);
 
 #endif /* XMLREADLISTSAXPARSER_H_ */

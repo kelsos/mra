@@ -1,7 +1,10 @@
+#ifndef XMLDATASAXPARSER_H_
+#define XMLDATASAXPARSER_H_
+
 #include <stdio.h>
-#include <memory>
+#include <memory.h>
 #include <libxml/parser.h>
-#include <string>
+#include <string.h>
 #include "DbWrapper.h"
 //Data classes included.
 #include "AuthorInfo.h"
@@ -13,9 +16,8 @@
 #include "MangaGenres.h"
 #include "MangaAuthors.h"
 
-#ifndef XMLSAXPARSER_H_
-#define XMLSAXPARSER_H_
+using namespace std;
 
 void parseMangaData(const char* file,DbWrapper *db);
 
-#endif /* XMLSAXPARSER_H_ */
+#endif /* XMLDATASAXPARSER_H_ */

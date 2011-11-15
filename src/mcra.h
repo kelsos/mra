@@ -2,6 +2,8 @@
 #define SRCMCRA_H
 
 #include <QtGui/QMainWindow>
+#include <qtconcurrentrun.h>
+#include <QFuture>
 #include <qsqltablemodel>
 #include <DbWrapper.h>
 #include <XmlWrapper.h>
