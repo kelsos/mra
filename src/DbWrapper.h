@@ -6,7 +6,7 @@
 #include <qsqlquerymodel.h>
 #include <qsqlquery>
 #include <qvariant>
-#include <qthread.h>
+#include <qobject.h>
 ///Include of the needed data classes.
 #include "DataClasses/AuthorInfo.h"
 #include "DataClasses/GenreInfo.h"

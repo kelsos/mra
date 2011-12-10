@@ -4,6 +4,7 @@
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/tree.h>
+#include <qobject.h>
 #include <string.h>
 #include <iostream>
 #include <vector>
@@ -14,18 +15,17 @@
 #include <XmlReadListSaxParser.h>
 
 using namespace std;
-/**TODO: Work on XML Logic
- *
- *
- */
-class XmlWrapper  {
+
+class XmlWrapper:public QObject  {
+	Q_OBJECT
 public:
 	/** Default constructor */
-	XmlWrapper(DbWrapper* db);
+	XmlWrapper(QObject* parent = 0);
 	/** Default destructor */
 	virtual ~XmlWrapper();
 	/** Opens an xmlfile with
 	 * \param fileName */
+	void connectWithDatabase(DbWrapper* db);
 	bool openXmlFile(QString fileName);
 	/** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
 	bool createApplicationSettings();
@@ -35,8 +35,7 @@ public:
 	bool loadApplicationSettings();
 	/** Saves the user's reading list */
 	bool saveUserReadingList();
-	/** Loads the user's reading list */
-	void loadUserReadingList(QString fileName);
+
 	/** Saves the application data */
 	bool saveApplicationData();
 	/** Loads the application data */
@@ -46,6 +45,10 @@ protected:
 private:
 	void xmlParser(QString fileName);
 	DbWrapper* db;
+
+public slots:
+	/** Loads the user's reading list */
+	void loadUserReadingList();
 
 };
 

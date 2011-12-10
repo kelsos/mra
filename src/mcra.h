@@ -25,7 +25,6 @@ private:
 
 public slots:
 	void update();
-	void getReadingListFromXml();
 };
 
 #endif // SRCMCRA_H

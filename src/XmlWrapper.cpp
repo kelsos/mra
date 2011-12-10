@@ -1,12 +1,15 @@
 #include "XmlWrapper.h"
 
-XmlWrapper::XmlWrapper(DbWrapper* db) {
-	//ctor
-	this->db=db;
+XmlWrapper::XmlWrapper(QObject* parent)
+:QObject(parent){
+
 }
 
 XmlWrapper::~XmlWrapper() {
-	//dtor
+}
+void XmlWrapper::connectWithDatabase(DbWrapper* db)
+{
+	this->db=db;
 }
 
 void XmlWrapper::xmlParser(QString fileName) {
@@ -19,7 +22,9 @@ bool XmlWrapper::loadApplicationData() {
 	return (true);
 }
 
-void XmlWrapper::loadUserReadingList(QString fileName){
-	QByteArray fArray = fileName.toAscii();
-    parseReadingList((const char*)fArray.data(),db);
+void XmlWrapper::loadUserReadingList(){
+
+	//QByteArray fArray = fileName.toAscii();
+	//(const char*)fArray.data()
+    parseReadingList("test.xml",db);
 }
