@@ -23,6 +23,6 @@ void AuthorInfo::clear()
 	this->authorId = '\0';
 	this->authorName = '\0';
 	this->authorNationality = '\0';
-	this->authorBirthday=QDateTime::currentDateTime() ;
+	this->authorBirthday=QDateTime::fromString("01.01.190000:00:00","dd.MM.yyyyhh:mm:ss");
 	this->authorWebsite = '\0';
 }

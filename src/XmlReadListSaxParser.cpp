@@ -21,7 +21,7 @@ typedef struct _ReadingListParseState ReadingListParseState;
 /*Describes the state of the parser, and also keeps info on the data parsed*/
 struct _ReadingListParseState {
 	ParserState state;
-	ReadItem read;
+	ReadItem readInfo;
 	DbWrapper* mdb;
 };
 
@@ -110,7 +110,7 @@ void parserAtElementEnd(ReadingListParseState* state, xmlChar* name) {
 		break;
 	case PARSER_IN_MANGA_NOTE:
 		state->state = PARSER_IN_MANGAREADINGLIST;
-		state->mdb->insertReadItem(&state->read);
+		state->mdb->insertReadItem(&state->readInfo);
 		break;
 	case PARSER_AT_END:
 		break;
@@ -139,32 +139,32 @@ void parserAtCharacters(ReadingListParseState* state, const xmlChar *chars,
 		case PARSER_IN_MANGA:
 			break;
 		case PARSER_IN_MANGA_TITLE:
-			state->read.setMangaTitle(QString::fromUtf8(output));
+			state->readInfo.setMangaTitle(QString::fromUtf8(output));
 			break;
 		case PARSER_IN_MANGA_STARTING_CHAPTER:
-			state->read.setStartingChapter((unsigned int)atoi(output));
+			state->readInfo.setStartingChapter((unsigned int)atoi(output));
 			break;
 		case PARSER_IN_MANGA_CURRENT_CHAPTER:
-			state->read.setCurrentChapter((unsigned int)atoi(output));
+			state->readInfo.setCurrentChapter((unsigned int)atoi(output));
 			break;
 		case PARSER_IN_MANGA_LAST_DATE:
 			dateData = QDateTime::fromString(output, Qt::ISODate);
-			state->read.setLastRead(dateData);
+			state->readInfo.setLastRead(dateData);
 			break;
 		case PARSER_IN_MANGA_ONLINE_URL:
-			state->read.setOnlineUrl(QString::fromUtf8(output));
+			state->readInfo.setOnlineUrl(QString::fromUtf8(output));
 			break;
 		case PARSER_IN_MANGA_READING_STATUS:
 			if (!strcmp(output, "true")) {
-				state->read.setReadFinished(true);
+				state->readInfo.setReadFinished(true);
 			} else if (!strcmp(output, "false")) {
-				state->read.setReadFinished(false);
+				state->readInfo.setReadFinished(false);
 			} else {
-				state->read.setReadFinished(false);
+				state->readInfo.setReadFinished(false);
 			}
 			break;
 		case PARSER_IN_MANGA_NOTE:
-			state->read.appendMangaNote(QString::fromUtf8(output));
+			state->readInfo.appendMangaNote(QString::fromUtf8(output));
 			break;
 		case PARSER_AT_END:
 			break;
@@ -204,7 +204,7 @@ void parseReadingList(const char* fileName, DbWrapper* db)
 	state.mdb = db;
 
 	if (xmlSAXUserParseFile(&readingListParser, &state, fileName) < 0) {
-		fprintf(stdout, "document not well formed");
+		qDebug("Document not well formed");
 	}
 	return;
 }

@@ -27,6 +27,6 @@ void ReadItem::clear()
 	this->startingChapter = '\0';
 	this->currentChapter = '\0';
 	this->onlineUrl = '\0';
-	this->lastRead = QDateTime::currentDateTime();
+	this->lastRead = QDateTime::fromString("01.01.190000:00:00","dd.MM.yyyyhh:mm:ss");
 	this->readFinished = '\0';
 }

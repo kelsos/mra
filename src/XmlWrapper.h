@@ -9,10 +9,18 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <MangaInfo.h>
 #include <DbWrapper.h>
 #include <XmlDataSaxParser.h>
 #include <XmlReadListSaxParser.h>
+//Data classes included.
+#include "AuthorInfo.h"
+#include "GenreInfo.h"
+#include "MangaAuthors.h"
+#include "MangaGenres.h"
+#include "MangaInfo.h"
+#include "PublisherInfo.h"
+#include "MangaGenres.h"
+#include "MangaAuthors.h"
 
 using namespace std;
 
@@ -38,7 +46,6 @@ public:
 
 	/** Saves the application data */
 	bool saveApplicationData();
-
 
 protected:
 private:
