@@ -38,8 +38,7 @@ public:
 
 	/** Saves the application data */
 	bool saveApplicationData();
-	/** Loads the application data */
-	bool loadApplicationData();
+
 
 protected:
 private:
@@ -49,7 +48,8 @@ private:
 public slots:
 	/** Loads the user's reading list */
 	void loadUserReadingList();
-
+	/** Loads the application data */
+	void loadApplicationData();
 };
 
 #endif // XMLWRAPPER_H

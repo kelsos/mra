@@ -17,9 +17,8 @@ void XmlWrapper::xmlParser(QString fileName) {
 	parseMangaData((const char*)fArray.data(),db);
 }
 
-bool XmlWrapper::loadApplicationData() {
-	xmlParser("test.xml");
-	return (true);
+void XmlWrapper::loadApplicationData() {
+	xmlParser("data.xml");
 }
 
 void XmlWrapper::loadUserReadingList(){

@@ -67,8 +67,6 @@
            <widget class="QTableView" name="tableView"/>
           </item>
          </layout>
-         <zorder>groupBox_3</zorder>
-         <zorder>tableView</zorder>
         </widget>
         <widget class="QWidget" name="tab_2">
          <attribute name="title">
@@ -98,7 +96,6 @@
         <property name="title">
          <string>GroupBox</string>
         </property>
-        <zorder>groupBox_2</zorder>
        </widget>
       </item>
       <item>
@@ -132,6 +129,7 @@
      <string>Test</string>
     </property>
     <addaction name="actionTestHere"/>
+    <addaction name="actionData"/>
    </widget>
    <addaction name="menuTest"/>
   </widget>
@@ -150,6 +148,11 @@
   <action name="actionTestHere">
    <property name="text">
     <string>TestHere</string>
+   </property>
+  </action>
+  <action name="actionData">
+   <property name="text">
+    <string>data</string>
    </property>
   </action>
  </widget>

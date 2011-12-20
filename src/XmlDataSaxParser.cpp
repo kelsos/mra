@@ -1,3 +1,6 @@
+#ifdef _MSC_VER
+#define OUTPUT_LENGTH 4096
+#endif
 #include "XmlDataSaxParser.h"
 
 //States of the parser
@@ -357,8 +360,11 @@ static void endElementMangaParser(MangaParseState *state,
 static void charactersMangaParser(MangaParseState *state,
 		const xmlChar *chars, int len) {
 	int i;
-
-	char output[len];
+#ifdef _MSC_VER
+		char output[OUTPUT_LENGTH];
+#else
+		char output[len];
+#endif
 	QDateTime dateData;
 
 	for (i = 0; i < len; i++) {
