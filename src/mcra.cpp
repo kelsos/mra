@@ -15,6 +15,7 @@ mcra::mcra(QWidget *parent)
 	connect(ui.actionMenuFileList, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
 	connect(ui.actionMenuFileData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
 	connect(ui.actionMenuFileQuit, SIGNAL(triggered()),this, SLOT(quit()));
+	connect(ui.actionMenuHelpAbout, SIGNAL(triggered()),this, SLOT(showAbout()));
 	timer->start(10000);
 	scene = new QGraphicsScene;
 	QThread* readingThread = new QThread;
@@ -63,4 +64,10 @@ void mcra::quit()
 	quitMessageBox.setDefaultButton(QMessageBox::No);
 	if(quitMessageBox.exec() == QMessageBox::Yes)
 	qApp->quit();
+}
+
+void mcra::showAbout()
+{
+	About abDial;
+	abDial.exec();
 }

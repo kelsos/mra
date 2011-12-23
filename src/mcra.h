@@ -9,6 +9,7 @@
 #include "DbWrapper.h"
 #include "XmlWrapper.h"
 #include "ui_mcra.h"
+#include "About.h"
 
 class mcra : public QMainWindow
 {
@@ -30,6 +31,7 @@ public slots:
 	void handleSelectionChanged(const QItemSelection & selected);
 private slots:
 	void quit();
+	void showAbout();
 
 };
 
