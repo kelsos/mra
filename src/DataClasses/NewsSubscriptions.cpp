@@ -17,7 +17,7 @@ NewsSubscriptions::~NewsSubscriptions() {
 
 void NewsSubscriptions::clear()
 {
-	this->subscriptionId = '\0';
-	this->subscriptionUrl = '\0';
-	this->subscriptionChannelName = '\0';
+	this->subscriptionId = 0;
+	this->subscriptionUrl = "";
+	this->subscriptionChannelName = "";
 }

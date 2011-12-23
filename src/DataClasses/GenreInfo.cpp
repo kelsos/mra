@@ -13,6 +13,6 @@ GenreInfo::~GenreInfo() {
 	//dtor
 }
 void GenreInfo::clear() {
-	this->genreId = '\0';
-	this->genreName = '\0';
+	this->genreId = 0;
+	this->genreName = "";
 }

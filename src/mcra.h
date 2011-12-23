@@ -5,6 +5,7 @@
 #include <QtConcurrentRun>
 #include <QFuture>
 #include <QSqlTableModel>
+#include <QMessageBox>
 #include "DbWrapper.h"
 #include "XmlWrapper.h"
 #include "ui_mcra.h"
@@ -27,6 +28,9 @@ private:
 public slots:
 	void update();
 	void handleSelectionChanged(const QItemSelection & selected);
+private slots:
+	void quit();
+
 };
 
 #endif // SRCMCRA_H

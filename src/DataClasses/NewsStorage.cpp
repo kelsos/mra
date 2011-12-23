@@ -19,10 +19,10 @@ NewsStorage::~NewsStorage() {
 }
 void NewsStorage::clear()
 {
-	this->newsItemId = '\0';
-	this->newsItemTitle = "\0";
-	this->newsItemHyperLink = "\0";
-	this->newsItemDescription = "\0";
+	this->newsItemId = 0;
+	this->newsItemTitle = "";
+	this->newsItemHyperLink = "";
+	this->newsItemDescription = "";
 	this->newsItemPublicationDate = QDateTime::currentDateTime();
 	this->newsItemAquisitionDate = QDateTime::currentDateTime();
 }

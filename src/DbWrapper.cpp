@@ -20,26 +20,36 @@ bool DbWrapper::isDatabaseConnectionActive() {
 	return true;
 }
 
-MangaSqlQueryModel* DbWrapper::getUserReadingList() {
+MangaSqlQueryModel* DbWrapper::getUserReadingList(bool displayFinished) {
 	try{
 		if(!mangaData.isOpen())
 		{
 			mangaData.open();
 		}
 		MangaSqlQueryModel *model = new MangaSqlQueryModel();
-		QString query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME, RL.READ_IS_FINISHED "
-			"FROM MANGA_INFO MI, READING_LIST RL "
-			"WHERE MI.MANGA_ID = RL.MANGA_ID";
+		QString query;
+		if(displayFinished)
+		{
+			query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME, RL.READ_IS_FINISHED "
+				"FROM MANGA_INFO MI, READING_LIST RL "
+				"WHERE MI.MANGA_ID = RL.MANGA_ID";
+		}
+		else
+		{
+			query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME "
+				"FROM MANGA_INFO MI, READING_LIST RL "
+				"WHERE MI.MANGA_ID = RL.MANGA_ID AND RL.READ_IS_FINISHED = 'false'";
+		}
 		model->setQuery(query,mangaData);
+
 		int i = 0;
 		model->setHeaderData(i++,Qt::Horizontal,"Manga Title");
 		model->setHeaderData(i++,Qt::Horizontal,"Starting\nChapter");
 		model->setHeaderData(i++,Qt::Horizontal,"Current\nChapter");
 		model->setHeaderData(i++,Qt::Horizontal,"Online URL");
 		model->setHeaderData(i++,Qt::Horizontal,"Last\nRead");
-		model->setHeaderData(i++,Qt::Horizontal,"Finished\nReading?");
-
-
+		if(displayFinished)
+			model->setHeaderData(i++,Qt::Horizontal,"Finished\nReading?");
 		return model;
 	}
 	catch(std::exception& e)
@@ -93,7 +103,7 @@ int DbWrapper::getMangaID(QString mangaTitle) {
 		while (query.next()) {
 			valueToReturn = query.value(0).toInt();
 		}
-		qDebug() << "mangaId for: " << mangaTitle << " is " << QString::number(valueToReturn,10);
+		//qDebug() << "mangaId for: " << mangaTitle << " is " << QString::number(valueToReturn,10);
 		return valueToReturn;
 	}
 	catch(std::exception& e)
@@ -813,6 +823,35 @@ QString DbWrapper::getMangaDescription(QString mangaTitle)
 		return mangaDescription;
 	}
 	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+}
+
+QString DbWrapper::getMangaNote(QString mangaTitle)
+{
+	try
+	{
+		if(!mangaData.isOpen())
+		{
+			mangaData.open();
+		}
+		QSqlQuery query;
+		QString mangaNote;
+		query.prepare("SELECT READ_NOTE "
+			"FROM READING_LIST "
+			"WHERE MANGA_ID = ?");
+		query.bindValue(0,this->getMangaID(mangaTitle));
+		query.exec();
+
+		while(query.next())
+		{
+			mangaNote=query.value(0).toString();
+		}
+		return mangaNote;
+			
+	}
+	catch (std::exception& e)
 	{
 		qDebug(e.what());
 	}

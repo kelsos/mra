@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 #include <QSqlQuery>
+#include <QString>
 #include <QVariant>
 #include <QGraphicsItem>
 #include <QObject>
@@ -37,7 +38,7 @@ public:
 	 *
 	 * @return
 	 */
-	MangaSqlQueryModel* getUserReadingList();
+	MangaSqlQueryModel* getUserReadingList(bool displayFinished);
 	/**Inserts an entry representing an author to the database.
 	 *
 	 * @param author

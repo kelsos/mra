@@ -14,7 +14,7 @@ MangaAuthors::~MangaAuthors() {
 }
 
 void MangaAuthors::clear() {
-	this->mangaId = '\0';
-	this->authorId = '\0';
+	this->mangaId = 0;
+	this->authorId = 0;
 }
 
