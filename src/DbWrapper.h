@@ -97,6 +97,8 @@ public:
 	void truncateMangaGenresTable();
 	void truncateReadingListTable();
 	QPixmap getMangaCover(QString mangaTitle);
+	QString getMangaDescription(QString mangaTitle);
+	QString getMangaNote(QString mangaTitle);
 protected:
 private:
 	QSqlDatabase mangaData;

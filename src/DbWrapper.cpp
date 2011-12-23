@@ -766,14 +766,51 @@ QPixmap DbWrapper::getMangaCover(QString mangaTitle)
 		query.bindValue(0,this->getMangaID(mangaTitle));
 		query.exec();
 		QByteArray ba;
-		while (query.next()) {
+		while (query.next())
+		{
 			ba = query.value(0).toByteArray();
 		}
 		QGraphicsPixmapItem *pi = new QGraphicsPixmapItem;
 		QPixmap pix;
 		pix.loadFromData(ba,"PNG");
 
+		if (pix.width()<160)
+		{
+			pix = pix.scaled(QSize(160,(pix.height())*160/pix.width()),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+		}
+		if (pix.height()<230)
+		{
+			pix = pix.scaled(QSize((pix.width()*230)/pix.height(),230),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+		}
 		return pix;
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+}
+
+QString DbWrapper::getMangaDescription(QString mangaTitle)
+{
+	try
+	{
+		if(!mangaData.isOpen())
+		{
+			mangaData.open();
+		}
+		QSqlQuery query;
+		QString mangaDescription;
+		query.prepare("SELECT MANGA_DESCRIPTION "
+			"FROM MANGA_INFO "
+			"WHERE MANGA_ID = ?");
+		query.bindValue(0,this->getMangaID(mangaTitle));
+		query.exec();
+		
+		while(query.next())
+		{
+			mangaDescription = query.value(0).toString();
+		}
+		return mangaDescription;
 	}
 	catch(std::exception& e)
 	{

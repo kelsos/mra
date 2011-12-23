@@ -13,8 +13,8 @@ mcra::mcra(QWidget *parent)
 	xmlWrap->connectWithDatabase(db);
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 	timer->start(10000);
-	connect(ui.actionTestHere, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
-	connect(ui.actionData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
+	connect(ui.actionMenuFileList, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
+	connect(ui.actionMenuFileData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
 	scene = new QGraphicsScene;
 	QThread* readingThread = new QThread;
 	xmlWrap->moveToThread(readingThread);
@@ -28,22 +28,25 @@ mcra::~mcra()
 
 void mcra::update()
 {
-	ui.tableView->setModel(db->getUserReadingList());
-		ui.tableView->horizontalHeader()->setResizeMode(0,QHeaderView::Stretch);
-	ui.tableView->setColumnWidth(1,60);
-	ui.tableView->setColumnWidth(2,60);
-	ui.tableView->horizontalHeader()->setResizeMode(3,QHeaderView::Stretch);
-	ui.tableView->setColumnWidth(4,80);
-	ui.tableView->setColumnWidth(5,60);
-		connect(ui.tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this,SLOT(handleSelectionChanged(const QItemSelection &)));
-
-		//horizontalHeader->setResizeMode(QHeaderView::Stretch);
+	ui.readingListTableView->setModel(db->getUserReadingList());
+	ui.readingListTableView->horizontalHeader()->setResizeMode(0,QHeaderView::Stretch);
+	ui.readingListTableView->setColumnWidth(1,60);
+	ui.readingListTableView->setColumnWidth(2,60);
+	ui.readingListTableView->horizontalHeader()->setResizeMode(3,QHeaderView::Stretch);
+	ui.readingListTableView->setColumnWidth(4,80);
+	ui.readingListTableView->setColumnWidth(5,60);
+	connect(ui.readingListTableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this,SLOT(handleSelectionChanged(const QItemSelection &)));
 }
 
 void mcra::handleSelectionChanged(const QItemSelection &selected)
 {
 	QModelIndexList selectedIndexes = selected.indexes();
-	scene->addPixmap(db->getMangaCover(selectedIndexes.takeFirst().data(Qt::DisplayRole).toString()));
-	ui.graphicsView->setScene(scene);
-	ui.graphicsView->show();
+	QString mangaTitle = selectedIndexes.takeFirst().data(Qt::DisplayRole).toString();
+	scene->clear();
+	scene->addPixmap(db->getMangaCover(mangaTitle));
+	ui.coverView->setScene(scene);
+	ui.coverView->show();
+	ui.textBrowser->setText(db->getMangaDescription(mangaTitle));
+
+	ui.wikipediaWebView->load("http://en.wikipedia.org/wiki/Special:Search?search="+mangaTitle.replace(" ","%20"));
 }
