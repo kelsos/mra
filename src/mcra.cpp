@@ -1,4 +1,5 @@
 #include <QTimer>
+#include <QGraphicsScene>
 #include "mcra.h"
 
 mcra::mcra(QWidget *parent)
@@ -15,6 +16,10 @@ mcra::mcra(QWidget *parent)
 	timer->start(10000);
 	connect(ui.actionTestHere, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
 	connect(ui.actionData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
+	QGraphicsScene* scene = new QGraphicsScene;
+	scene->addPixmap(db->getMangaCover("Naruto"));
+	ui.graphicsView->setScene(scene);
+	ui.graphicsView->show();
 	QThread* readingThread = new QThread;
 	xmlWrap->moveToThread(readingThread);
 	readingThread->start();

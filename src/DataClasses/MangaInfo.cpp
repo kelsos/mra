@@ -22,13 +22,13 @@ MangaInfo::~MangaInfo() {
 }
 
 void MangaInfo::clear() {
-	this->mangaId = '\0';
-	this->mangaTitle = '\0';
-	this->mangaDescription = '\0';
+	this->mangaId = 0;
+	this->mangaTitle = "";
+	this->mangaDescription = "";
 	this->mangaPublicationDate = QDateTime::fromString("01.01.190000:00:00","dd.MM.yyyyhh:mm:ss");
-	this->mangaPublicationStatus = '\0';
-	this->mangaPublisherId = '\0';
-	this->mangaCover = '\0';
+	this->mangaPublicationStatus = "";
+	this->mangaPublisherId = 0;
+	this->mangaCover = "";
 }
 
 

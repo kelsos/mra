@@ -1,12 +1,14 @@
 #ifndef DBWRAPPER_H
 #define DBWRAPPER_H
 //Include of the needed libraries.
+#include <QGraphicsItem>
 #include <qsql.h>
 #include <qsqldatabase>
 #include <qsqlquerymodel.h>
 #include <qsqlquery>
 #include <qvariant>
 #include <qobject.h>
+#include <QtDebug>
 ///Include of the needed data classes.
 #include "DataClasses/AuthorInfo.h"
 #include "DataClasses/GenreInfo.h"
@@ -93,6 +95,7 @@ public:
 	void truncateMangaAuthorsTable();
 	void truncateMangaGenresTable();
 	void truncateReadingListTable();
+	QPixmap getMangaCover(QString mangaTitle);
 protected:
 private:
 	QSqlDatabase mangaData;

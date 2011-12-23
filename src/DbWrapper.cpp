@@ -93,7 +93,7 @@ int DbWrapper::getMangaID(QString mangaTitle) {
 		while (query.next()) {
 			valueToReturn = query.value(0).toInt();
 		}
-
+		qDebug() << "mangaId for: " << mangaTitle << " is " << QString::number(valueToReturn,10);
 		return valueToReturn;
 	}
 	catch(std::exception& e)
@@ -739,6 +739,36 @@ void DbWrapper::truncateReadingListTable()
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM READING_LIST");	
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+}
+
+QPixmap DbWrapper::getMangaCover(QString mangaTitle)
+{
+	try
+	{
+		if(!mangaData.isOpen())
+		{
+			mangaData.open();
+		}
+		QSqlQuery query;
+		query.prepare("SELECT MANGA_COVER "
+			"FROM MANGA_INFO "
+			"WHERE MANGA_ID = ?");
+		query.bindValue(0,this->getMangaID(mangaTitle));
+		query.exec();
+		QByteArray ba;
+		while (query.next()) {
+			ba = query.value(0).toByteArray();
+		}
+		QGraphicsPixmapItem *pi = new QGraphicsPixmapItem;
+		QPixmap pix;
+		pix.loadFromData(ba,"PNG");
+
+		return pix;
 	}
 	catch(std::exception& e)
 	{
