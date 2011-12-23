@@ -1,8 +1,8 @@
 #ifndef NEWSSTORAGE_H
 #define NEWSSTORAGE_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class NewsStorage {
 public:

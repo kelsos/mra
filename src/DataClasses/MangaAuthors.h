@@ -1,8 +1,8 @@
 #ifndef MANGAAUTHORS_H
 #define MANGAAUTHORS_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class MangaAuthors {
 public:

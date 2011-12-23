@@ -1,8 +1,8 @@
 #ifndef NEWSSUBSCRIPTIONS_H
 #define NEWSSUBSCRIPTIONS_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class NewsSubscriptions {
 public:

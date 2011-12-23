@@ -7,7 +7,7 @@ DbWrapper::DbWrapper() {
 	mangaData.setDatabaseName("mdb.db3");
 	if(!mangaData.isOpen())
 	{
-		qDebug("Error");
+		mangaData.open();
 	}
 	initDatabase();
 }
@@ -20,24 +20,24 @@ bool DbWrapper::isDatabaseConnectionActive() {
 	return true;
 }
 
-QSqlQueryModel* DbWrapper::getUserReadingList() {
+MangaSqlQueryModel* DbWrapper::getUserReadingList() {
 	try{
 		if(!mangaData.isOpen())
 		{
 			mangaData.open();
 		}
-		QSqlQueryModel *model = new QSqlQueryModel();
+		MangaSqlQueryModel *model = new MangaSqlQueryModel();
 		QString query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME, RL.READ_IS_FINISHED "
 			"FROM MANGA_INFO MI, READING_LIST RL "
 			"WHERE MI.MANGA_ID = RL.MANGA_ID";
 		model->setQuery(query,mangaData);
 		int i = 0;
 		model->setHeaderData(i++,Qt::Horizontal,"Manga Title");
-		model->setHeaderData(i++,Qt::Horizontal,"Starting Chapter");
-		model->setHeaderData(i++,Qt::Horizontal,"Current Chapter");
+		model->setHeaderData(i++,Qt::Horizontal,"Starting\nChapter");
+		model->setHeaderData(i++,Qt::Horizontal,"Current\nChapter");
 		model->setHeaderData(i++,Qt::Horizontal,"Online URL");
-		model->setHeaderData(i++,Qt::Horizontal,"Last Read");
-		model->setHeaderData(i++,Qt::Horizontal,"Finished Reading?");
+		model->setHeaderData(i++,Qt::Horizontal,"Last\nRead");
+		model->setHeaderData(i++,Qt::Horizontal,"Finished\nReading?");
 
 
 		return model;
@@ -122,6 +122,11 @@ void DbWrapper::insertReadItem(ReadItem* readItem) {
 			")");
 
 		int i = 0;
+		if(getMangaID(readItem->getMangaTitle())==-1)
+		{
+			qDebug("Match of Read Item with Manga Info Failed");
+			return;
+		}
 		query.bindValue(i++, getMangaID(readItem->getMangaTitle()));
 		query.bindValue(i++, (int) readItem->getStartingChapter());
 		query.bindValue(i++, (int) readItem->getCurrentChapter());

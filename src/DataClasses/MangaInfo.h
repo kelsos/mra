@@ -1,9 +1,9 @@
 #ifndef MANGAINFO_H
 #define MANGAINFO_H
 
-#include <qstring>
-#include <qdatetime>
-#include <qbytearray>
+#include <QString>
+#include <QDateTime>
+#include <QByteArray>
 
 class MangaInfo {
 public:

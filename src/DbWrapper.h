@@ -1,15 +1,16 @@
 #ifndef DBWRAPPER_H
 #define DBWRAPPER_H
 //Include of the needed libraries.
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQueryModel>
+#include <QSqlQuery>
+#include <QVariant>
 #include <QGraphicsItem>
-#include <qsql.h>
-#include <qsqldatabase>
-#include <qsqlquerymodel.h>
-#include <qsqlquery>
-#include <qvariant>
-#include <qobject.h>
+#include <QObject>
 #include <QtDebug>
 ///Include of the needed data classes.
+#include "mangaSqlQueryModel.h"
 #include "DataClasses/AuthorInfo.h"
 #include "DataClasses/GenreInfo.h"
 #include "DataClasses/PublisherInfo.h"
@@ -36,7 +37,7 @@ public:
 	 *
 	 * @return
 	 */
-	QSqlQueryModel* getUserReadingList();
+	MangaSqlQueryModel* getUserReadingList();
 	/**Inserts an entry representing an author to the database.
 	 *
 	 * @param author

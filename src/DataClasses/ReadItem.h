@@ -1,8 +1,8 @@
 #ifndef READITEM_H
 #define READITEM_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class ReadItem {
 public:

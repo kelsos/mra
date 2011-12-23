@@ -2,11 +2,11 @@
 #define SRCMCRA_H
 
 #include <QtGui/QMainWindow>
-#include <qtconcurrentrun.h>
+#include <QtConcurrentRun>
 #include <QFuture>
-#include <qsqltablemodel>
-#include <DbWrapper.h>
-#include <XmlWrapper.h>
+#include <QSqlTableModel>
+#include "DbWrapper.h"
+#include "XmlWrapper.h"
 #include "ui_mcra.h"
 
 class mcra : public QMainWindow
@@ -22,9 +22,11 @@ private:
     Ui::mcraClass ui;
     DbWrapper* db;
     XmlWrapper* xmlWrap;
+	QGraphicsScene* scene;
 
 public slots:
 	void update();
+	void handleSelectionChanged(const QItemSelection & selected);
 };
 
 #endif // SRCMCRA_H

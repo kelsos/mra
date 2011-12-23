@@ -1,8 +1,8 @@
 #ifndef PUBLISHERINFO_H
 #define PUBLISHERINFO_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class PublisherInfo {
 public:

@@ -1,8 +1,8 @@
 #ifndef MANGAGENRES_H
 #define MANGAGENRES_H
 
-#include <qstring>
-#include <qdatetime>
+#include <QString>
+#include <QDateTime>
 
 class MangaGenres {
 public:
