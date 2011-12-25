@@ -222,6 +222,32 @@
         <property name="title">
          <string>Rss Ticker</string>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextBrowser" name="textBrowser_2">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>hyperlink</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -324,6 +350,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionToolbarOpenToRead"/>
+   <addaction name="actionToolbarAnotherChapterGone"/>
+   <addaction name="actionToolbarRefresh"/>
   </widget>
   <action name="actionMenuFileList">
    <property name="text">
@@ -356,6 +385,33 @@
     <string>Display Finished</string>
    </property>
   </action>
+  <action name="actionToolbarOpenToRead">
+   <property name="icon">
+    <iconset>
+     <normaloff>./icons/globe.png</normaloff>./icons/globe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open To Read</string>
+   </property>
+  </action>
+  <action name="actionToolbarRefresh">
+   <property name="icon">
+    <iconset>
+     <normaloff>./icons/reload.png</normaloff>./icons/reload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionToolbarAnotherChapterGone">
+   <property name="icon">
+    <iconset>
+     <normaloff>./icons/calendar.png</normaloff>./icons/calendar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Another Chapter Gone</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -364,6 +420,8 @@
    <header>QtWebKit/QWebView</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resources/mcra.qrc"/>
+ </resources>
  <connections/>
 </ui>

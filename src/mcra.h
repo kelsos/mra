@@ -32,6 +32,7 @@ public slots:
 private slots:
 	void quit();
 	void showAbout();
+	void updateOnToggle(bool toggle);
 
 };
 
