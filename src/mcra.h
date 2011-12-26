@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include "DbWrapper.h"
 #include "XmlWrapper.h"
+#include "RssFetcher.h"
 #include "ui_mcra.h"
 #include "About.h"
 
@@ -25,6 +26,7 @@ private:
     DbWrapper* db;
     XmlWrapper* xmlWrap;
 	QGraphicsScene* scene;
+	RssFetcher *rss;
 
 public slots:
 	void update();

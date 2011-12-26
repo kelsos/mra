@@ -1,6 +1,6 @@
 #include "RssFetcher.h"
 
-RssFetcher::RssFetcher()
+RssFetcher::RssFetcher(QObject *parent):QObject(parent), currentReply(0)
 {
 	connect(&manager, SIGNAL(finished(QNetworkReply*)),this,SLOT(finished(QNetworkReply*)));
 }
@@ -20,10 +20,13 @@ void RssFetcher::get(const QUrl &url)
 
 }
 
-void RssFetcher::fetch(const QUrl &url)
+void RssFetcher::fetch(QString urlString)
 {
+	QUrl feedUrl;
+	feedUrl.setUrl(urlString,QUrl::ParsingMode::TolerantMode);
 	xmlStreamReader.clear();
-	get(url);
+	get(feedUrl);
+	//qDebug() << feedUrl.toString();
 }
 
 void RssFetcher::metaDataChanged()
@@ -68,19 +71,27 @@ void RssFetcher::parseXml()
 		{
 			if(xmlStreamReader.name()=="item")
 			{
+				timeAquired = QDateTime::currentDateTime();
+				timePublished = DateTime::parseRFC822DateTime(pubDateString);
+				//qDebug() << titleString << " " << linkString << "pubDate: " << pubDateString << " Parsed: " << timePublished.toString(Qt::ISODate);
 				//TODO: Dump to the database;
 				titleString.clear();
 				linkString.clear();
+				descriptionString.clear();
+				pubDateString.clear();
 				//TODO: Initialize Dates.
 			}
 		}
 		else if (xmlStreamReader.isCharacters() && !xmlStreamReader.isWhitespace())
 		{
 			if (currentTag=="title")
-				titleString +=xmlStreamReader.text().toString();
+				titleString += xmlStreamReader.text().toString();
 			else if (currentTag=="link")
-				linkString +=xmlStreamReader.text().toString();
-			//TODO: Add publication date/decription parsing
+				linkString += xmlStreamReader.text().toString();
+			else if (currentTag=="pubDate")
+				pubDateString += xmlStreamReader.text().toString();
+			else if (currentTag=="description")
+				descriptionString+=xmlStreamReader.text().toString();
 		}
 	}
 	if (xmlStreamReader.error() && xmlStreamReader.error() !=QXmlStreamReader::PrematureEndOfDocumentError)

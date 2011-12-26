@@ -6,7 +6,7 @@ mcra::mcra(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	db = new DbWrapper();
+	db = new DbWrapper;
 	xmlWrap = new XmlWrapper;
 	xmlWrap->connectWithDatabase(db);
 	connect(ui.actionToolbarRefresh, SIGNAL(triggered()), this, SLOT(update()));
@@ -20,6 +20,9 @@ mcra::mcra(QWidget *parent)
 	xmlWrap->moveToThread(readingThread);
 	readingThread->start();
 	update();
+	rss = new RssFetcher;
+	
+	
 }
 
 mcra::~mcra()
@@ -69,6 +72,7 @@ void mcra::showAbout()
 {
 	About abDial;
 	abDial.exec();
+	rss->fetch("http://feeds.feedburner.com/mstream?format=xml");
 }
 
 void mcra::updateOnToggle(bool toggle)

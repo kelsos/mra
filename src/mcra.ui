@@ -112,9 +112,6 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QTextBrowser" name="noteTextBrowser">
-             <property name="styleSheet">
-              <string notr="true">background-color:rgb(240, 240, 240)</string>
-             </property>
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
@@ -282,9 +279,6 @@
              <height>0</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true">background-color:rgb(240, 240, 240)</string>
-           </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -388,7 +382,7 @@
   <action name="actionToolbarOpenToRead">
    <property name="icon">
     <iconset>
-     <normaloff>./icons/globe.png</normaloff>./icons/globe.png</iconset>
+     <normaloff>icons/globe.png</normaloff>icons/globe.png</iconset>
    </property>
    <property name="text">
     <string>Open To Read</string>
@@ -397,7 +391,7 @@
   <action name="actionToolbarRefresh">
    <property name="icon">
     <iconset>
-     <normaloff>./icons/reload.png</normaloff>./icons/reload.png</iconset>
+     <normaloff>icons/reload.png</normaloff>icons/reload.png</iconset>
    </property>
    <property name="text">
     <string>Refresh</string>
@@ -406,7 +400,7 @@
   <action name="actionToolbarAnotherChapterGone">
    <property name="icon">
     <iconset>
-     <normaloff>./icons/calendar.png</normaloff>./icons/calendar.png</iconset>
+     <normaloff>icons/calendar.png</normaloff>icons/calendar.png</iconset>
    </property>
    <property name="text">
     <string>Another Chapter Gone</string>

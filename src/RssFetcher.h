@@ -1,5 +1,6 @@
 #ifndef RSSFETCHER_H
 #define RSSFETCHER_H
+
 #include <QtNetwork>
 #include <QApplication>
 #include <QXmlStreamReader>
@@ -7,14 +8,17 @@
 #include <QNetworkReply>
 #include <QBuffer>
 #include <QUrl>
+#include <QDateTime>
+
+#include "Utilities\DateTime.h"
 
 class RssFetcher : public QObject
 {
 	Q_OBJECT
 public:
-	RssFetcher();
+	RssFetcher(QObject *parent = 0);
 public slots:
-	void fetch(const QUrl &url);
+	void fetch(QString urlString);
 	void finished(QNetworkReply *reply);
 	void readyRead();
 	void metaDataChanged();
@@ -29,12 +33,13 @@ private:
 	QString currentTag;
 	QString linkString;
 	QString titleString;
+	QString descriptionString;
+	QString pubDateString;
 	QDateTime timeAquired;
 	QDateTime timePublished;
 
 	QNetworkAccessManager manager;
 	QNetworkReply *currentReply;
-
 };
 
 #endif //RSSFETCHER_H
