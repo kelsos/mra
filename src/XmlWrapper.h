@@ -12,6 +12,7 @@
 #include <DbWrapper.h>
 #include <XmlDataSaxParser.h>
 #include <XmlReadListSaxParser.h>
+#include "XmlReadingListParser.h"
 //Data classes included.
 #include "AuthorInfo.h"
 #include "GenreInfo.h"
@@ -50,7 +51,8 @@ public:
 protected:
 private:
 	void xmlParser(QString fileName);
-	DbWrapper* db;
+	DbWrapper *db;
+	XmlReadingListParser *xmP;
 
 public slots:
 	/** Loads the user's reading list */

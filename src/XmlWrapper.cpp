@@ -25,5 +25,6 @@ void XmlWrapper::loadUserReadingList(){
 
 	//QByteArray fArray = fileName.toAscii();
 	//(const char*)fArray.data()
-    parseReadingList("test.xml",db);
+	xmP = new XmlReadingListParser;
+	xmP->ParseReadingList("test.xml",db);
 }
