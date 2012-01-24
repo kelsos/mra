@@ -11,7 +11,7 @@ class XmlReadingListParser
 {
 public:
 	XmlReadingListParser();
-	void ParseReadingList(QString fileName, DbWrapper *db);
+	void parseReadingList(QString fileName, DbWrapper *db);
 protected:
 private:
 	QXmlStreamReader xmlStreamReader;

@@ -15,6 +15,7 @@ mcra::mcra(QWidget *parent)
 	connect(ui.actionMenuFileData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
 	connect(ui.actionMenuFileQuit, SIGNAL(triggered()),this, SLOT(quit()));
 	connect(ui.actionMenuHelpAbout, SIGNAL(triggered()),this, SLOT(showAbout()));
+	connect(ui.actionToolbarOpenToRead, SIGNAL(triggered()),this,SLOT(showWebBrowser()));
 	scene = new QGraphicsScene;
 	QThread* readingThread = new QThread;
 	xmlWrap->moveToThread(readingThread);
@@ -72,7 +73,7 @@ void mcra::showAbout()
 {
 	About abDial;
 	abDial.exec();
-	rss->fetch("http://feeds.feedburner.com/mstream?format=xml");
+	//rss->fetch("http://feeds.feedburner.com/mstream?format=xml");
 }
 
 void mcra::updateOnToggle(bool toggle)
@@ -86,4 +87,10 @@ void mcra::updateOnToggle(bool toggle)
 	if(ui.actionMenuSettingsDisplayFinished->isChecked())
 		ui.readingListTableView->setColumnWidth(5,60);
 	connect(ui.readingListTableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this,SLOT(handleSelectionChanged(const QItemSelection &)));
+}
+
+void mcra::showWebBrowser()
+{
+	browserWindow = new webBrowser();
+	browserWindow->show();
 }

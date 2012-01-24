@@ -11,6 +11,7 @@
 #include "RssFetcher.h"
 #include "ui_mcra.h"
 #include "About.h"
+#include "webBrowser.h"
 
 class mcra : public QMainWindow
 {
@@ -20,21 +21,23 @@ public:
     mcra(QWidget *parent = 0);
     ~mcra();
 
-
 private:
     Ui::mcraClass ui;
     DbWrapper* db;
     XmlWrapper* xmlWrap;
 	QGraphicsScene* scene;
 	RssFetcher *rss;
+	webBrowser *browserWindow;
 
 public slots:
 	void update();
 	void handleSelectionChanged(const QItemSelection & selected);
+
 private slots:
 	void quit();
 	void showAbout();
 	void updateOnToggle(bool toggle);
+	void showWebBrowser();
 
 };
 

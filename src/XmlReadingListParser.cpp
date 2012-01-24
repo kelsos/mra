@@ -5,7 +5,7 @@ XmlReadingListParser::XmlReadingListParser()
 	//default constructor
 }
 
-void XmlReadingListParser::ParseReadingList(QString fileName, DbWrapper *db)
+void XmlReadingListParser::parseReadingList(QString fileName, DbWrapper *db)
 {
 	QFile *file = new QFile(fileName);
 	file->open(QIODevice::ReadOnly);

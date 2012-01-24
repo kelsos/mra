@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WebBrowser</class>
+ <widget class="QMainWindow" name="WebBrowser">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWebView" name="webView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="url">
+     <url>
+      <string>about:blank</string>
+     </url>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionGo_To_Previous_Page"/>
+   <addaction name="actionGo_To_Next_Page"/>
+   <addaction name="actionReload_Page"/>
+   <addaction name="actionChapter_Finished"/>
+  </widget>
+  <action name="actionGo_To_Previous_Page">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/navigation_180.png</normaloff>../resources/icons/navigation_180.png</iconset>
+   </property>
+   <property name="text">
+    <string>Go To Previous Page</string>
+   </property>
+   <property name="toolTip">
+    <string>Goes to the previous page in history</string>
+   </property>
+  </action>
+  <action name="actionGo_To_Next_Page">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/navigation.png</normaloff>../resources/icons/navigation.png</iconset>
+   </property>
+   <property name="text">
+    <string>Go To Next Page</string>
+   </property>
+   <property name="toolTip">
+    <string>Visits the next page in history</string>
+   </property>
+  </action>
+  <action name="actionReload_Page">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/arrow_circle_double.png</normaloff>../resources/icons/arrow_circle_double.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reload Page</string>
+   </property>
+   <property name="toolTip">
+    <string>Reloads the current page</string>
+   </property>
+  </action>
+  <action name="actionChapter_Finished">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/calendar_day.png</normaloff>../resources/icons/calendar_day.png</iconset>
+   </property>
+   <property name="text">
+    <string>Chapter Finished</string>
+   </property>
+   <property name="toolTip">
+    <string>Increases the Current Chapter by one and sets the Read Date to the current Date</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
