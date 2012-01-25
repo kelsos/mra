@@ -30,5 +30,8 @@ void webBrowser::reload()
 	ui.webView->reload();
 }
 
-	bool webBrowser::eventFilter(QObject *obj, QEvent *event);
+void webBrowser::navigateToUrl(QString url)
+{
+	ui.webView->load(QUrl(url));
+	ui.webView->show();
 }

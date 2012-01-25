@@ -856,3 +856,31 @@ QString DbWrapper::getMangaNote(QString mangaTitle)
 		qDebug(e.what());
 	}
 }
+
+QString DbWrapper::getMangaUrl(QString mangaTitle)
+{
+	try
+	{
+		if(!mangaData.isOpen())
+		{
+			mangaData.open();
+		}
+		QSqlQuery query;
+		QString mangaDescription;
+		query.prepare("SELECT READ_ONLINE_URL "
+			"FROM READING_LIST "
+			"WHERE MANGA_ID = ?");
+		query.bindValue(0,this->getMangaID(mangaTitle));
+		query.exec();
+		
+		while(query.next())
+		{
+			mangaDescription = query.value(0).toString();
+		}
+		return mangaDescription;
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+}

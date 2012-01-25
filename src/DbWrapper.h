@@ -100,6 +100,7 @@ public:
 	QPixmap getMangaCover(QString mangaTitle);
 	QString getMangaDescription(QString mangaTitle);
 	QString getMangaNote(QString mangaTitle);
+	QString getMangaUrl(QString mangaTitle);
 protected:
 private:
 	QSqlDatabase mangaData;

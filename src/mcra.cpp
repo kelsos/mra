@@ -47,14 +47,14 @@ void mcra::update()
 void mcra::handleSelectionChanged(const QItemSelection &selected)
 {
 	QModelIndexList selectedIndexes = selected.indexes();
-	QString mangaTitle = selectedIndexes.takeFirst().data(Qt::DisplayRole).toString();
+	QString selectionTitle = selectedMangaTitle = selectedIndexes.takeFirst().data(Qt::DisplayRole).toString();
 	scene->clear();
-	scene->addPixmap(db->getMangaCover(mangaTitle));
+	scene->addPixmap(db->getMangaCover(selectionTitle));
 	ui.coverView->setScene(scene);
 	ui.coverView->show();
-	ui.textBrowser->setText(db->getMangaDescription(mangaTitle));
-	ui.noteTextBrowser->setText(db->getMangaNote(mangaTitle));
-	ui.wikipediaWebView->load("http://en.wikipedia.org/wiki/Special:Search?search="+mangaTitle.replace(" ","%20"));
+	ui.textBrowser->setText(db->getMangaDescription(selectionTitle));
+	ui.noteTextBrowser->setText(db->getMangaNote(selectionTitle));
+	ui.wikipediaWebView->load("http://en.wikipedia.org/wiki/Special:Search?search="+selectionTitle.replace(" ","%20"));
 }
 
 void mcra::quit()
@@ -91,6 +91,11 @@ void mcra::updateOnToggle(bool toggle)
 
 void mcra::showWebBrowser()
 {
+
 	browserWindow = new webBrowser();
+	connect(this,SIGNAL(navigateToUrl(QString)),browserWindow,SLOT(navigateToUrl(QString)));
+
 	browserWindow->show();
+	qDebug() << selectedMangaTitle;
+	emit navigateToUrl(db->getMangaUrl(selectedMangaTitle));
 }

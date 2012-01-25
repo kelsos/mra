@@ -16,6 +16,9 @@ public:
 private:
 	Ui::WebBrowser ui;
 
+public slots:
+	void navigateToUrl(QString url);
+
 private slots:
 	void goBack();
 	void goForward();

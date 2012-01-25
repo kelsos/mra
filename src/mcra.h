@@ -28,6 +28,7 @@ private:
 	QGraphicsScene* scene;
 	RssFetcher *rss;
 	webBrowser *browserWindow;
+	QString selectedMangaTitle;
 
 public slots:
 	void update();
@@ -38,6 +39,9 @@ private slots:
 	void showAbout();
 	void updateOnToggle(bool toggle);
 	void showWebBrowser();
+
+signals:
+	void navigateToUrl(QString url);
 
 };
 
