@@ -6,6 +6,13 @@
 #include <QXmlStreamReader>
 #include <QFile>
 #include "DbWrapper.h"
+//Data classes included.
+#include "AuthorInfo.h"
+#include "GenreInfo.h"
+#include "MangaAuthors.h"
+#include "MangaGenres.h"
+#include "MangaInfo.h"
+#include "PublisherInfo.h"
 
 class XmlDataParser
 {
@@ -15,5 +22,6 @@ public:
 private:
 	QXmlStreamReader xmlStreamReader;
 	QString currentTag;
+	QString currentCategory;
 };
 #endif

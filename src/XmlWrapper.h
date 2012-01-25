@@ -10,8 +10,7 @@
 #include <vector>
 #include <fstream>
 #include <DbWrapper.h>
-#include <XmlDataSaxParser.h>
-#include <XmlReadListSaxParser.h>
+#include <XmlDataParser.h>
 #include "XmlReadingListParser.h"
 //Data classes included.
 #include "AuthorInfo.h"
@@ -53,6 +52,7 @@ private:
 	void xmlParser(QString fileName);
 	DbWrapper *db;
 	XmlReadingListParser *xmP;
+	XmlDataParser *xmD;
 
 public slots:
 	/** Loads the user's reading list */

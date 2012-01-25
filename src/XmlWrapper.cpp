@@ -13,18 +13,15 @@ void XmlWrapper::connectWithDatabase(DbWrapper* db)
 }
 
 void XmlWrapper::xmlParser(QString fileName) {
-  QByteArray fArray = fileName.toAscii();
-  parseMangaData((const char*)fArray.data(),db);
+
 }
 
 void XmlWrapper::loadApplicationData() {
-  xmlParser("data.xml");
+    xmD = new XmlDataParser;
+  xmD->parseData("data.xml",db);
 }
 
 void XmlWrapper::loadUserReadingList(){
-
-  //QByteArray fArray = fileName.toAscii();
-  //(const char*)fArray.data()
   xmP = new XmlReadingListParser;
   xmP->parseReadingList("test.xml",db);
 }

@@ -15,6 +15,7 @@ public:
 
 private:
 	Ui::WebBrowser ui;
+	bool eventFilter(QObject *obj, QEvent *event);
 
 public slots:
 	void navigateToUrl(QString url);
