@@ -1,14 +1,6 @@
 #ifndef XMLWRAPPER_H
 #define XMLWRAPPER_H
 
-#include <libxml/parser.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/tree.h>
-#include <qobject.h>
-#include <string.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
 #include <DbWrapper.h>
 #include <XmlDataParser.h>
 #include "XmlReadingListParser.h"

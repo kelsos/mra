@@ -30,3 +30,15 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 include(mcra_msvc.pri)
+
+HEADERS += \
+    src/databaseeditor.h \
+    src/genresinfoeditor.h
+
+SOURCES += \
+    src/databaseeditor.cpp \
+    src/genresinfoeditor.cpp
+
+FORMS += \
+    src/databaseeditor.ui \
+    src/genresinfoeditor.ui

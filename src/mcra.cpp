@@ -16,6 +16,7 @@ mcra::mcra(QWidget *parent)
 	connect(ui.actionMenuFileQuit, SIGNAL(triggered()),this, SLOT(quit()));
 	connect(ui.actionMenuHelpAbout, SIGNAL(triggered()),this, SLOT(showAbout()));
 	connect(ui.actionToolbarOpenToRead, SIGNAL(triggered()),this,SLOT(showWebBrowser()));
+	connect(ui.actionDatabase_Editor, SIGNAL(triggered()),this,SLOT(openDatabaseEditor()));
 	scene = new QGraphicsScene;
 	QThread* readingThread = new QThread;
 	xmlWrap->moveToThread(readingThread);
@@ -98,4 +99,10 @@ void mcra::showWebBrowser()
 	browserWindow->show();
 	qDebug() << selectedMangaTitle;
 	emit navigateToUrl(db->getMangaUrl(selectedMangaTitle));
+}
+
+void mcra::openDatabaseEditor()
+{
+	DatabaseEditor dbEdit;
+	dbEdit.exec();
 }

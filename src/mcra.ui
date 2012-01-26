@@ -339,6 +339,7 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <addaction name="actionDatabase_Editor"/>
    </widget>
    <addaction name="menuTest"/>
    <addaction name="menuTools"/>
@@ -357,17 +358,17 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionToolbarOpenToRead"/>
-   <addaction name="actionToolbarAnotherChapterGone"/>
+   <addaction name="actionToolbarChapterFinished"/>
    <addaction name="actionToolbarRefresh"/>
   </widget>
   <action name="actionMenuFileList">
    <property name="text">
-    <string>TestHere</string>
+    <string>Load Reading List Data</string>
    </property>
   </action>
   <action name="actionMenuFileData">
    <property name="text">
-    <string>data</string>
+    <string>Load Manga Data</string>
    </property>
   </action>
   <action name="actionMenuFileQuit">
@@ -394,7 +395,7 @@
   <action name="actionToolbarOpenToRead">
    <property name="icon">
     <iconset>
-     <normaloff>icons/globe.png</normaloff>icons/globe.png</iconset>
+     <normaloff>../resources/icons/globe.png</normaloff>../resources/icons/globe.png</iconset>
    </property>
    <property name="text">
     <string>Open To Read</string>
@@ -403,19 +404,30 @@
   <action name="actionToolbarRefresh">
    <property name="icon">
     <iconset>
-     <normaloff>icons/reload.png</normaloff>icons/reload.png</iconset>
+     <normaloff>../resources/icons/reload.png</normaloff>../resources/icons/reload.png</iconset>
    </property>
    <property name="text">
     <string>Refresh</string>
    </property>
   </action>
-  <action name="actionToolbarAnotherChapterGone">
+  <action name="actionToolbarChapterFinished">
    <property name="icon">
     <iconset>
-     <normaloff>icons/calendar.png</normaloff>icons/calendar.png</iconset>
+     <normaloff>../resources/icons/calendar.png</normaloff>../resources/icons/calendar.png</iconset>
    </property>
    <property name="text">
-    <string>Another Chapter Gone</string>
+    <string>Chapter Finished</string>
+   </property>
+   <property name="toolTip">
+    <string>Another Chapter finished.</string>
+   </property>
+  </action>
+  <action name="actionDatabase_Editor">
+   <property name="text">
+    <string>Database Editor</string>
+   </property>
+   <property name="toolTip">
+    <string>Database Editor</string>
    </property>
   </action>
  </widget>
@@ -426,8 +438,6 @@
    <header>QtWebKit/QWebView</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../resources/mcra.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

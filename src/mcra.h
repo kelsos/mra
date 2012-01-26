@@ -12,6 +12,7 @@
 #include "ui_mcra.h"
 #include "About.h"
 #include "webBrowser.h"
+#include "databaseeditor.h"
 
 class mcra : public QMainWindow
 {
@@ -39,6 +40,7 @@ private slots:
 	void showAbout();
 	void updateOnToggle(bool toggle);
 	void showWebBrowser();
+	void openDatabaseEditor();
 
 signals:
 	void navigateToUrl(QString url);
