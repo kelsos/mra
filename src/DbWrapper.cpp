@@ -16,8 +16,8 @@ DbWrapper::~DbWrapper() {
 	//dtor
 }
 
-bool DbWrapper::isDatabaseConnectionActive() {
-	return true;
+bool DbWrapper::isDatabaseOpen() {
+    return mangaData.isOpen();
 }
 
 MangaSqlQueryModel* DbWrapper::getUserReadingList(bool displayFinished) {

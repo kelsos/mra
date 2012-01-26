@@ -33,7 +33,7 @@ public:
 	 *
 	 * @return
 	 */
-	bool isDatabaseConnectionActive();
+    bool isDatabaseOpen();
 	/** Gets the User's reading List
 	 *
 	 * @return
