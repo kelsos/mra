@@ -12,6 +12,7 @@ class DataWrapperS : public QObject
 public:
     explicit DataWrapperS(QObject *parent = 0);
     QStringList getAllMangaInfoTitles();
+	QString getMangaStatus(QString mangaTitle);
     
 signals:
     

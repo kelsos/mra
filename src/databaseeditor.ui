@@ -40,6 +40,115 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
+        <layout class="QHBoxLayout" name="mangaInfoButtonLayout">
+         <item>
+          <widget class="QToolButton" name="mangaInfoNewButton">
+           <property name="text">
+            <string>New</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/plus-octagon.png</normaloff>../resources/icons/plus-octagon.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="mangaInfoSaveButton">
+           <property name="text">
+            <string>Save</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/disk--pencil.png</normaloff>../resources/icons/disk--pencil.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="mangaInfoDeleteButton">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/cross-script.png</normaloff>../resources/icons/cross-script.png</iconset>
+           </property>
+           <property name="popupMode">
+            <enum>QToolButton::DelayedPopup</enum>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="mangaHorizonaSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="searchMangaLineEdit"/>
+         </item>
+         <item>
+          <widget class="QToolButton" name="searchMangaButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/magnifier.png</normaloff>../resources/icons/magnifier.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="secondMangaInfoButtonLayout">
+         <item>
+          <widget class="QPushButton" name="listAllMangaButton">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>List All Manga</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="mangaInfoAllComboBox">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="mangaInfoTopLayout">
          <item>
           <layout class="QVBoxLayout" name="mangaInfoLeftLayout">
@@ -123,6 +232,9 @@
                    <iconset>
                     <normaloff>../resources/icons/plus.png</normaloff>../resources/icons/plus.png</iconset>
                   </property>
+                  <property name="autoRaise">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -133,6 +245,9 @@
                   <property name="icon">
                    <iconset>
                     <normaloff>../resources/icons/minus.png</normaloff>../resources/icons/minus.png</iconset>
+                  </property>
+                  <property name="autoRaise">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -160,9 +275,6 @@
          </item>
          <item>
           <layout class="QVBoxLayout" name="mangaInfoRigthLayout">
-           <item>
-            <widget class="QComboBox" name="mangaInfoAllComboBox"/>
-           </item>
            <item>
             <widget class="QGroupBox" name="titleAndDescriptionGroupBox">
              <property name="title">
@@ -235,7 +347,7 @@
                    <enum>Qt::ToolButtonIconOnly</enum>
                   </property>
                   <property name="autoRaise">
-                   <bool>false</bool>
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -247,6 +359,9 @@
                   <property name="icon">
                    <iconset>
                     <normaloff>../resources/icons/minus.png</normaloff>../resources/icons/minus.png</iconset>
+                  </property>
+                  <property name="autoRaise">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -282,6 +397,9 @@
                    <iconset>
                     <normaloff>../resources/icons/plus.png</normaloff>../resources/icons/plus.png</iconset>
                   </property>
+                  <property name="autoRaise">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -292,6 +410,9 @@
                   <property name="icon">
                    <iconset>
                     <normaloff>../resources/icons/minus.png</normaloff>../resources/icons/minus.png</iconset>
+                  </property>
+                  <property name="autoRaise">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -304,38 +425,6 @@
          </item>
         </layout>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="mangaInfoButtonLayout">
-         <item>
-          <widget class="QPushButton" name="mangaInfoNewButton">
-           <property name="text">
-            <string>New</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="mangaInfoSaveButton">
-           <property name="text">
-            <string>Save</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="mangaInfoDeleteButton">
-           <property name="text">
-            <string>Delete</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="openGenreInfoEditButton">
-           <property name="text">
-            <string>Genre Info</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="authPubInfoTab">
@@ -344,14 +433,107 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
+        <layout class="QHBoxLayout" name="authorInfoButtonLayout">
+         <item>
+          <widget class="QToolButton" name="authorNewButton">
+           <property name="text">
+            <string>New</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/plus-octagon.png</normaloff>../resources/icons/plus-octagon.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="authorSaveButton">
+           <property name="text">
+            <string>Save</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/disk--pencil.png</normaloff>../resources/icons/disk--pencil.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="authorDeleteButton">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/cross-script.png</normaloff>../resources/icons/cross-script.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="authorHorizonalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="authorSearchBox"/>
+         </item>
+         <item>
+          <widget class="QToolButton" name="authorSearchButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/magnifier.png</normaloff>../resources/icons/magnifier.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="authrorsHorizontalLayout">
+         <item>
+          <widget class="QPushButton" name="listAllAuthorsButton">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>List All Authors</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="authorsAllComboBox"/>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QGroupBox" name="authorInfoGroupBox">
          <property name="title">
           <string>Author Info</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QComboBox" name="authorsAllComboBox"/>
-          </item>
           <item>
            <widget class="QLabel" name="authorFullNameLabel">
             <property name="text">
@@ -392,33 +574,104 @@
           <item>
            <widget class="QLineEdit" name="authorWebsiteTextEdit"/>
           </item>
-          <item>
-           <layout class="QHBoxLayout" name="authorInfoButtonLayout">
-            <item>
-             <widget class="QPushButton" name="authorNewButton">
-              <property name="text">
-               <string>New</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="authorSaveButton">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="authorDeleteButton">
-              <property name="text">
-               <string>Delete</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="publisherInfoButtonLayout">
+         <item>
+          <widget class="QToolButton" name="publisherNewButton">
+           <property name="text">
+            <string>New</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/plus-octagon.png</normaloff>../resources/icons/plus-octagon.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="publisherSaveButton">
+           <property name="text">
+            <string>Save</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/disk--pencil.png</normaloff>../resources/icons/disk--pencil.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="publisherDeleteButton">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/cross-script.png</normaloff>../resources/icons/cross-script.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="publisherHorizonalSeperator">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="publisherLineEdit"/>
+         </item>
+         <item>
+          <widget class="QToolButton" name="publisherSearchButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../resources/icons/magnifier.png</normaloff>../resources/icons/magnifier.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="publishersHorizonalLayout">
+         <item>
+          <widget class="QPushButton" name="listAllMangaPublishers">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>List All Publishers</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="publishersAllComboBox"/>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="publisherInfoGroubBox">
@@ -426,9 +679,6 @@
           <string>Publisher Info</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QComboBox" name="publishersAllComboBox"/>
-          </item>
           <item>
            <widget class="QLabel" name="publisherNameLabel">
             <property name="text">
@@ -476,37 +726,30 @@
             </property>
            </widget>
           </item>
-          <item>
-           <layout class="QHBoxLayout" name="publisherInfoButtonLayout">
-            <item>
-             <widget class="QPushButton" name="publisherNewButton">
-              <property name="text">
-               <string>New</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="publisherSaveButton">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="publisherDeleteButton">
-              <property name="text">
-               <string>Delete</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
          </layout>
         </widget>
        </item>
       </layout>
      </widget>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="extraDialogButtonsLayout">
+     <item>
+      <widget class="QPushButton" name="importExportManagerButton">
+       <property name="text">
+        <string>Open Import/Export Manager</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="openGenreInfoEditButton">
+       <property name="text">
+        <string>Open Genre Info Editor</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

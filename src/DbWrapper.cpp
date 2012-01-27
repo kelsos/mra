@@ -6,9 +6,7 @@ DbWrapper::DbWrapper() {
 	mangaData.setHostName("localhost");
 	mangaData.setDatabaseName("mdb.db3");
 	if(!mangaData.isOpen())
-	{
 		mangaData.open();
-	}
 	initDatabase();
 }
 

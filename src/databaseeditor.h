@@ -21,12 +21,15 @@ public:
 private:
     Ui::DatabaseEditor *ui;
     void retrieveCover(QString selectionTitle);
+	void updateStatusCombobox(QString status);
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
+
 private slots:
     void openGenresEdit();
     void handleMangaComboIndexChanged(QString text);
+	void browserAllManga();
 };
 
 #endif // DATABASEEDITOR_H

@@ -6,12 +6,25 @@ QDialog(parent),
 	ui(new Ui::DatabaseEditor)
 {
 	ui->setupUi(this);
-	connect(ui->openGenreInfoEditButton, SIGNAL(clicked()),this,SLOT(openGenresEdit()));
-	connect(ui->mangaInfoAllComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(handleMangaComboIndexChanged(QString)));
+
+	//Initialize the Objects
 	scene = new QGraphicsScene;
 	wrap = new DataWrapperS;
 	db = new DbWrapper;
+
+	//Connect the signals
+	connect(ui->openGenreInfoEditButton, SIGNAL(clicked()),this,SLOT(openGenresEdit()));
+	connect(ui->mangaInfoAllComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(handleMangaComboIndexChanged(QString)));
+	connect(ui->listAllMangaButton, SIGNAL(clicked()),this,SLOT(browserAllManga()));
+	
+	//Populate the mangaCombobox
 	ui->mangaInfoAllComboBox->addItems(wrap->getAllMangaInfoTitles());
+	ui->mangaTitleLineEdit->setText(ui->mangaInfoAllComboBox->currentText());
+
+	//Populate the status combobox
+	ui->mangaPublicationStatusCombobox->addItem("Ongoing");
+	ui->mangaPublicationStatusCombobox->addItem("Complete");
+	ui->mangaPublicationStatusCombobox->addItem("Hiatus");
 }
 
 DatabaseEditor::~DatabaseEditor()
@@ -38,4 +51,27 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 {
 	retrieveCover(text);
 	ui->mangaDescriptionTextEdit->setText(db->getMangaDescription(text));
+	ui->mangaTitleLineEdit->setText(text);
+	updateStatusCombobox(wrap->getMangaStatus(text));
 }
+
+void DatabaseEditor::browserAllManga()
+{
+	ui->mangaInfoAllComboBox->addItems(wrap->getAllMangaInfoTitles());
+	ui->mangaTitleLineEdit->setText(ui->mangaInfoAllComboBox->currentText());
+}
+
+void DatabaseEditor::updateStatusCombobox(QString status)
+{
+	if(status.isNull()||status.isEmpty()){
+		ui->mangaPublicationStatusCombobox->setCurrentIndex(-1);
+		return;
+	}
+	if(status.contains("Ongoing"))
+		ui->mangaPublicationStatusCombobox->setCurrentIndex(0);
+	else if (status.contains("Complete"))
+		ui->mangaPublicationStatusCombobox->setCurrentIndex(1);
+	else if (status.contains("Hiatus"))
+		ui->mangaPublicationStatusCombobox->setCurrentIndex(2);
+}
+	 
