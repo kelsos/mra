@@ -6,9 +6,22 @@ mcra::mcra(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+    //Database Init
+
+    appData=QSqlDatabase::addDatabase("QSQLITE");
+    appData.setHostName("localhost");
+    appData.setDatabaseName("mdb.db3");
+
+    //New Objects
 	db = new DbWrapper;
 	xmlWrap = new XmlWrapper;
+    scene = new QGraphicsScene;
+    rss = new RssFetcher;
+    QThread* readingThread = new QThread;
+
 	xmlWrap->connectWithDatabase(db);
+    //Connect the Singals-Slots
 	connect(ui.actionToolbarRefresh, SIGNAL(triggered()), this, SLOT(update()));
 	connect(ui.actionMenuSettingsDisplayFinished, SIGNAL(toggled(bool)), this, SLOT(updateOnToggle(bool)));
 	connect(ui.actionMenuFileList, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
@@ -17,14 +30,10 @@ mcra::mcra(QWidget *parent)
 	connect(ui.actionMenuHelpAbout, SIGNAL(triggered()),this, SLOT(showAbout()));
 	connect(ui.actionToolbarOpenToRead, SIGNAL(triggered()),this,SLOT(showWebBrowser()));
 	connect(ui.actionDatabase_Editor, SIGNAL(triggered()),this,SLOT(openDatabaseEditor()));
-	scene = new QGraphicsScene;
-	QThread* readingThread = new QThread;
+
 	xmlWrap->moveToThread(readingThread);
 	readingThread->start();
 	update();
-	rss = new RssFetcher;
-	
-	
 }
 
 mcra::~mcra()

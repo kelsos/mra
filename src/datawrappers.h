@@ -13,13 +13,13 @@ public:
     explicit DataWrapperS(QObject *parent = 0);
     QStringList getAllMangaInfoTitles();
 	QString getMangaStatus(QString mangaTitle);
-    
+    QStringList getAuthorsForManga(QString mangaTitle);
 signals:
     
 public slots:
 
 private:
-    QSqlDatabase mangaData;
+    QSqlDatabase database;
     
 };
 

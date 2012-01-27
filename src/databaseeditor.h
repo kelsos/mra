@@ -2,6 +2,8 @@
 #define DATABASEEDITOR_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QStringListModel>
 #include "genresinfoeditor.h"
 #include "datawrappers.h"
 #include "DbWrapper.h"
@@ -25,6 +27,7 @@ private:
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
+	QStringListModel *qModel;
 
 private slots:
     void openGenresEdit();

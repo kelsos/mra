@@ -1,12 +1,9 @@
 #include "DbWrapper.h"
 
 DbWrapper::DbWrapper() {
-	//Set database driver to QSQLITE
-	mangaData = QSqlDatabase::addDatabase("QSQLITE");
-	mangaData.setHostName("localhost");
-	mangaData.setDatabaseName("mdb.db3");
-	if(!mangaData.isOpen())
-		mangaData.open();
+    database = QSqlDatabase::database();
+    if(!database.isOpen())
+        database.open();
 	initDatabase();
 }
 
@@ -15,14 +12,14 @@ DbWrapper::~DbWrapper() {
 }
 
 bool DbWrapper::isDatabaseOpen() {
-    return mangaData.isOpen();
+    return database.isOpen();
 }
 
 MangaSqlQueryModel* DbWrapper::getUserReadingList(bool displayFinished) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		MangaSqlQueryModel *model = new MangaSqlQueryModel();
 		QString query;
@@ -38,7 +35,7 @@ MangaSqlQueryModel* DbWrapper::getUserReadingList(bool displayFinished) {
 				"FROM MANGA_INFO MI, READING_LIST RL "
 				"WHERE MI.MANGA_ID = RL.MANGA_ID AND RL.READ_IS_FINISHED = 'false'";
 		}
-		model->setQuery(query,mangaData);
+        model->setQuery(query,database);
 
 		int i = 0;
 		model->setHeaderData(i++,Qt::Horizontal,"Manga Title");
@@ -58,9 +55,9 @@ MangaSqlQueryModel* DbWrapper::getUserReadingList(bool displayFinished) {
 
 QString DbWrapper::getMangaTitle(int mangaId) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QString mangaTitle;
 		QSqlQuery query;
@@ -85,9 +82,9 @@ QString DbWrapper::getMangaTitle(int mangaId) {
 
 int DbWrapper::getMangaID(QString mangaTitle) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		int valueToReturn = -1;
 		QSqlQuery query;
@@ -112,9 +109,9 @@ int DbWrapper::getMangaID(QString mangaTitle) {
 
 void DbWrapper::insertReadItem(ReadItem* readItem) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO READING_LIST ("
@@ -153,9 +150,9 @@ void DbWrapper::insertReadItem(ReadItem* readItem) {
 
 void DbWrapper::insertMangaData(MangaInfo* manga) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO MANGA_INFO ("
@@ -189,9 +186,9 @@ void DbWrapper::insertMangaData(MangaInfo* manga) {
 
 void DbWrapper::insertAuthorData(AuthorInfo* author) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO AUTHOR_INFO ("
@@ -221,9 +218,9 @@ void DbWrapper::insertAuthorData(AuthorInfo* author) {
 }
 void DbWrapper::insertGenreData(GenreInfo* genre) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO GENRE_INFO ("
@@ -246,9 +243,9 @@ void DbWrapper::insertGenreData(GenreInfo* genre) {
 }
 void DbWrapper::insertPublisherData(PublisherInfo* publisher) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO PUBLISHER_INFO ( "
@@ -278,9 +275,9 @@ void DbWrapper::insertPublisherData(PublisherInfo* publisher) {
 
 void DbWrapper::insertNewsItem(NewsStorage* newsItem) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO NEWS_STORAGE ( "
@@ -310,9 +307,9 @@ void DbWrapper::insertNewsItem(NewsStorage* newsItem) {
 }
 void DbWrapper::insertNewsSubscription(NewsSubscriptions* subscription) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO NEWS_SUBSCRIPTIONS ( "
@@ -336,9 +333,9 @@ void DbWrapper::insertNewsSubscription(NewsSubscriptions* subscription) {
 }
 void DbWrapper::insertMangaAuthor(MangaAuthors* maAuth) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO MANGA_AUTHORS ( "
@@ -362,9 +359,9 @@ void DbWrapper::insertMangaAuthor(MangaAuthors* maAuth) {
 
 void DbWrapper::insertMangaGenre(MangaGenres* maGen) {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("INSERT INTO MANGA_GENRES ( "
@@ -388,9 +385,9 @@ void DbWrapper::insertMangaGenre(MangaGenres* maGen) {
 
 void DbWrapper::createMangaInfoTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE MANGA_INFO ( "
@@ -413,9 +410,9 @@ void DbWrapper::createMangaInfoTable() {
 
 void DbWrapper::createPublisherInfoTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE PUBLISHER_INFO ( "
@@ -436,9 +433,9 @@ void DbWrapper::createPublisherInfoTable() {
 
 void DbWrapper::createAuthorInfoTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE AUTHOR_INFO ( "
@@ -475,9 +472,9 @@ void DbWrapper::createGenreInfoTable() {
 
 void DbWrapper::createNewsStorageTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE NEWS_STORAGE ( "
@@ -499,9 +496,9 @@ void DbWrapper::createNewsStorageTable() {
 
 void DbWrapper::createNewsSubscriptionsTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE NEWS_SUBSCRIPTIONS ( "
@@ -519,9 +516,9 @@ void DbWrapper::createNewsSubscriptionsTable() {
 
 void DbWrapper::createMangaAuthorsTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE MANGA_AUTHORS ( "
@@ -542,9 +539,9 @@ void DbWrapper::createMangaAuthorsTable() {
 
 void DbWrapper::createMangaGenresTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE MANGA_GENRES ( "
@@ -565,9 +562,9 @@ void DbWrapper::createMangaGenresTable() {
 
 void DbWrapper::createReadingListTable() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("CREATE TABLE READING_LIST ( "
@@ -603,9 +600,9 @@ void DbWrapper::initDatabase() {
 
 void DbWrapper::getMangaData() {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("SELECT * "
@@ -622,9 +619,9 @@ void DbWrapper::getMangaData() {
 
 void DbWrapper::truncateAuthorInfoTable(){
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM AUTHOR_INFO");
@@ -637,9 +634,9 @@ void DbWrapper::truncateAuthorInfoTable(){
 
 void DbWrapper::truncateGenreInfoTable(){
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}QSqlQuery query;
 		query.exec("DELETE FROM GENRE_INFO");
 	}
@@ -653,9 +650,9 @@ void DbWrapper::truncateMangaAuthorsTable()
 
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM MANGA_AUTHORS");	}
@@ -668,9 +665,9 @@ void DbWrapper::truncateMangaAuthorsTable()
 void DbWrapper::truncateMangaGenresTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM MANGA_GENRES");
@@ -684,9 +681,9 @@ void DbWrapper::truncateMangaGenresTable()
 void DbWrapper::truncateMangaInfoTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM MANGA_INFO");	
@@ -700,9 +697,9 @@ void DbWrapper::truncateMangaInfoTable()
 void DbWrapper::truncateNewsStorageTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM NEWS_STORAGE");	
@@ -716,9 +713,9 @@ void DbWrapper::truncateNewsStorageTable()
 void DbWrapper::truncateNewsSubscriptionsTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM NEWS_SUBSCRIPTIONS");	
@@ -731,9 +728,9 @@ void DbWrapper::truncateNewsSubscriptionsTable()
 void DbWrapper::truncatePublisherInfoTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM PUBLISHER_INFO");	
@@ -746,9 +743,9 @@ void DbWrapper::truncatePublisherInfoTable()
 void DbWrapper::truncateReadingListTable()
 {
 	try{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.exec("DELETE FROM READING_LIST");	
@@ -763,9 +760,9 @@ QPixmap DbWrapper::getMangaCover(QString mangaTitle)
 {
 	try
 	{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		query.prepare("SELECT MANGA_COVER "
@@ -777,11 +774,12 @@ QPixmap DbWrapper::getMangaCover(QString mangaTitle)
 		while (query.next())
 		{
 			ba = query.value(0).toByteArray();
-		}
+		}	
 		QGraphicsPixmapItem *pi = new QGraphicsPixmapItem;
 		QPixmap pix;
+		if(ba.isEmpty()||ba.isNull())
+			return pix;
 		pix.loadFromData(ba,"PNG");
-
 		if (pix.width()<160)
 		{
 			pix = pix.scaled(QSize(160,(pix.height())*160/pix.width()),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
@@ -802,9 +800,9 @@ QString DbWrapper::getMangaDescription(QString mangaTitle)
 {
 	try
 	{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		QString mangaDescription;
@@ -830,9 +828,9 @@ QString DbWrapper::getMangaNote(QString mangaTitle)
 {
 	try
 	{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		QString mangaNote;
@@ -859,9 +857,9 @@ QString DbWrapper::getMangaUrl(QString mangaTitle)
 {
 	try
 	{
-		if(!mangaData.isOpen())
+        if(!database.isOpen())
 		{
-			mangaData.open();
+            database.open();
 		}
 		QSqlQuery query;
 		QString mangaDescription;

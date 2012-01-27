@@ -11,6 +11,7 @@ QDialog(parent),
 	scene = new QGraphicsScene;
 	wrap = new DataWrapperS;
 	db = new DbWrapper;
+	qModel = new QStringListModel;
 
 	//Connect the signals
 	connect(ui->openGenreInfoEditButton, SIGNAL(clicked()),this,SLOT(openGenresEdit()));
@@ -53,6 +54,8 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 	ui->mangaDescriptionTextEdit->setText(db->getMangaDescription(text));
 	ui->mangaTitleLineEdit->setText(text);
 	updateStatusCombobox(wrap->getMangaStatus(text));
+	qModel->setStringList(wrap->getAuthorsForManga(text));
+	ui->mangaAuthorsListView->setModel(qModel);
 }
 
 void DatabaseEditor::browserAllManga()

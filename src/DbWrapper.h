@@ -103,7 +103,7 @@ public:
 	QString getMangaUrl(QString mangaTitle);
 protected:
 private:
-	QSqlDatabase mangaData;
+    QSqlDatabase database;
 	void createAuthorInfoTable();
 	void createGenreInfoTable();
 	void createPublisherInfoTable();

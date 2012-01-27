@@ -20,6 +20,7 @@ class mcra : public QMainWindow
 
 public:
     mcra(QWidget *parent = 0);
+    QSqlDatabase appData;
     ~mcra();
 
 private:
