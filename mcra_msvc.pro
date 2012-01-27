@@ -34,12 +34,14 @@ include(mcra_msvc.pri)
 HEADERS += \
     src/databaseeditor.h \
     src/genresinfoeditor.h \
-    src/datawrappers.h
+    src/datawrappers.h \
+    src/Database/databaseinitializer.h
 
 SOURCES += \
     src/databaseeditor.cpp \
     src/genresinfoeditor.cpp \
-    src/datawrappers.cpp
+    src/datawrappers.cpp \
+    src/Database/databaseinitializer.cpp
 
 FORMS += \
     src/databaseeditor.ui \
