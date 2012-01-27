@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVector>
+#include <QDateTime>
 #include "MangaInfo.h"
 #include "DbWrapper.h"
 
@@ -14,6 +15,13 @@ public:
     QStringList getAllMangaInfoTitles();
 	QString getMangaStatus(QString mangaTitle);
     QStringList getAuthorsForManga(QString mangaTitle);
+	QStringList getGenresForManga(QString mangaTitle);
+	QString getPublisherForManga(QString mangaTitle);
+	QStringList getNonSelectedAuthorsForManga(QString mangaTitle);
+	QStringList getNonSelectedGenresForManga(QString mangaTitle);
+	QStringList getNonSelectedPublishersForManga(QString mangaTitle);
+	QDateTime getPublicationDateForManga(QString mangaTitle);
+
 signals:
     
 public slots:

@@ -203,7 +203,7 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
-               <widget class="QListWidget" name="mangaGenresListWidget">
+               <widget class="QListView" name="mangaGenresListView">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
                   <horstretch>0</horstretch>
@@ -263,7 +263,18 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11">
               <item>
-               <widget class="QDateEdit" name="mangaPublicationDateEdit"/>
+               <widget class="QDateEdit" name="mangaPublicationDateEdit">
+                <property name="date">
+                 <date>
+                  <year>1800</year>
+                  <month>1</month>
+                  <day>1</day>
+                 </date>
+                </property>
+                <property name="displayFormat">
+                 <string>yyyy</string>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QComboBox" name="mangaPublicationStatusCombobox"/>

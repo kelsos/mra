@@ -28,6 +28,7 @@ private:
     QGraphicsScene* scene;
     DbWrapper *db;
 	QStringListModel *qModel;
+	QStringListModel *genresModel;
 
 private slots:
     void openGenresEdit();
