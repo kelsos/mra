@@ -185,7 +185,7 @@ void DataWrapperS::addGenreForManga(QString mangaTitle, QString genreName)
 	query.bindValue(1,genreName);
 	query.exec();
 }
-	
+
 void DataWrapperS::removeGenreFromManga(QString mangaTitle, QString genreName)
 {
 	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(genreName.isNull()||genreName.isEmpty()))
@@ -199,7 +199,7 @@ void DataWrapperS::removeGenreFromManga(QString mangaTitle, QString genreName)
 	query.bindValue(1,genreName);
 	query.exec();
 }
-	
+
 void DataWrapperS::addPublisherForManga(QString mangaTitle, QString publisherName)
 {
 	qDebug() << publisherName;
@@ -213,7 +213,7 @@ void DataWrapperS::addPublisherForManga(QString mangaTitle, QString publisherNam
 	query.bindValue(1,mangaTitle);
 	query.exec();
 }
-	
+
 void DataWrapperS::removePublisherFromManga(QString mangaTitle)
 {
 	if(mangaTitle.isNull()||mangaTitle.isEmpty())
@@ -233,33 +233,53 @@ void DataWrapperS::updateCoverForManga(QString mangaTitle, QByteArray cover)
 	if(!database.isOpen())
 		database.open();
 	QSqlQuery query;
-    query.prepare("UPDATE MANGA_INFO SET MANGA_COVER = ? WHERE MANGA_TITLE = ?");
-    query.bindValue(0,cover);
-    query.bindValue(1,mangaTitle);
-    query.exec();
+	query.prepare("UPDATE MANGA_INFO SET MANGA_COVER = ? WHERE MANGA_TITLE = ?");
+	query.bindValue(0,cover);
+	query.bindValue(1,mangaTitle);
+	query.exec();
 }
 
 void DataWrapperS::insertNewMangaInfo(QString title, QString description, QString publisher, QDateTime publicationDate, QString publicationStatus, QByteArray cover)
 {
-		try{
-			if(!database.isOpen())
-				database.open();
-			QSqlQuery query;
-			query.prepare("INSERT INTO MANGA_INFO (MANGA_TITLE, MANGA_DESCRIPTION, MANGA_PUBLICATION_DATE, "
-				"MANGA_PUBLICATION_STATUS, MANGA_PUBLISHER_ID, MANGA_COVER) VALUES (?, ?, ?, ?, (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?), ?)");
+	try{
+		if(!database.isOpen())
+			database.open();
+		QSqlQuery query;
+		query.prepare("INSERT INTO MANGA_INFO (MANGA_TITLE, MANGA_DESCRIPTION, MANGA_PUBLICATION_DATE, "
+			"MANGA_PUBLICATION_STATUS, MANGA_PUBLISHER_ID, MANGA_COVER) VALUES (?, ?, ?, ?, (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?), ?)");
 
-			int i = 0;
-			query.bindValue(i++, title);
-			query.bindValue(i++, description);
-			query.bindValue(i++, publicationDate);
-			query.bindValue(i++, publicationStatus);
-			query.bindValue(i++, publisher);
-			query.bindValue(i++, cover);
-			query.exec();
-		}
-		catch(std::exception& e)
-		{
-			qDebug(e.what());
-		}
-	
+		int i = 0;
+		query.bindValue(i++, title);
+		query.bindValue(i++, description);
+		query.bindValue(i++, publicationDate);
+		query.bindValue(i++, publicationStatus);
+		query.bindValue(i++, publisher);
+		query.bindValue(i++, cover);
+		query.exec();
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+}
+
+int DataWrapperS::getMangaCount()
+{
+	int result = 0;
+	try{
+
+		if(!database.isOpen())
+			database.open();
+		QSqlQuery query;
+		query.prepare("SELECT COUNT(*) FROM MANGA_INFO");
+		query.exec();
+		while(query.next())
+			result = query.value(0).toInt();
+		
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+	return result;
 }

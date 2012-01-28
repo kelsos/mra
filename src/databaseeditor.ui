@@ -146,6 +146,22 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="totalMangaLabel">
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>{n} Total</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

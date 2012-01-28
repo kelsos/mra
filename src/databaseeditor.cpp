@@ -36,6 +36,7 @@ QDialog(parent),
 
 	ui->mangaInfoAllComboBox->addItems(wrap->getAllMangaInfoTitles());
 	isNewEntryInProgress=false;
+	ui->totalMangaLabel->setText(QString::number(wrap->getMangaCount()) + " Total");
 }
 
 DatabaseEditor::~DatabaseEditor()
@@ -79,6 +80,7 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 
 void DatabaseEditor::browserAllManga()
 {
+	ui->totalMangaLabel->setText(QString::number(wrap->getMangaCount()) + " Total");
 	ui->mangaInfoAllComboBox->clear();
 	ui->mangaInfoAllComboBox->addItems(wrap->getAllMangaInfoTitles());
 	ui->mangaTitleLineEdit->setText(ui->mangaInfoAllComboBox->currentText());

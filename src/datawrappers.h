@@ -29,6 +29,7 @@ public:
 	void removePublisherFromManga(QString mangaTitle);
     void updateCoverForManga(QString mangaTitle, QByteArray cover);
 	void insertNewMangaInfo(QString title, QString description, QString publisher, QDateTime publicationDate, QString publicationStatus, QByteArray cover);
+	int getMangaCount();
 
 signals:
     
