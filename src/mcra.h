@@ -5,6 +5,7 @@
 #include <QtConcurrentRun>
 #include <QFuture>
 #include <QSqlTableModel>
+#include <QSortFilterProxyModel>
 #include <QMessageBox>
 #include "DbWrapper.h"
 #include "XmlWrapper.h"
@@ -31,6 +32,7 @@ private:
 	RssFetcher *rss;
 	webBrowser *browserWindow;
 	QString selectedMangaTitle;
+	QSortFilterProxyModel *sortModel;
 
 public slots:
 	void update();

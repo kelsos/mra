@@ -18,6 +18,7 @@ mcra::mcra(QWidget *parent)
 	xmlWrap = new XmlWrapper;
     scene = new QGraphicsScene;
     rss = new RssFetcher;
+	sortModel = new QSortFilterProxyModel(this);
     QThread* readingThread = new QThread;
 
 	xmlWrap->connectWithDatabase(db);
@@ -43,7 +44,8 @@ mcra::~mcra()
 
 void mcra::update()
 {
-	ui.readingListTableView->setModel(db->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
+	sortModel->setSourceModel(db->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
+	ui.readingListTableView->setModel(sortModel);
 	ui.readingListTableView->horizontalHeader()->setResizeMode(0,QHeaderView::Stretch);
 	ui.readingListTableView->setColumnWidth(1,60);
 	ui.readingListTableView->setColumnWidth(2,60);

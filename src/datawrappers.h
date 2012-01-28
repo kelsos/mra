@@ -23,6 +23,11 @@ public:
 	QDateTime getPublicationDateForManga(QString mangaTitle);
 	void addAuthorForManga(QString mangaTitle, QString authorName);
 	void removeAuthorForManga(QString mangaTitle, QString authorName);
+	void addGenreForManga(QString mangaTitle, QString genreName);
+	void removeGenreFromManga(QString mangaTitle, QString genreName);
+	void addPublisherForManga(QString mangaTitle, QString publisherName);
+	void removePublisherFromManga(QString mangaTitle, QString publisherName);
+    void updateCoverForManga(QString mangaTitle, QByteArray cover);
 
 signals:
     

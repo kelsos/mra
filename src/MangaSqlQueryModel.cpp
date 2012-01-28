@@ -13,7 +13,7 @@ QVariant MangaSqlQueryModel::data(const QModelIndex &index, int role) const
 		if (index.column()==4)
 		{
 		    QDateTime lastReadDate=value.toDateTime();
-			return lastReadDate.toString("dd.MM.yyyy");
+			return lastReadDate.toString("yyyy-MM-dd");
 		}
 		if (index.column()==5)
 		{

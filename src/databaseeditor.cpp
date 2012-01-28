@@ -22,6 +22,8 @@ QDialog(parent),
 	connect(ui->mangaGenreAddButton, SIGNAL(clicked()), this, SLOT(addSelecteGenreToManga()));
 	connect(ui->mangaAddPublisherButton, SIGNAL(clicked()), this, SLOT(addSelectPublisherToManga()));
 	connect(ui->mangaAuthorsRemoveButton, SIGNAL(clicked()), this, SLOT(removeSelectedAuthorFromManga()));
+	connect(ui->mangaGenreRemoveButton, SIGNAL(clicked()), this, SLOT(removeSelectedGenreFromManga()));
+	connect(ui->mangaCoverAddButton, SIGNAL(clicked()), this, SLOT(openImageSelectionDialog()));
 
 	//Populate the status combobox
 	ui->mangaPublicationStatusCombobox->addItem("Ongoing");
@@ -64,11 +66,8 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 	ui->mangaTitleLineEdit->setText(text);
 	updateStatusCombobox(wrap->getMangaStatus(text));
 	updateMangaAuthorData(text);
-	genresModel->setStringList(wrap->getGenresForManga(text));
-	ui->mangaGenresListView->setModel(genresModel);
+	updateMangaGenreData(text);
 	ui->mangaPublisherLineEdit->setText(wrap->getPublisherForManga(text));
-	ui->mangaGenresComboBox->clear();
-	ui->mangaGenresComboBox->addItems(wrap->getNonSelectedGenresForManga(text));
 	ui->mangaPublishersComboBox->clear();
 	ui->mangaPublishersComboBox->addItems(wrap->getNonSelectedPublishersForManga(text));
 	ui->mangaPublicationDateEdit->setDate(QDate::fromString("01/01/1800","dd/MM/yyyy"));
@@ -98,7 +97,8 @@ void DatabaseEditor::updateStatusCombobox(QString status)
 
 void DatabaseEditor::addSelecteGenreToManga()
 {
-
+	wrap->addGenreForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresComboBox->currentText());
+	updateMangaGenreData(ui->mangaInfoAllComboBox->currentText());
 }
 
 void DatabaseEditor::addSelectAuthorToManga()
@@ -125,4 +125,57 @@ void DatabaseEditor::removeSelectedAuthorFromManga()
 	wrap->removeAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsListView->currentIndex().data
 		(Qt::DisplayRole).toString());
 	updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
+}
+
+void DatabaseEditor::updateMangaGenreData(QString selection)
+{
+	ui->mangaGenresComboBox->clear();
+	ui->mangaGenresComboBox->addItems(wrap->getNonSelectedGenresForManga(selection));
+	genresModel->setStringList(wrap->getGenresForManga(selection));
+	ui->mangaGenresListView->setModel(genresModel);
+}
+
+void DatabaseEditor::removeSelectedGenreFromManga()
+{
+	wrap->removeGenreFromManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresListView->currentIndex().data
+		(Qt::DisplayRole).toString());
+	updateMangaGenreData(ui->mangaInfoAllComboBox->currentText());
+}
+
+void DatabaseEditor::openImageSelectionDialog()
+{
+	QFileDialog dialog(this);
+	dialog.setFileMode(QFileDialog::ExistingFile);
+	dialog.setNameFilter(tr("Images (*.png *.jpg)"));
+	QString fileName;
+	if (dialog.exec())
+	{
+		fileName=dialog.selectedFiles().first();
+	}
+	scene->clear();
+	QImage image(fileName);
+	QPixmap pix = QPixmap::fromImage(image);
+	float aspectRatio;
+	aspectRatio = pix.height()/pix.width();
+	//resizing
+	if ((230/160)==aspectRatio)
+	{
+		pix = pix.scaled(QSize(160,230),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+	}
+	else if ((230/160)>aspectRatio)
+	{
+		pix = pix.scaled(QSize(160,(pix.height())*160/pix.width()),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+	}
+	if ((230/160)<aspectRatio)
+	{
+		pix = pix.scaled(QSize((pix.width()*230)/pix.height(),230),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+	}
+	scene->addPixmap(pix);
+	ui->mangaCoverGraphicView->setScene(scene);
+	ui->mangaCoverGraphicView->show();
+	QByteArray ba;
+	QBuffer buffer(&ba);
+	buffer.open(QIODevice::WriteOnly);
+	pix.save(&buffer,"PNG");
+	wrap->updateCoverForManga(ui->mangaInfoAllComboBox->currentText(),ba);
 }

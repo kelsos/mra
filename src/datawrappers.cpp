@@ -170,3 +170,54 @@ void DataWrapperS::removeAuthorForManga(QString mangaTitle, QString authorName)
 	query.bindValue(1,authorName);
 	query.exec();
 }
+
+
+void DataWrapperS::addGenreForManga(QString mangaTitle, QString genreName)
+{
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(genreName.isNull()||genreName.isEmpty()))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("INSERT INTO MANGA_GENRES (MANGA_ID, GENRE_ID) VALUES"
+		" ((SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?),(SELECT GENRE_ID FROM GENRE_INFO WHERE GENRE_NAME = ?))");
+	query.bindValue(0,mangaTitle);
+	query.bindValue(1,genreName);
+	query.exec();
+}
+	
+void DataWrapperS::removeGenreFromManga(QString mangaTitle, QString genreName)
+{
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(genreName.isNull()||genreName.isEmpty()))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("DELETE FROM MANGA_GENRES "
+		"WHERE MANGA_ID IN (SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?) AND GENRE_ID IN (SELECT GENRE_ID FROM GENRE_INFO WHERE GENRE_NAME = ?)");
+	query.bindValue(0,mangaTitle);
+	query.bindValue(1,genreName);
+	query.exec();
+}
+	
+void DataWrapperS::addPublisherForManga(QString mangaTitle, QString publisherName)
+{
+}
+	
+void DataWrapperS::removePublisherFromManga(QString mangaTitle, QString publisherName)
+{
+
+}
+
+void DataWrapperS::updateCoverForManga(QString mangaTitle, QByteArray cover)
+{
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||((cover.isNull()||cover.isEmpty())))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+    query.prepare("UPDATE MANGA_INFO SET MANGA_COVER = ? WHERE MANGA_TITLE = ?");
+    query.bindValue(0,cover);
+    query.bindValue(1,mangaTitle);
+    query.exec();
+}

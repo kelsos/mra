@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <QStringListModel>
+#include <QFileDialog>
 #include "genresinfoeditor.h"
 #include "datawrappers.h"
 #include "DbWrapper.h"
@@ -25,6 +26,7 @@ private:
     void retrieveCover(QString selectionTitle);
 	void updateStatusCombobox(QString status);
 	void updateMangaAuthorData(QString selection);
+	void updateMangaGenreData(QString selection);
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
@@ -39,6 +41,8 @@ private slots:
 	void addSelectPublisherToManga();
 	void addSelecteGenreToManga();
 	void removeSelectedAuthorFromManga();
+	void removeSelectedGenreFromManga();
+	void openImageSelectionDialog();
 };
 
 #endif // DATABASEEDITOR_H
