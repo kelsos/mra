@@ -24,6 +24,7 @@ private:
     Ui::DatabaseEditor *ui;
     void retrieveCover(QString selectionTitle);
 	void updateStatusCombobox(QString status);
+	void updateMangaAuthorData(QString selection);
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
@@ -34,6 +35,10 @@ private slots:
     void openGenresEdit();
     void handleMangaComboIndexChanged(QString text);
 	void browserAllManga();
+	void addSelectAuthorToManga();
+	void addSelectPublisherToManga();
+	void addSelecteGenreToManga();
+	void removeSelectedAuthorFromManga();
 };
 
 #endif // DATABASEEDITOR_H

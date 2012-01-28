@@ -18,6 +18,10 @@ QDialog(parent),
 	connect(ui->openGenreInfoEditButton, SIGNAL(clicked()),this,SLOT(openGenresEdit()));
 	connect(ui->mangaInfoAllComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(handleMangaComboIndexChanged(QString)));
 	connect(ui->listAllMangaButton, SIGNAL(clicked()),this,SLOT(browserAllManga()));
+	connect(ui->mangaAuthorsAddButton, SIGNAL(clicked()), this, SLOT(addSelectAuthorToManga()));
+	connect(ui->mangaGenreAddButton, SIGNAL(clicked()), this, SLOT(addSelecteGenreToManga()));
+	connect(ui->mangaAddPublisherButton, SIGNAL(clicked()), this, SLOT(addSelectPublisherToManga()));
+	connect(ui->mangaAuthorsRemoveButton, SIGNAL(clicked()), this, SLOT(removeSelectedAuthorFromManga()));
 
 	//Populate the status combobox
 	ui->mangaPublicationStatusCombobox->addItem("Ongoing");
@@ -59,13 +63,10 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 	ui->mangaDescriptionTextEdit->setText(db->getMangaDescription(text));
 	ui->mangaTitleLineEdit->setText(text);
 	updateStatusCombobox(wrap->getMangaStatus(text));
-	qModel->setStringList(wrap->getAuthorsForManga(text));
-	ui->mangaAuthorsListView->setModel(qModel);
+	updateMangaAuthorData(text);
 	genresModel->setStringList(wrap->getGenresForManga(text));
 	ui->mangaGenresListView->setModel(genresModel);
 	ui->mangaPublisherLineEdit->setText(wrap->getPublisherForManga(text));
-	ui->mangaAuthorsComboBox->clear();
-	ui->mangaAuthorsComboBox->addItems(wrap->getNonSelectedAuthorsForManga(text));
 	ui->mangaGenresComboBox->clear();
 	ui->mangaGenresComboBox->addItems(wrap->getNonSelectedGenresForManga(text));
 	ui->mangaPublishersComboBox->clear();
@@ -94,4 +95,34 @@ void DatabaseEditor::updateStatusCombobox(QString status)
 	else if (status.contains("Hiatus"))
 		ui->mangaPublicationStatusCombobox->setCurrentIndex(2);
 }
+
+void DatabaseEditor::addSelecteGenreToManga()
+{
+
+}
+
+void DatabaseEditor::addSelectAuthorToManga()
+{
+	wrap->addAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsComboBox->currentText());
+	updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
+}
 	 
+void DatabaseEditor::addSelectPublisherToManga()
+{
+}
+
+void DatabaseEditor::updateMangaAuthorData(QString selection)
+{
+	ui->mangaAuthorsComboBox->clear();
+	ui->mangaAuthorsComboBox->addItems(wrap->getNonSelectedAuthorsForManga(selection));
+	qModel->setStringList(wrap->getAuthorsForManga(selection));
+	ui->mangaAuthorsListView->setModel(qModel);
+}
+
+void DatabaseEditor::removeSelectedAuthorFromManga()
+{
+	
+	wrap->removeAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsListView->currentIndex().data
+		(Qt::DisplayRole).toString());
+	updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
+}

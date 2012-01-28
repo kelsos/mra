@@ -21,6 +21,8 @@ public:
 	QStringList getNonSelectedGenresForManga(QString mangaTitle);
 	QStringList getNonSelectedPublishersForManga(QString mangaTitle);
 	QDateTime getPublicationDateForManga(QString mangaTitle);
+	void addAuthorForManga(QString mangaTitle, QString authorName);
+	void removeAuthorForManga(QString mangaTitle, QString authorName);
 
 signals:
     

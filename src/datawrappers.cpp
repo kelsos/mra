@@ -142,3 +142,31 @@ QDateTime DataWrapperS::getPublicationDateForManga(QString mangaTitle)
 		result = query.value(0).toDateTime();
 	return result;
 }
+
+void DataWrapperS::addAuthorForManga(QString mangaTitle, QString authorName)
+{
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(authorName.isNull()||authorName.isEmpty()))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("INSERT INTO MANGA_AUTHORS (MANGA_ID, AUTHOR_ID) VALUES"
+		" ((SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?),(SELECT AUTHOR_ID FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?))");
+	query.bindValue(0,mangaTitle);
+	query.bindValue(1,authorName);
+	query.exec();
+}
+
+void DataWrapperS::removeAuthorForManga(QString mangaTitle, QString authorName)
+{
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(authorName.isNull()||authorName.isEmpty()))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("DELETE FROM MANGA_AUTHORS "
+		"WHERE MANGA_ID IN (SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?) AND AUTHOR_ID IN (SELECT AUTHOR_ID FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?)");
+	query.bindValue(0,mangaTitle);
+	query.bindValue(1,authorName);
+	query.exec();
+}
