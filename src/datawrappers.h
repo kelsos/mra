@@ -26,8 +26,9 @@ public:
 	void addGenreForManga(QString mangaTitle, QString genreName);
 	void removeGenreFromManga(QString mangaTitle, QString genreName);
 	void addPublisherForManga(QString mangaTitle, QString publisherName);
-	void removePublisherFromManga(QString mangaTitle, QString publisherName);
+	void removePublisherFromManga(QString mangaTitle);
     void updateCoverForManga(QString mangaTitle, QByteArray cover);
+	void insertNewMangaInfo(QString title, QString description, QString publisher, QDateTime publicationDate, QString publicationStatus, QByteArray cover);
 
 signals:
     

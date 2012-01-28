@@ -8,6 +8,7 @@
 #include "genresinfoeditor.h"
 #include "datawrappers.h"
 #include "DbWrapper.h"
+#include "MangaInfo.h"
 
 namespace Ui {
 class DatabaseEditor;
@@ -27,11 +28,14 @@ private:
 	void updateStatusCombobox(QString status);
 	void updateMangaAuthorData(QString selection);
 	void updateMangaGenreData(QString selection);
+	void updatePublisherData(QString selection);
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
 	QStringListModel *qModel;
 	QStringListModel *genresModel;
+	bool isNewEntryInProgress;
+	QByteArray coverArray;
 
 private slots:
     void openGenresEdit();
@@ -42,7 +46,11 @@ private slots:
 	void addSelecteGenreToManga();
 	void removeSelectedAuthorFromManga();
 	void removeSelectedGenreFromManga();
+	void removeSelectedPublisherFromManga();
 	void openImageSelectionDialog();
+	void newData();
+	void saveData();
+	void deleteData();
 };
 
 #endif // DATABASEEDITOR_H

@@ -22,8 +22,12 @@ QDialog(parent),
 	connect(ui->mangaGenreAddButton, SIGNAL(clicked()), this, SLOT(addSelecteGenreToManga()));
 	connect(ui->mangaAddPublisherButton, SIGNAL(clicked()), this, SLOT(addSelectPublisherToManga()));
 	connect(ui->mangaAuthorsRemoveButton, SIGNAL(clicked()), this, SLOT(removeSelectedAuthorFromManga()));
+	connect(ui->mangaRemovePublisherButton, SIGNAL(clicked()),this,SLOT(removeSelectedPublisherFromManga()));
 	connect(ui->mangaGenreRemoveButton, SIGNAL(clicked()), this, SLOT(removeSelectedGenreFromManga()));
 	connect(ui->mangaCoverAddButton, SIGNAL(clicked()), this, SLOT(openImageSelectionDialog()));
+	connect(ui->mangaInfoNewButton,SIGNAL(clicked()),this,SLOT(newData()));
+	connect(ui->mangaInfoSaveButton, SIGNAL(clicked()), this, SLOT(saveData()));
+	connect(ui->mangaInfoDeleteButton,SIGNAL(clicked()), this, SLOT(deleteData()));
 
 	//Populate the status combobox
 	ui->mangaPublicationStatusCombobox->addItem("Ongoing");
@@ -31,6 +35,7 @@ QDialog(parent),
 	ui->mangaPublicationStatusCombobox->addItem("Hiatus");
 
 	ui->mangaInfoAllComboBox->addItems(wrap->getAllMangaInfoTitles());
+	isNewEntryInProgress=false;
 }
 
 DatabaseEditor::~DatabaseEditor()
@@ -67,9 +72,7 @@ void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 	updateStatusCombobox(wrap->getMangaStatus(text));
 	updateMangaAuthorData(text);
 	updateMangaGenreData(text);
-	ui->mangaPublisherLineEdit->setText(wrap->getPublisherForManga(text));
-	ui->mangaPublishersComboBox->clear();
-	ui->mangaPublishersComboBox->addItems(wrap->getNonSelectedPublishersForManga(text));
+	updatePublisherData(text);
 	ui->mangaPublicationDateEdit->setDate(QDate::fromString("01/01/1800","dd/MM/yyyy"));
 	ui->mangaPublicationDateEdit->setDateTime(wrap->getPublicationDateForManga(text));
 }
@@ -109,6 +112,16 @@ void DatabaseEditor::addSelectAuthorToManga()
 	 
 void DatabaseEditor::addSelectPublisherToManga()
 {
+	if(isNewEntryInProgress)
+	{
+		ui->mangaPublisherLineEdit->setText(ui->mangaPublishersComboBox->currentText());
+		ui->mangaPublishersComboBox->removeItem(ui->mangaPublishersComboBox->currentIndex());
+	}
+	else
+	{
+		wrap->addPublisherForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaPublishersComboBox->currentText());
+		updatePublisherData(ui->mangaInfoAllComboBox->currentText());
+	}
 }
 
 void DatabaseEditor::updateMangaAuthorData(QString selection)
@@ -121,7 +134,6 @@ void DatabaseEditor::updateMangaAuthorData(QString selection)
 
 void DatabaseEditor::removeSelectedAuthorFromManga()
 {
-	
 	wrap->removeAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsListView->currentIndex().data
 		(Qt::DisplayRole).toString());
 	updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
@@ -177,5 +189,86 @@ void DatabaseEditor::openImageSelectionDialog()
 	QBuffer buffer(&ba);
 	buffer.open(QIODevice::WriteOnly);
 	pix.save(&buffer,"PNG");
-	wrap->updateCoverForManga(ui->mangaInfoAllComboBox->currentText(),ba);
+	if (isNewEntryInProgress)
+	{
+		coverArray = ba;
+	} 
+	else
+	{
+		wrap->updateCoverForManga(ui->mangaInfoAllComboBox->currentText(),ba);
+	}
+	
+}
+
+void DatabaseEditor::updatePublisherData(QString selection)
+{
+	ui->mangaPublisherLineEdit->setText(wrap->getPublisherForManga(selection));
+	ui->mangaPublishersComboBox->clear();
+	ui->mangaPublishersComboBox->addItems(wrap->getNonSelectedPublishersForManga(selection));
+}
+
+void DatabaseEditor::removeSelectedPublisherFromManga()
+{
+	wrap->removePublisherFromManga(ui->mangaInfoAllComboBox->currentText());
+	updatePublisherData(ui->mangaInfoAllComboBox->currentText());
+}
+
+void DatabaseEditor::newData()
+{
+	ui->mangaInfoAllComboBox->setCurrentIndex(-1);
+	ui->mangaInfoAllComboBox->setEnabled(false);
+	ui->mangaGenreAddButton->setEnabled(false);
+	ui->mangaGenreRemoveButton->setEnabled(false);
+	ui->mangaGenresComboBox->setEnabled(false);
+	ui->mangaGenresComboBox->setCurrentIndex(-1);
+	ui->mangaAuthorsAddButton->setEnabled(false);
+	ui->mangaAuthorsRemoveButton->setEnabled(false);
+	ui->mangaAuthorsComboBox->setEnabled(false);
+	ui->mangaAuthorsComboBox->setCurrentIndex(-1);
+	isNewEntryInProgress=true;
+}
+
+void DatabaseEditor::saveData()
+{
+	if (isNewEntryInProgress)
+	{
+		if(ui->mangaTitleLineEdit->text().isNull()||ui->mangaTitleLineEdit->text().isEmpty())
+			return;
+		QDateTime datetime;
+		if(ui->mangaPublicationDateEdit->date()!=QDate::fromString("01/01/1800","dd/MM/yyyy"))
+			datetime=ui->mangaPublicationDateEdit->dateTime();
+		wrap->insertNewMangaInfo(ui->mangaTitleLineEdit->text(),ui->mangaDescriptionTextEdit->toPlainText(),ui->mangaPublisherLineEdit->text(),datetime,ui->mangaPublicationStatusCombobox->currentText(),coverArray);
+		
+		coverArray.clear();
+		browserAllManga();
+		ui->mangaInfoAllComboBox->setCurrentIndex(0);
+		ui->mangaInfoAllComboBox->setEnabled(true);
+		ui->mangaGenreAddButton->setEnabled(true);
+		ui->mangaGenreRemoveButton->setEnabled(true);
+		ui->mangaGenresComboBox->setEnabled(true);
+		ui->mangaGenresComboBox->setCurrentIndex(0);
+		ui->mangaAuthorsAddButton->setEnabled(true);
+		ui->mangaAuthorsRemoveButton->setEnabled(true);
+		ui->mangaAuthorsComboBox->setEnabled(true);
+		ui->mangaAuthorsComboBox->setCurrentIndex(0);
+		isNewEntryInProgress=false;
+	}
+}
+
+void DatabaseEditor::deleteData()
+{
+	if(isNewEntryInProgress)
+	{
+		ui->mangaInfoAllComboBox->setCurrentIndex(0);
+		ui->mangaInfoAllComboBox->setEnabled(true);
+		ui->mangaGenreAddButton->setEnabled(true);
+		ui->mangaGenreRemoveButton->setEnabled(true);
+		ui->mangaGenresComboBox->setEnabled(true);
+		ui->mangaGenresComboBox->setCurrentIndex(0);
+		ui->mangaAuthorsAddButton->setEnabled(true);
+		ui->mangaAuthorsRemoveButton->setEnabled(true);
+		ui->mangaAuthorsComboBox->setEnabled(true);
+		ui->mangaAuthorsComboBox->setCurrentIndex(0);
+		isNewEntryInProgress=false;
+	}
 }

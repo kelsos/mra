@@ -202,11 +202,28 @@ void DataWrapperS::removeGenreFromManga(QString mangaTitle, QString genreName)
 	
 void DataWrapperS::addPublisherForManga(QString mangaTitle, QString publisherName)
 {
+	qDebug() << publisherName;
+	if((mangaTitle.isNull()||mangaTitle.isEmpty())||(publisherName.isNull()||publisherName.isEmpty()))
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("UPDATE MANGA_INFO SET MANGA_PUBLISHER_ID = (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?) WHERE MANGA_TITLE = ?");
+	query.bindValue(0,publisherName);
+	query.bindValue(1,mangaTitle);
+	query.exec();
 }
 	
-void DataWrapperS::removePublisherFromManga(QString mangaTitle, QString publisherName)
+void DataWrapperS::removePublisherFromManga(QString mangaTitle)
 {
-
+	if(mangaTitle.isNull()||mangaTitle.isEmpty())
+		return;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("UPDATE MANGA_INFO SET MANGA_PUBLISHER_ID = 0 WHERE MANGA_TITLE = ?");
+	query.bindValue(0,mangaTitle);
+	query.exec();
 }
 
 void DataWrapperS::updateCoverForManga(QString mangaTitle, QByteArray cover)
@@ -220,4 +237,29 @@ void DataWrapperS::updateCoverForManga(QString mangaTitle, QByteArray cover)
     query.bindValue(0,cover);
     query.bindValue(1,mangaTitle);
     query.exec();
+}
+
+void DataWrapperS::insertNewMangaInfo(QString title, QString description, QString publisher, QDateTime publicationDate, QString publicationStatus, QByteArray cover)
+{
+		try{
+			if(!database.isOpen())
+				database.open();
+			QSqlQuery query;
+			query.prepare("INSERT INTO MANGA_INFO (MANGA_TITLE, MANGA_DESCRIPTION, MANGA_PUBLICATION_DATE, "
+				"MANGA_PUBLICATION_STATUS, MANGA_PUBLISHER_ID, MANGA_COVER) VALUES (?, ?, ?, ?, (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?), ?)");
+
+			int i = 0;
+			query.bindValue(i++, title);
+			query.bindValue(i++, description);
+			query.bindValue(i++, publicationDate);
+			query.bindValue(i++, publicationStatus);
+			query.bindValue(i++, publisher);
+			query.bindValue(i++, cover);
+			query.exec();
+		}
+		catch(std::exception& e)
+		{
+			qDebug(e.what());
+		}
+	
 }
