@@ -17,11 +17,11 @@
 class XmlDataParser
 {
 public:
-	XmlDataParser();
-	void parseData(QString fileName, DbWrapper *db);
+    XmlDataParser();
+    void parseData(QString fileName, DbWrapper *db);
 private:
-	QXmlStreamReader xmlStreamReader;
-	QString currentTag;
-	QString currentCategory;
+    QXmlStreamReader xmlStreamReader;
+    QString currentTag;
+    QString currentCategory;
 };
 #endif

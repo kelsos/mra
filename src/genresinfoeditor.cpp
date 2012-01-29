@@ -2,13 +2,13 @@
 #include "ui_genresinfoeditor.h"
 
 genresInfoEditor::genresInfoEditor(QWidget *parent) :
-  QDialog(parent),
-  ui(new Ui::genresInfoEditor)
+    QDialog(parent),
+    ui(new Ui::genresInfoEditor)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 genresInfoEditor::~genresInfoEditor()
 {
-  delete ui;
+    delete ui;
 }

@@ -10,7 +10,8 @@
 #include "DbWrapper.h"
 #include "MangaInfo.h"
 
-namespace Ui {
+namespace Ui
+{
 class DatabaseEditor;
 }
 
@@ -25,32 +26,42 @@ public:
 private:
     Ui::DatabaseEditor *ui;
     void retrieveCover(QString selectionTitle);
-	void updateStatusCombobox(QString status);
-	void updateMangaAuthorData(QString selection);
-	void updateMangaGenreData(QString selection);
-	void updatePublisherData(QString selection);
+    void updateStatusCombobox(QString status);
+    void updateMangaAuthorData(QString selection);
+    void updateMangaGenreData(QString selection);
+    void updatePublisherData(QString selection);
     DataWrapperS *wrap;
     QGraphicsScene* scene;
     DbWrapper *db;
-	QStringListModel *qModel;
-	QStringListModel *genresModel;
-	bool isNewEntryInProgress;
-	QByteArray coverArray;
+    QStringListModel *qModel;
+    QStringListModel *genresModel;
+    bool isNewMangaEntryInProgress;
+	bool isNewAuthorEntryInProgress;
+	bool isNewPublisherEntryInProgress;
+    QByteArray coverArray;
 
 private slots:
     void openGenresEdit();
     void handleMangaComboIndexChanged(QString text);
-	void browserAllManga();
-	void addSelectAuthorToManga();
-	void addSelectPublisherToManga();
-	void addSelecteGenreToManga();
-	void removeSelectedAuthorFromManga();
-	void removeSelectedGenreFromManga();
-	void removeSelectedPublisherFromManga();
-	void openImageSelectionDialog();
-	void newData();
-	void saveData();
-	void deleteData();
+    void handleAuthorComboIndexChanged(QString text);
+    void handlePublisherComboIndexChanged(QString text);
+    void browserAllManga();
+    void addSelectAuthorToManga();
+    void addSelectPublisherToManga();
+    void addSelecteGenreToManga();
+    void removeSelectedAuthorFromManga();
+    void removeSelectedGenreFromManga();
+    void removeSelectedPublisherFromManga();
+    void openImageSelectionDialog();
+    void newManga();
+    void saveManga();
+    void deleteManga();
+    void newAuthor();
+    void saveAuthor();
+    void deleteAuthor();
+    void newPublisher();
+    void savePublisher();
+    void deletePublisher();
 };
 
 #endif // DATABASEEDITOR_H

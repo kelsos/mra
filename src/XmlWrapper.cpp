@@ -1,27 +1,32 @@
 #include "XmlWrapper.h"
 
 XmlWrapper::XmlWrapper(QObject* parent)
-  :QObject(parent){
+    :QObject(parent)
+{
 
 }
 
-XmlWrapper::~XmlWrapper() {
+XmlWrapper::~XmlWrapper()
+{
 }
 void XmlWrapper::connectWithDatabase(DbWrapper* db)
 {
-  this->db=db;
+    this->db=db;
 }
 
-void XmlWrapper::xmlParser(QString fileName) {
+void XmlWrapper::xmlParser(QString fileName)
+{
 
 }
 
-void XmlWrapper::loadApplicationData() {
+void XmlWrapper::loadApplicationData()
+{
     xmD = new XmlDataParser;
-  xmD->parseData("data.xml",db);
+    xmD->parseData("data.xml",db);
 }
 
-void XmlWrapper::loadUserReadingList(){
-  xmP = new XmlReadingListParser;
-  xmP->parseReadingList("test.xml",db);
+void XmlWrapper::loadUserReadingList()
+{
+    xmP = new XmlReadingListParser;
+    xmP->parseReadingList("test.xml",db);
 }

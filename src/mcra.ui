@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mcraClass</class>
- <widget class="QMainWindow" name="mcraClass">
+ <class>mainForm</class>
+ <widget class="QMainWindow" name="mainForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>768</height>
+    <height>860</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1024</width>
-    <height>768</height>
+    <width>1000</width>
+    <height>715</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -323,7 +323,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">
@@ -358,7 +358,7 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="mainTool">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>

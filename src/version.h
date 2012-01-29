@@ -1,7 +1,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-namespace AutoVersion {
+namespace AutoVersion
+{
 
 //Date Version Types
 static const char DATE[] = "23";

@@ -25,28 +25,28 @@ public:
     ~mcra();
 
 private:
-    Ui::mcraClass ui;
+    Ui::mainForm ui;
     DbWrapper* db;
     XmlWrapper* xmlWrap;
-	QGraphicsScene* scene;
-	RssFetcher *rss;
-	webBrowser *browserWindow;
-	QString selectedMangaTitle;
-	QSortFilterProxyModel *sortModel;
+    QGraphicsScene* scene;
+    RssFetcher *rss;
+    webBrowser *browserWindow;
+    QString selectedMangaTitle;
+    QSortFilterProxyModel *sortModel;
 
 public slots:
-	void update();
-	void handleSelectionChanged(const QItemSelection & selected);
+    void update();
+    void handleSelectionChanged(const QItemSelection & selected);
 
 private slots:
-	void quit();
-	void showAbout();
-	void updateOnToggle(bool toggle);
-	void showWebBrowser();
-	void openDatabaseEditor();
+    void quit();
+    void showAbout();
+    void updateOnToggle(bool toggle);
+    void showWebBrowser();
+    void openDatabaseEditor();
 
 signals:
-	void navigateToUrl(QString url);
+    void navigateToUrl(QString url);
 
 };
 

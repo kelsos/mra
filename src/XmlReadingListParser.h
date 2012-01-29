@@ -10,13 +10,13 @@
 class XmlReadingListParser
 {
 public:
-	XmlReadingListParser();
-	void parseReadingList(QString fileName, DbWrapper *db);
+    XmlReadingListParser();
+    void parseReadingList(QString fileName, DbWrapper *db);
 protected:
 private:
-	QXmlStreamReader xmlStreamReader;
-	QString currentTag;
-	ReadItem readItem;
+    QXmlStreamReader xmlStreamReader;
+    QString currentTag;
+    ReadItem readItem;
 };
 
 #endif

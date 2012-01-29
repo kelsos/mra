@@ -7,10 +7,10 @@
 
 class MangaSqlQueryModel : public QSqlQueryModel
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MangaSqlQueryModel(QObject *parent=0);
-	QVariant data(const QModelIndex &item, int role) const;
+    MangaSqlQueryModel(QObject *parent=0);
+    QVariant data(const QModelIndex &item, int role) const;
 };
 #endif

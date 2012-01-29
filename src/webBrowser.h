@@ -7,23 +7,23 @@
 
 class webBrowser : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	webBrowser(QWidget* parent=0);
-	~webBrowser();
+    webBrowser(QWidget* parent=0);
+    ~webBrowser();
 
 private:
-	Ui::WebBrowser ui;
-	bool eventFilter(QObject *obj, QEvent *event);
+    Ui::WebBrowser ui;
+    bool eventFilter(QObject *obj, QEvent *event);
 
 public slots:
-	void navigateToUrl(QString url);
+    void navigateToUrl(QString url);
 
 private slots:
-	void goBack();
-	void goForward();
-	void reload();
+    void goBack();
+    void goForward();
+    void reload();
 
 signals:
 };

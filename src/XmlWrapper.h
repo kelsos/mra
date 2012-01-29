@@ -16,41 +16,42 @@
 
 using namespace std;
 
-class XmlWrapper:public QObject  {
-	Q_OBJECT
+class XmlWrapper:public QObject
+{
+    Q_OBJECT
 public:
-	/** Default constructor */
-	XmlWrapper(QObject* parent = 0);
-	/** Default destructor */
-	virtual ~XmlWrapper();
-	/** Opens an xmlfile with
-	 * \param fileName */
-	void connectWithDatabase(DbWrapper* db);
-	bool openXmlFile(QString fileName);
-	/** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-	bool createApplicationSettings();
-	/** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-	bool saveApplicationSettings();
-	/** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
-	bool loadApplicationSettings();
-	/** Saves the user's reading list */
-	bool saveUserReadingList();
+    /** Default constructor */
+    XmlWrapper(QObject* parent = 0);
+    /** Default destructor */
+    virtual ~XmlWrapper();
+    /** Opens an xmlfile with
+     * \param fileName */
+    void connectWithDatabase(DbWrapper* db);
+    bool openXmlFile(QString fileName);
+    /** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+    bool createApplicationSettings();
+    /** Saves the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+    bool saveApplicationSettings();
+    /** Loads the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
+    bool loadApplicationSettings();
+    /** Saves the user's reading list */
+    bool saveUserReadingList();
 
-	/** Saves the application data */
-	bool saveApplicationData();
+    /** Saves the application data */
+    bool saveApplicationData();
 
 protected:
 private:
-	void xmlParser(QString fileName);
-	DbWrapper *db;
-	XmlReadingListParser *xmP;
-	XmlDataParser *xmD;
+    void xmlParser(QString fileName);
+    DbWrapper *db;
+    XmlReadingListParser *xmP;
+    XmlDataParser *xmD;
 
 public slots:
-	/** Loads the user's reading list */
-	void loadUserReadingList();
-	/** Loads the application data */
-	void loadApplicationData();
+    /** Loads the user's reading list */
+    void loadUserReadingList();
+    /** Loads the application data */
+    void loadApplicationData();
 };
 
 #endif // XMLWRAPPER_H
