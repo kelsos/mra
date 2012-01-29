@@ -366,3 +366,129 @@ QStringList DataWrapperS::getAllPublisherNames()
 	}
 	return result;
 }
+
+int DataWrapperS::getAuthorCount()
+{
+	int result = 0;
+	try
+	{
+
+		if(!database.isOpen())
+			database.open();
+		QSqlQuery query;
+		query.prepare("SELECT COUNT(*) FROM AUTHOR_INFO");
+		query.exec();
+		while(query.next())
+			result = query.value(0).toInt();
+
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+	return result;
+}
+
+int DataWrapperS::getPublisherCount()
+{
+	int result = 0;
+	try
+	{
+		if(!database.isOpen())
+			database.open();
+		QSqlQuery query;
+		query.prepare("SELECT COUNT(*) FROM PUBLISHER_INFO");
+		query.exec();
+		while(query.next())
+			result = query.value(0).toInt();
+	}
+	catch(std::exception& e)
+	{
+		qDebug(e.what());
+	}
+	return result;
+}
+
+QString DataWrapperS::getAuthorCountryOfBirth(QString authorName)
+{
+	QString result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT AUTHOR_NATIONALITY FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+	query.bindValue(0,authorName);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toString();
+	return result;
+}
+
+QDateTime DataWrapperS::getAuthorBirthday(QString authorName)
+{
+	QDateTime result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT AUTHOR_BIRTHDAY FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+	query.bindValue(0,authorName);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toDateTime();
+	return result;
+}
+
+QString DataWrapperS::getAuthorWebsite(QString authorName)
+{
+	QString result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT AUTHOR_WEBSITE FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+	query.bindValue(0,authorName);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toString();
+	return result;
+}
+
+QString DataWrapperS::getPublisherCountry(QString publisher)
+{
+	QString result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT PUBLISHER_COUNTRY FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+	query.bindValue(0,publisher);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toString();
+	return result;
+}
+
+QString DataWrapperS::getPublisherWebsite(QString publisher)
+{
+	QString result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT PUBLISHER_WEBSITE FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+	query.bindValue(0,publisher);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toString();
+	return result;
+}
+
+QString DataWrapperS::getPublisherNote(QString publisher)
+{
+	QString result;
+	if(!database.isOpen())
+		database.open();
+	QSqlQuery query;
+	query.prepare("SELECT PUBLISHER_NOTE FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+	query.bindValue(0,publisher);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toString();
+	return result;
+}

@@ -30,10 +30,18 @@ public:
     void updateCoverForManga(QString mangaTitle, QByteArray cover);
     void insertNewMangaInfo(QString title, QString description, QString publisher, QDateTime publicationDate, QString publicationStatus, QByteArray cover);
     int getMangaCount();
+	int getAuthorCount();
+	int getPublisherCount();
     void deleteManga(QString mangaTitle);
     void updateNewMangaInfo(QString oldTitle, QString newTitle, QString description, QDateTime publicationDate, QString publicationStatus);
 	QStringList getAllAuthorNames();
 	QStringList getAllPublisherNames();
+	QString getAuthorCountryOfBirth(QString authorName);
+	QDateTime getAuthorBirthday(QString authorName);
+	QString getAuthorWebsite(QString authorName);
+	QString getPublisherCountry(QString publisher);
+	QString getPublisherWebsite(QString publisher);
+	QString getPublisherNote(QString publisher);
 
 signals:
 

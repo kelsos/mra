@@ -45,7 +45,9 @@ private slots:
     void handleMangaComboIndexChanged(QString text);
     void handleAuthorComboIndexChanged(QString text);
     void handlePublisherComboIndexChanged(QString text);
-    void browserAllManga();
+    void listAllManga();
+	void listAllAuthors();
+	void listAllPublishers();
     void addSelectAuthorToManga();
     void addSelectPublisherToManga();
     void addSelecteGenreToManga();
