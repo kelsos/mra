@@ -22,11 +22,13 @@ DatabaseManager::DatabaseManager(QObject *parent) :
     DatabaseCreator creator(&appData,this);
     creator.initializeDatabaseTables();
     readDataCon = new ReadingListDataController(&appData,this);
+	importer=nullptr;
+	editorOperator=nullptr;
 }
 
 DataImporter *DatabaseManager::getImporter()
-{
-    if(!importer)
+	{
+    if(importer==nullptr)
         importer = new DataImporter(&appData,this);
     return importer;
 }
@@ -50,7 +52,7 @@ void DatabaseManager::deleteOperator()
 
 DatabaseEditorOperator *DatabaseManager::getOperator()
 {
-	if(!editorOperator)
+	if(editorOperator==nullptr)
 		editorOperator = new DatabaseEditorOperator(&appData,this);
 	return editorOperator;
 }
