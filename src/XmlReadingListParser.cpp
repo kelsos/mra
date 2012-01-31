@@ -5,7 +5,7 @@ XmlReadingListParser::XmlReadingListParser()
     //default constructor
 }
 
-void XmlReadingListParser::parseReadingList(QString fileName, DbWrapper *db)
+void XmlReadingListParser::parseReadingList(QString fileName)
 {
     QFile *file = new QFile(fileName);
     file->open(QIODevice::ReadOnly);
@@ -27,7 +27,7 @@ void XmlReadingListParser::parseReadingList(QString fileName, DbWrapper *db)
             if(xmlStreamReader.name()=="manga")
             {
                 qDebug() << readItem.getMangaTitle();
-                db->insertReadItem(&readItem);
+                DatabaseManager::Instance()->getImporter()->insertReadItem(&readItem);
                 readItem.clear();
             }
         }

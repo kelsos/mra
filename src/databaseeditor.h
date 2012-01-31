@@ -5,9 +5,10 @@
 #include <QDebug>
 #include <QStringListModel>
 #include <QFileDialog>
+#include <QBuffer>
+#include <QGraphicsScene>
 #include "genresinfoeditor.h"
-#include "datawrappers.h"
-#include "DbWrapper.h"
+#include "Data/databasemanager.h"
 #include "MangaInfo.h"
 
 namespace Ui
@@ -30,9 +31,7 @@ private:
     void updateMangaAuthorData(QString selection);
     void updateMangaGenreData(QString selection);
     void updatePublisherData(QString selection);
-    DataWrapperS *wrap;
     QGraphicsScene* scene;
-    DbWrapper *db;
     QStringListModel *qModel;
     QStringListModel *genresModel;
     bool isNewMangaEntryInProgress;

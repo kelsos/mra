@@ -7,33 +7,24 @@ mcra::mcra(QWidget *parent)
 {
     ui.setupUi(this);
 
-    //Database Init
-
-    appData=QSqlDatabase::addDatabase("QSQLITE");
-    appData.setHostName("localhost");
-    appData.setDatabaseName("mdb.db3");
-
     //New Objects
-    db = new DbWrapper;
-    xmlWrap = new XmlWrapper;
     scene = new QGraphicsScene;
     rss = new RssFetcher;
     sortModel = new QSortFilterProxyModel(this);
     QThread* readingThread = new QThread;
 
-    xmlWrap->connectWithDatabase(db);
     //Connect the Singals-Slots
     connect(ui.actionToolbarRefresh, SIGNAL(triggered()), this, SLOT(update()));
     connect(ui.actionMenuSettingsDisplayFinished, SIGNAL(toggled(bool)), this, SLOT(updateOnToggle(bool)));
-    connect(ui.actionMenuFileList, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
-    connect(ui.actionMenuFileData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
+    //connect(ui.actionMenuFileList, SIGNAL(triggered()),xmlWrap, SLOT(loadUserReadingList()));
+    //connect(ui.actionMenuFileData, SIGNAL(triggered()),xmlWrap, SLOT(loadApplicationData()));
     connect(ui.actionMenuFileQuit, SIGNAL(triggered()),this, SLOT(quit()));
     connect(ui.actionMenuHelpAbout, SIGNAL(triggered()),this, SLOT(showAbout()));
     connect(ui.actionToolbarOpenToRead, SIGNAL(triggered()),this,SLOT(showWebBrowser()));
     connect(ui.actionDatabase_Editor, SIGNAL(triggered()),this,SLOT(openDatabaseEditor()));
 
-    xmlWrap->moveToThread(readingThread);
-    readingThread->start();
+//     xmlWrap->moveToThread(readingThread);
+//     readingThread->start();
     update();
 }
 
@@ -44,7 +35,7 @@ mcra::~mcra()
 
 void mcra::update()
 {
-    sortModel->setSourceModel(db->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
+    sortModel->setSourceModel(DatabaseManager::Instance()->getReadDataController()->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
     ui.readingListTableView->setModel(sortModel);
     ui.readingListTableView->horizontalHeader()->setResizeMode(0,QHeaderView::Stretch);
     ui.readingListTableView->setColumnWidth(1,60);
@@ -61,11 +52,11 @@ void mcra::handleSelectionChanged(const QItemSelection &selected)
     QModelIndexList selectedIndexes = selected.indexes();
     QString selectionTitle = selectedMangaTitle = selectedIndexes.takeFirst().data(Qt::DisplayRole).toString();
     scene->clear();
-    scene->addPixmap(db->getMangaCover(selectionTitle));
+    scene->addPixmap(DatabaseManager::Instance()->getReadDataController()->getMangaCover(selectionTitle));
     ui.coverView->setScene(scene);
     ui.coverView->show();
-    ui.textBrowser->setText(db->getMangaDescription(selectionTitle));
-    ui.noteTextBrowser->setText(db->getMangaNote(selectionTitle));
+    ui.textBrowser->setText(DatabaseManager::Instance()->getReadDataController()->getMangaDescription(selectionTitle));
+    ui.noteTextBrowser->setText(DatabaseManager::Instance()->getReadDataController()->getMangaNote(selectionTitle));
     ui.wikipediaWebView->load("http://en.wikipedia.org/wiki/Special:Search?search="+selectionTitle.replace(" ","%20"));
 }
 
@@ -90,7 +81,7 @@ void mcra::showAbout()
 
 void mcra::updateOnToggle(bool toggle)
 {
-    ui.readingListTableView->setModel(db->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
+    ui.readingListTableView->setModel(DatabaseManager::Instance()->getReadDataController()->getUserReadingList(ui.actionMenuSettingsDisplayFinished->isChecked()));
     ui.readingListTableView->horizontalHeader()->setResizeMode(0,QHeaderView::Stretch);
     ui.readingListTableView->setColumnWidth(1,60);
     ui.readingListTableView->setColumnWidth(2,60);
@@ -109,7 +100,7 @@ void mcra::showWebBrowser()
 
     browserWindow->show();
     qDebug() << selectedMangaTitle;
-    emit navigateToUrl(db->getMangaUrl(selectedMangaTitle));
+    emit navigateToUrl(DatabaseManager::Instance()->getReadDataController()->getMangaUrl(selectedMangaTitle));
 }
 
 void mcra::openDatabaseEditor()

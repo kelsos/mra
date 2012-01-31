@@ -7,7 +7,7 @@
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
 #include <QMessageBox>
-#include "DbWrapper.h"
+#include "Data\databasemanager.h"
 #include "XmlWrapper.h"
 #include "RssFetcher.h"
 #include "ui_mcra.h"
@@ -21,12 +21,10 @@ class mcra : public QMainWindow
 
 public:
     mcra(QWidget *parent = 0);
-    QSqlDatabase appData;
     ~mcra();
 
 private:
     Ui::mainForm ui;
-    DbWrapper* db;
     XmlWrapper* xmlWrap;
     QGraphicsScene* scene;
     RssFetcher *rss;

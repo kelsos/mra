@@ -5,7 +5,8 @@
 #include <QDateTime>
 #include <QXmlStreamReader>
 #include <QFile>
-#include "DbWrapper.h"
+#include <QDebug>
+#include "Data/databasemanager.h"
 //Data classes included.
 #include "AuthorInfo.h"
 #include "GenreInfo.h"
@@ -18,7 +19,7 @@ class XmlDataParser
 {
 public:
     XmlDataParser();
-    void parseData(QString fileName, DbWrapper *db);
+    void parseData(QString fileName);
 private:
     QXmlStreamReader xmlStreamReader;
     QString currentTag;

@@ -3,9 +3,10 @@
 XmlDataParser::XmlDataParser()
 {
     //default constructor
+
 }
 
-void XmlDataParser::parseData(QString fileName, DbWrapper *db)
+void XmlDataParser::parseData(QString fileName)
 {
     QFile *file = new QFile(fileName);
     file->open(QIODevice::ReadOnly);
@@ -34,17 +35,17 @@ void XmlDataParser::parseData(QString fileName, DbWrapper *db)
         {
             if(xmlStreamReader.name()=="Publisher")
             {
-                db->insertPublisherData(&pub);
+				DatabaseManager::Instance()->getImporter()->insertPublisherData(&pub);
                 pub.clear();
             }
             else if(xmlStreamReader.name()=="Genre")
             {
-                db->insertGenreData(&gen);
+                DatabaseManager::Instance()->getImporter()->insertGenreData(&gen);
                 gen.clear();
             }
             else if(xmlStreamReader.name()=="Author")
             {
-                db->insertAuthorData(&auth);
+                DatabaseManager::Instance()->getImporter()->insertAuthorData(&auth);
                 auth.clear();
             }
             else if (xmlStreamReader.name()=="Manga")
@@ -52,7 +53,7 @@ void XmlDataParser::parseData(QString fileName, DbWrapper *db)
 
                 ba.append(coverString);
                 mInfo.setMangaCover(QByteArray::fromBase64(ba));
-                db->insertMangaData(&mInfo);
+                DatabaseManager::Instance()->getImporter()->insertMangaData(&mInfo);
                 coverString.clear();
                 mInfo.clear();
                 ba.clear();
@@ -60,12 +61,12 @@ void XmlDataParser::parseData(QString fileName, DbWrapper *db)
             }
             else if (xmlStreamReader.name()=="MangaGenre")
             {
-                db->insertMangaGenre(&mGen);
+                DatabaseManager::Instance()->getImporter()->insertMangaGenre(&mGen);
                 mGen.clear();
             }
             else if(xmlStreamReader.name()=="MangaAuthors")
             {
-                db->insertMangaAuthor(&mAuth);
+                DatabaseManager::Instance()->getImporter()->insertMangaAuthor(&mAuth);
                 mAuth.clear();
             }
         }

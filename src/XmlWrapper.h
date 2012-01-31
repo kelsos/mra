@@ -1,7 +1,7 @@
 #ifndef XMLWRAPPER_H
 #define XMLWRAPPER_H
 
-#include <DbWrapper.h>
+#include <QDebug>
 #include <XmlDataParser.h>
 #include "XmlReadingListParser.h"
 //Data classes included.
@@ -26,7 +26,6 @@ public:
     virtual ~XmlWrapper();
     /** Opens an xmlfile with
      * \param fileName */
-    void connectWithDatabase(DbWrapper* db);
     bool openXmlFile(QString fileName);
     /** Creates the application settings file. !Probably to be replaced with internal wxWidgets configuration system */
     bool createApplicationSettings();
@@ -43,7 +42,6 @@ public:
 protected:
 private:
     void xmlParser(QString fileName);
-    DbWrapper *db;
     XmlReadingListParser *xmP;
     XmlDataParser *xmD;
 

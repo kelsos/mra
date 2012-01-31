@@ -5,44 +5,90 @@
 TEMPLATE = vcapp
 TARGET = mcra_msvc
 DESTDIR = ./debug
-QT += core gui sql network xml xmlpatterns webkit qaxserver qaxcontainer
+QT += core gui sql network xml xmlpatterns webkit
 CONFIG += debug
 DEFINES += _WINDOWS QT_LARGEFILE_SUPPORT QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
-INCLUDEPATH += ./lib/libxml2-2.7.8.win32/include \
-    ./lib/iconv-1.9.2.win32/include \
-    ./src \
-    ./src/DataClasses \
-    ./lib/includes \
+INCLUDEPATH += src \
+    src/DataClasses \
     ./debug/.moc \
     ./debug/.ui \
     $(QTDIR)/mkspecs/win32-msvc2010 \
     ./GeneratedFiles
-LIBS += -L"./lib/libxml2-2.7.8.win32/lib" \
-    -L"./lib/iconv-1.9.2.win32/lib" \
-    -llibxml2_a_dll. \
-    -liconv_a \
-    -lWS2_32.Lib \
-    -lC:/Qt/4.8.0/plugins/sqldrivers/qsqlited4
-PRECOMPILED_HEADER = StdAfx.h
+LIBS += -lC:/Qt/4.8.0/plugins/sqldrivers/qsqlited4
 DEPENDPATH += .
 MOC_DIR += debug/.moc
 OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-include(mcra_msvc.pri)
 
 HEADERS += \
     src/databaseeditor.h \
     src/genresinfoeditor.h \
-    src/datawrappers.h \
-    src/Database/databaseinitializer.h
+    src/DataClasses/AuthorInfo.h \
+    src/DataClasses/GenreInfo.h \
+    src/DataClasses/MangaAuthors.h \
+    src/DataClasses/MangaGenres.h \
+    src/DataClasses/MangaInfo.h \
+    src/DataClasses/NewsStorage.h \
+    src/DataClasses/NewsSubscriptions.h \
+    src/DataClasses/PublisherInfo.h \
+    src/DataClasses/ReadItem.h \
+    src/Utilities/DateTime.h \
+    src/version.h \
+    src/About.h \
+    src/MangaSqlQueryModel.h \
+    src/RssFetcher.h \
+    src/XmlReadingListParser.h \
+    src/XmlWrapper.h \
+    src/mcra.h \
+    src/databaseeditor.h \
+    src/XmlDataParser.h \
+    src/webBrowser.h \
+    src/genresinfoeditor.h \
+    src/Data/databasemanager.h \
+    src/Data/databasecreator.h \
+    src/Data/databaseeraser.h \
+    src/Data/dataimporter.h \
+    src/Data/readinglistdatacontroller.h \
+    src/Data/databaseeditoroperator.h
 
 SOURCES += \
     src/databaseeditor.cpp \
     src/genresinfoeditor.cpp \
-    src/datawrappers.cpp \
-    src/Database/databaseinitializer.cpp
+    src/databaseeditor.cpp \
+    src/About.cpp \
+    src/DataClasses/AuthorInfo.cpp \
+    src/DataClasses/GenreInfo.cpp \
+    src/DataClasses/MangaAuthors.cpp \
+    src/DataClasses/MangaGenres.cpp \
+    src/DataClasses/MangaInfo.cpp \
+    src/DataClasses/NewsStorage.cpp \
+    src/DataClasses/NewsSubscriptions.cpp \
+    src/DataClasses/PublisherInfo.cpp \
+    src/DataClasses/ReadItem.cpp \
+    src/MangaSqlQueryModel.cpp \
+    src/RssFetcher.cpp \
+    src/Utilities/DateTime.cpp \
+    src/XmlReadingListParser.cpp \
+    src/XmlWrapper.cpp \
+    src/main.cpp \
+    src/mcra.cpp \
+    src/XmlDataParser.cpp \
+    src/webBrowser.cpp \
+    src/genresinfoeditor.cpp \
+    src/Data/databasemanager.cpp \
+    src/Data/databasecreator.cpp \
+    src/Data/databaseeraser.cpp \
+    src/Data/dataimporter.cpp \
+    src/Data/readinglistdatacontroller.cpp \
+    src/Data/databaseeditoroperator.cpp
 
 FORMS += \
+    src/databaseeditor.ui \
+    src/genresinfoeditor.ui \
+    src/mcra.ui \
+    src/About.ui \
+    src/SubscriptionManager.ui \
+    src/webBrowser.ui \
     src/databaseeditor.ui \
     src/genresinfoeditor.ui

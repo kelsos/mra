@@ -4,14 +4,15 @@
 #include <QDateTime>
 #include <QXmlStreamReader>
 #include <QFile>
+#include <QDebug>
 #include "DataClasses/ReadItem.h"
-#include "DbWrapper.h"
+#include "Data/databasemanager.h"
 
 class XmlReadingListParser
 {
 public:
     XmlReadingListParser();
-    void parseReadingList(QString fileName, DbWrapper *db);
+    void parseReadingList(QString fileName);
 protected:
 private:
     QXmlStreamReader xmlStreamReader;

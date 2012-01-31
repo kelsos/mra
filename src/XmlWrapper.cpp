@@ -9,10 +9,6 @@ XmlWrapper::XmlWrapper(QObject* parent)
 XmlWrapper::~XmlWrapper()
 {
 }
-void XmlWrapper::connectWithDatabase(DbWrapper* db)
-{
-    this->db=db;
-}
 
 void XmlWrapper::xmlParser(QString fileName)
 {
@@ -22,11 +18,11 @@ void XmlWrapper::xmlParser(QString fileName)
 void XmlWrapper::loadApplicationData()
 {
     xmD = new XmlDataParser;
-    xmD->parseData("data.xml",db);
+    xmD->parseData("data.xml");
 }
 
 void XmlWrapper::loadUserReadingList()
 {
     xmP = new XmlReadingListParser;
-    xmP->parseReadingList("test.xml",db);
+    xmP->parseReadingList("test.xml");
 }
