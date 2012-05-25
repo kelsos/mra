@@ -10,7 +10,7 @@
 #include "Data\databasemanager.h"
 #include "XmlWrapper.h"
 #include "RssFetcher.h"
-#include "ui_mcra.h"
+#include "ui_forms_main.h"
 #include "About.h"
 #include "webBrowser.h"
 #include "databaseeditor.h"

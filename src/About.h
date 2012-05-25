@@ -1,7 +1,7 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 #include <QDialog>
-#include "ui_about.h"
+#include "ui_forms_about.h"
 
 class About : public QDialog
 {

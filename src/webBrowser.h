@@ -3,7 +3,7 @@
 
 #include <QtGui/QMainWindow>
 #include <QMouseEvent>
-#include "ui_webBrowser.h"
+#include "ui_forms_web_browser.h"
 
 class webBrowser : public QMainWindow
 {

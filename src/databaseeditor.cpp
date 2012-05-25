@@ -1,5 +1,5 @@
 #include "databaseeditor.h"
-#include "ui_databaseeditor.h"
+#include "ui_forms_database_editor.h"
 
 DatabaseEditor::DatabaseEditor(QWidget *parent) :
     QDialog(parent),
