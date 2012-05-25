@@ -14,7 +14,7 @@ INCLUDEPATH += src \
     ./debug/.ui \
     $(QTDIR)/mkspecs/win32-msvc2010 \
     ./GeneratedFiles
-LIBS += -lC:/Qt/4.8.0/plugins/sqldrivers/qsqlited4
+LIBS += -lC:/Tools/Qt/4.8.1/plugins/sqldrivers/qsqlited4
 DEPENDPATH += .
 MOC_DIR += debug/.moc
 OBJECTS_DIR += debug
@@ -24,25 +24,9 @@ RCC_DIR += ./GeneratedFiles
 HEADERS += \
     src/databaseeditor.h \
     src/genresinfoeditor.h \
-    src/DataClasses/AuthorInfo.h \
-    src/DataClasses/GenreInfo.h \
-    src/DataClasses/MangaAuthors.h \
-    src/DataClasses/MangaGenres.h \
-    src/DataClasses/MangaInfo.h \
-    src/DataClasses/NewsStorage.h \
-    src/DataClasses/NewsSubscriptions.h \
-    src/DataClasses/PublisherInfo.h \
-    src/DataClasses/ReadItem.h \
-    src/Utilities/DateTime.h \
     src/version.h \
-    src/About.h \
-    src/MangaSqlQueryModel.h \
-    src/RssFetcher.h \
-    src/XmlReadingListParser.h \
-    src/XmlWrapper.h \
     src/mcra.h \
     src/databaseeditor.h \
-    src/XmlDataParser.h \
     src/webBrowser.h \
     src/genresinfoeditor.h \
     src/Data/databasemanager.h \
@@ -50,30 +34,31 @@ HEADERS += \
     src/Data/databaseeraser.h \
     src/Data/dataimporter.h \
     src/Data/readinglistdatacontroller.h \
-    src/Data/databaseeditoroperator.h
+    src/Data/databaseeditoroperator.h \
+    src/DataClasses/authorinfo.h \
+    src/DataClasses/genreinfo.h \
+    src/DataClasses/mangaauthors.h \
+    src/DataClasses/mangagenres.h \
+    src/DataClasses/mangainfo.h \
+    src/DataClasses/newsstorage.h \
+    src/DataClasses/newssubscriptions.h \
+    src/DataClasses/publisherinfo.h \
+    src/DataClasses/readitem.h \
+    src/Utilities/datetime.h \
+    src/about.h \
+    src/mangasqlquerymodel.h \
+    src/rssfetcher.h \
+    src/xmldataparser.h \
+    src/xmlreadinglistparser.h \
+    src/xmlwrapper.h
 
 SOURCES += \
     src/databaseeditor.cpp \
     src/genresinfoeditor.cpp \
     src/databaseeditor.cpp \
     src/About.cpp \
-    src/DataClasses/AuthorInfo.cpp \
-    src/DataClasses/GenreInfo.cpp \
-    src/DataClasses/MangaAuthors.cpp \
-    src/DataClasses/MangaGenres.cpp \
-    src/DataClasses/MangaInfo.cpp \
-    src/DataClasses/NewsStorage.cpp \
-    src/DataClasses/NewsSubscriptions.cpp \
-    src/DataClasses/PublisherInfo.cpp \
-    src/DataClasses/ReadItem.cpp \
-    src/MangaSqlQueryModel.cpp \
-    src/RssFetcher.cpp \
-    src/Utilities/DateTime.cpp \
-    src/XmlReadingListParser.cpp \
-    src/XmlWrapper.cpp \
     src/main.cpp \
     src/mcra.cpp \
-    src/XmlDataParser.cpp \
     src/webBrowser.cpp \
     src/genresinfoeditor.cpp \
     src/Data/databasemanager.cpp \
@@ -81,14 +66,27 @@ SOURCES += \
     src/Data/databaseeraser.cpp \
     src/Data/dataimporter.cpp \
     src/Data/readinglistdatacontroller.cpp \
-    src/Data/databaseeditoroperator.cpp
+    src/Data/databaseeditoroperator.cpp \
+    src/DataClasses/newsstorage.cpp \
+    src/DataClasses/mangainfo.cpp \
+    src/DataClasses/mangagenres.cpp \
+    src/DataClasses/mangaauthors.cpp \
+    src/DataClasses/genreinfo.cpp \
+    src/DataClasses/authorinfo.cpp \
+    src/DataClasses/newssubscriptions.cpp \
+    src/DataClasses/publisherinfo.cpp \
+    src/DataClasses/readitem.cpp \
+    src/Utilities/datetime.cpp \
+    src/mangasqlquerymodel.cpp \
+    src/rssfetcher.cpp \
+    src/xmldataparser.cpp \
+    src/xmlreadinglistparser.cpp \
+    src/xmlwrapper.cpp
 
 FORMS += \
-    src/databaseeditor.ui \
-    src/genresinfoeditor.ui \
-    src/mcra.ui \
-    src/About.ui \
-    src/SubscriptionManager.ui \
-    src/webBrowser.ui \
-    src/databaseeditor.ui \
-    src/genresinfoeditor.ui
+    src/forms_about.ui \
+    src/forms_genre_editor.ui \
+    src/forms_subscription_manager.ui \
+    src/forms_web_browser.ui \
+    src/forms_database_editor.ui \
+    src/forms_main.ui

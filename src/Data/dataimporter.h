@@ -5,15 +5,15 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
-#include "DataClasses/AuthorInfo.h"
-#include "DataClasses/GenreInfo.h"
-#include "DataClasses/PublisherInfo.h"
-#include "DataClasses/MangaInfo.h"
-#include "DataClasses/NewsStorage.h"
-#include "DataClasses/NewsSubscriptions.h"
-#include "DataClasses/MangaAuthors.h"
-#include "DataClasses/MangaGenres.h"
-#include "DataClasses/ReadItem.h"
+#include "DataClasses/authorinfo.h"
+#include "DataClasses/genreinfo.h"
+#include "DataClasses/publisherinfo.h"
+#include "DataClasses/mangainfo.h"
+#include "DataClasses/newsstorage.h"
+#include "DataClasses/newssubscriptions.h"
+#include "DataClasses/mangaauthors.h"
+#include "DataClasses/mangagenres.h"
+#include "DataClasses/readitem.h"
 class DataImporter : public QObject
 {
     Q_OBJECT
