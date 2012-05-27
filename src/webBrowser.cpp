@@ -42,12 +42,12 @@ bool webBrowser::eventFilter(QObject *obj, QEvent *event)
     if(event->type()==QMouseEvent::MouseButtonPress)
     {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-        if(mouseEvent->button() == Qt::MouseButton::XButton1)
+        if(mouseEvent->button() == Qt::XButton1)
         {
             goBack();
             return true;
         }
-        else if (mouseEvent->button()== Qt::MouseButton::XButton2)
+        else if (mouseEvent->button()== Qt::XButton2)
         {
             goForward();
             return true;

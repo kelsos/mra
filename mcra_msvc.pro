@@ -14,12 +14,20 @@ INCLUDEPATH += src \
     ./debug/.ui \
     $(QTDIR)/mkspecs/win32-msvc2010 \
     ./GeneratedFiles
-LIBS += -lC:/Tools/Qt/4.8.1/plugins/sqldrivers/qsqlited4
+win32{
+    LIBS += -lC:/Tools/Qt/4.8.1/plugins/sqldrivers/qsqlited4
+}
+
+unix:!macx{
+    LIBS += -L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers/ -lqsqlite
+}
+
 DEPENDPATH += .
 MOC_DIR += debug/.moc
-OBJECTS_DIR += debug
+OBJECTS_DIR += debug/.obj
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
+QMAKE_CXXFLAGS += -std=c++0x
 
 HEADERS += src/databaseeditor.h \
     src/genresinfoeditor.h \

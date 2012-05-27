@@ -5,7 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QPixmap>
-#include "MangaSqlQueryModel.h"
+#include "mangasqlquerymodel.h"
 
 class ReadingListDataController : public QObject
 {

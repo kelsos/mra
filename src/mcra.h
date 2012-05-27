@@ -7,9 +7,9 @@
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
 #include <QMessageBox>
-#include "Data\databasemanager.h"
-#include "XmlWrapper.h"
-#include "RssFetcher.h"
+#include "Data/databasemanager.h"
+#include "xmlwrapper.h"
+#include "rssfetcher.h"
 #include "ui_forms_main.h"
 #include "About.h"
 #include "webBrowser.h"
