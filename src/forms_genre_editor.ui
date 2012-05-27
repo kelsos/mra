@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>genresInfoEditor</class>
- <widget class="QDialog" name="genresInfoEditor">
+ <class>GenresInfoEditorForm</class>
+ <widget class="QDialog" name="GenresInfoEditorForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>304</width>
-    <height>153</height>
+    <width>313</width>
+    <height>172</height>
    </rect>
   </property>
   <property name="windowTitle">

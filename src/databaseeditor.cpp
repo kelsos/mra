@@ -1,9 +1,8 @@
 #include "databaseeditor.h"
-#include "ui_forms_database_editor.h"
 
 DatabaseEditor::DatabaseEditor(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DatabaseEditor)
+    ui(new Ui::DatabaseEditorForm)
 {
     ui->setupUi(this);
 

@@ -11,7 +11,7 @@
 #include "xmlwrapper.h"
 #include "rssfetcher.h"
 #include "ui_forms_main.h"
-#include "About.h"
+#include "about.h"
 #include "webBrowser.h"
 #include "databaseeditor.h"
 

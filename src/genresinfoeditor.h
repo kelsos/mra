@@ -2,11 +2,7 @@
 #define GENRESINFOEDITOR_H
 
 #include <QDialog>
-
-namespace Ui
-{
-class genresInfoEditor;
-}
+#include "ui_forms_genre_editor.h"
 
 class genresInfoEditor : public QDialog
 {
@@ -17,7 +13,7 @@ public:
     ~genresInfoEditor();
 
 private:
-    Ui::genresInfoEditor *ui;
+    Ui::GenresInfoEditorForm *ui;
 };
 
 #endif // GENRESINFOEDITOR_H

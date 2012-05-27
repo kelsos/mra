@@ -10,11 +10,7 @@
 #include "genresinfoeditor.h"
 #include "Data/databasemanager.h"
 #include "mangainfo.h"
-
-namespace Ui
-{
-class DatabaseEditor;
-}
+#include "ui_forms_database_editor.h"
 
 class DatabaseEditor : public QDialog
 {
@@ -25,7 +21,7 @@ public:
     ~DatabaseEditor();
 
 private:
-    Ui::DatabaseEditor *ui;
+    Ui::DatabaseEditorForm *ui;
     void retrieveCover(QString selectionTitle);
     void updateStatusCombobox(QString status);
     void updateMangaAuthorData(QString selection);
