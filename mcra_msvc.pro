@@ -7,15 +7,14 @@ TARGET = mcra_msvc
 DESTDIR = ./debug
 QT += core gui sql network xml xmlpatterns webkit
 CONFIG += debug
-DEFINES += _WINDOWS QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
+DEFINES += QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
 INCLUDEPATH += src \
-    src/DataClasses \
     ./debug/.moc \
     ./debug/.ui \
     ./GeneratedFiles
 win32{
     LIBS += -lC:/Tools/Qt/4.8.1/plugins/sqldrivers/qsqlited4
-    DEFINES += QT_LARGEFILE_SUPPORT
+    DEFINES += QT_LARGEFILE_SUPPORT _WINDOWS
     INCLUDEPATH += $(QTDIR)/mkspecs/win32-msvc2010
 }
 
@@ -30,13 +29,10 @@ UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 QMAKE_CXXFLAGS += -std=c++0x
 
-HEADERS += src/databaseeditor.h \
-    src/genresinfoeditor.h \
+HEADERS += \
     src/version.h \
     src/mcra.h \
-    src/databaseeditor.h \
     src/webBrowser.h \
-    src/genresinfoeditor.h \
     src/Data/databasemanager.h \
     src/Data/databasecreator.h \
     src/Data/databaseeraser.h \
@@ -58,16 +54,14 @@ HEADERS += src/databaseeditor.h \
     src/rssfetcher.h \
     src/xmldataparser.h \
     src/xmlreadinglistparser.h \
-    src/xmlwrapper.h
+    src/xmlwrapper.h \
+    src/views/dataeditorview.h
 
-SOURCES += src/databaseeditor.cpp \
-    src/genresinfoeditor.cpp \
-    src/databaseeditor.cpp \
+SOURCES += \
     src/about.cpp \
     src/main.cpp \
     src/mcra.cpp \
     src/webBrowser.cpp \
-    src/genresinfoeditor.cpp \
     src/Data/databasemanager.cpp \
     src/Data/databasecreator.cpp \
     src/Data/databaseeraser.cpp \
@@ -88,7 +82,8 @@ SOURCES += src/databaseeditor.cpp \
     src/rssfetcher.cpp \
     src/xmldataparser.cpp \
     src/xmlreadinglistparser.cpp \
-    src/xmlwrapper.cpp
+    src/xmlwrapper.cpp \
+    src/views/dataeditorview.cpp
 
 FORMS += src/forms_about.ui \
     src/forms_genre_editor.ui \

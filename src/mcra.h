@@ -13,7 +13,6 @@
 #include "ui_forms_main.h"
 #include "about.h"
 #include "webBrowser.h"
-#include "databaseeditor.h"
 
 class mcra : public QMainWindow
 {

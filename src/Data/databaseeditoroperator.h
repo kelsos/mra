@@ -9,7 +9,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QStringList>
-#include "mangainfo.h"
+#include "DataClasses/mangainfo.h"
 
 class DatabaseEditorOperator : public QObject
 {

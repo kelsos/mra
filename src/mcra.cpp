@@ -11,7 +11,7 @@ mcra::mcra(QWidget *parent)
     scene = new QGraphicsScene;
     rss = new RssFetcher;
     sortModel = new QSortFilterProxyModel(this);
-    QThread* readingThread = new QThread;
+    //QThread* readingThread = new QThread;
 
     //Connect the Singals-Slots
     connect(ui.actionToolbarRefresh, SIGNAL(triggered()), this, SLOT(update()));
@@ -105,6 +105,6 @@ void mcra::showWebBrowser()
 
 void mcra::openDatabaseEditor()
 {
-    DatabaseEditor dbEdit;
-    dbEdit.exec();
+    //DatabaseEditor dbEdit;
+    //dbEdit.exec();
 }

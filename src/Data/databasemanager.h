@@ -23,8 +23,6 @@ public:
 private:
     //constructors are private to enforce the singleton state of the class
     explicit DatabaseManager(QObject *parent = 0);
-    DatabaseManager(DatabaseManager const&){}
-    DatabaseManager& operator =(DatabaseManager const&){}
     static DatabaseManager *m_pInstance;
     QSqlDatabase appData;
     DataImporter *importer;
