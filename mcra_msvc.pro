@@ -56,7 +56,8 @@ HEADERS += \
     src/xmlreadinglistparser.h \
     src/xmlwrapper.h \
     src/views/dataeditorview.h \
-    src/form_user_login.h
+    src/form_user_login.h \
+    src/Data/tablecreator.h
 
 SOURCES += \
     src/about.cpp \
@@ -85,7 +86,8 @@ SOURCES += \
     src/xmlreadinglistparser.cpp \
     src/xmlwrapper.cpp \
     src/views/dataeditorview.cpp \
-    src/form_user_login.cpp
+    src/form_user_login.cpp \
+    src/Data/tablecreator.cpp
 
 FORMS += src/forms_about.ui \
     src/forms_genre_editor.ui \
