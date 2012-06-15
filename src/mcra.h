@@ -13,6 +13,7 @@
 #include "ui_forms_main.h"
 #include "about.h"
 #include "webBrowser.h"
+#include "form_user_login.h"
 
 class mcra : public QMainWindow
 {
@@ -30,6 +31,7 @@ private:
     webBrowser *browserWindow;
     QString selectedMangaTitle;
     QSortFilterProxyModel *sortModel;
+
 
 public slots:
     void update();

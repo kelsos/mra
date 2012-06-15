@@ -26,6 +26,8 @@ mcra::mcra(QWidget *parent)
 //     xmlWrap->moveToThread(readingThread);
 //     readingThread->start();
     update();
+    form_user_login form;
+    form.exec();
 }
 
 mcra::~mcra()

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QtSql>
 #include "Data/databasecreator.h"
 #include "Data/databaseeditoroperator.h"
 #include "Data/databaseeraser.h"

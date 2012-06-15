@@ -23,6 +23,7 @@ private:
     Ui::form_user_login *ui;
 
 public slots:
+    void handleCancelButtonClick();
 
 };
 

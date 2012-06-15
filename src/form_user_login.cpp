@@ -6,9 +6,15 @@ form_user_login::form_user_login(QWidget *parent) :
     ui(new Ui::form_user_login)
 {
     ui->setupUi(this);
+    connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(handleCancelButtonClick()));
 }
 
 form_user_login::~form_user_login()
 {
     delete ui;
+}
+
+void form_user_login::handleCancelButtonClick()
+{
+    this->close();
 }
