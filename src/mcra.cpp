@@ -6,7 +6,7 @@ mcra::mcra(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-
+    browserWindow = 0;
     //New Objects
     scene = new QGraphicsScene;
     rss = new RssFetcher;
@@ -96,8 +96,9 @@ void mcra::updateOnToggle(bool toggle)
 
 void mcra::showWebBrowser()
 {
-
-    browserWindow = new webBrowser();
+    if(browserWindow==0){
+        browserWindow = new webBrowser();
+    }
     connect(this,SIGNAL(navigateToUrl(QString)),browserWindow,SLOT(navigateToUrl(QString)));
 
     browserWindow->show();

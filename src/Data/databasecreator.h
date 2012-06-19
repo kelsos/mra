@@ -21,6 +21,9 @@ private:
     void createMangaAuthorsTable();
     void createMangaGenresTable();
     void createReadingListTable();
+    void createUserTable();
+    void createOnlineReaderList();
+
 
     QSqlDatabase *database;
 

@@ -24,6 +24,7 @@ private slots:
     void goBack();
     void goForward();
     void reload();
+    void loadFinished(bool isFinished);
 
 signals:
 };

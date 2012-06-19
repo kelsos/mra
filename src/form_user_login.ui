@@ -44,7 +44,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="userNameLineEdit"/>
+        <widget class="QLineEdit" name="userNameLineEdit">
+         <property name="placeholderText">
+          <string>Insert Username</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -76,7 +80,20 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="passwordLineEdit"/>
+        <widget class="QLineEdit" name="passwordLineEdit">
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>20</number>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Insert Password</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

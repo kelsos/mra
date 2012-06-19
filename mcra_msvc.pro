@@ -19,13 +19,8 @@ win32{
 }
 
 unix:!macx{
-    LIBS +=     -L/usr/lib/x86_64-linux-gnu/mysql \
-                -L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers \
-                -lqsqlmysql \
-                -lmysqld
-
-    INCLUDEPATH += /usr/include/mysql \
-                   /usr/share/qt4/include
+    LIBS +=     -L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers \
+                -lqsqlite
 }
 
 DEPENDPATH += .

@@ -1,4 +1,5 @@
 #include "readinglistdatacontroller.h"
+#include <QDebug>
 
 ReadingListDataController::ReadingListDataController(QSqlDatabase *database, QObject *parent) :
     QObject(parent)
@@ -125,13 +126,16 @@ QString ReadingListDataController::getMangaUrl(QString mangaTitle)
         if(!database->isOpen())
             database->open();
         QSqlQuery query;
-        QString mangaDescription;
-        query.prepare("SELECT READ_ONLINE_URL FROM READING_LIST WHERE MANGA_TITLE = ?");
+        QString mangaUrl;
+        query.prepare("SELECT RL.READ_ONLINE_URL FROM READING_LIST RL, MANGA_INFO MI WHERE MI.MANGA_TITLE = ? "
+                      "AND RL.MANGA_ID = MI.MANGA_ID");
         query.bindValue(0,mangaTitle);
         query.exec();
         while(query.next())
-            mangaDescription = query.value(0).toString();
-        return mangaDescription;
+        {
+            mangaUrl = query.value(0).toString();
+        }
+        return mangaUrl;
     }
     catch(std::exception& e)
     {

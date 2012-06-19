@@ -14,15 +14,15 @@ void DatabaseCreator::createMangaInfoTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE MANGA_INFO ( "
-                      "MANGA_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "MANGA_TITLE NVARCHAR(400) NOT NULL, "
-                      "MANGA_DESCRIPTION NVARCHAR(3000), "
-                      "MANGA_PUBLICATION_DATE DATE, "
-                      "MANGA_PUBLICATION_STATUS VARCHAR(30) DEFAULT 'Ongoing', "
-                      "MANGA_PUBLISHER_ID INTEGER, "
-                      "MANGA_COVER BLOB, "
-                      "FOREIGN KEY (MANGA_PUBLISHER_ID) REFERENCES PUBLISHER_INFO(PUBLISHER_ID) ON DELETE CASCADE ON UPDATE CASCADE"
+        query.prepare("CREATE TABLE manga_info ( "
+                      "manga_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                      "manga_title TEXT NOT NULL,"
+                      "manga_description TEXT,"
+                      "manga_publication_year INT,"
+                      "manga_publication_status TEXT DEFAULT 'Ongoing',"
+                      "manga_publisher_id INT,"
+                      "manga_cover BLOB,"
+                      "FOREIGN KEY (manga_publisher_id) REFERENCES publisher_info(publisher_id) ON DELETE CASCADE ON UPDATE CASCADE"
                       ")");
 
         query.exec();
@@ -42,13 +42,12 @@ void DatabaseCreator::createPublisherInfoTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE PUBLISHER_INFO ( "
-                      "PUBLISHER_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "PUBLISHER_NAME NVARCHAR(150) NOT NULL, "
-                      "PUBLISHER_COUNTRY NVARCHAR(40), "
-                      "PUBLISHER_WEBSITE NVARCHAR(150), "
-                      "PUBLISHER_NOTE NVARCHAR(500) "
-                      ")");
+        query.prepare("CREATE TABLE publisher_info ( "
+                      "publisher_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                      "publisher_name TEXT NOT NULL,"
+                      "publisher_country TEXT,"
+                      "publisher_website TEXT,"
+                      "publisher_note TEXT)");
 
         query.exec();
     }
@@ -67,13 +66,12 @@ void DatabaseCreator::createAuthorInfoTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE AUTHOR_INFO ( "
-                      "AUTHOR_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "AUTHOR_NAME NVARCHAR(100) NOT NULL, "
-                      "AUTHOR_NATIONALITY NVARCHAR(40), "
-                      "AUTHOR_BIRTHDAY DATE, "
-                      "AUTHOR_WEBSITE NVARCHAR(150) "
-                      ")");
+        query.prepare("CREATE TABLE author_info ( "
+                      "author_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                      "author_name TEXT NOT NULL,"
+                      "author_nationality TEXT,"
+                      "author_birthday DATE,"
+                      "author_website TEXT)");
 
         query.exec();
     }
@@ -88,10 +86,9 @@ void DatabaseCreator::createGenreInfoTable()
     try
     {
         QSqlQuery query;
-        query.prepare("CREATE TABLE GENRE_INFO ( "
-                      "GENRE_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "GENRE_NAME NVARCHAR(50) "
-                      ")");
+        query.prepare("CREATE TABLE genre_info ("
+                      "genre_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                      "genre_name TEXT NOT NULL)");
 
         query.exec();
     }
@@ -110,14 +107,13 @@ void DatabaseCreator::createNewsStorageTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE NEWS_STORAGE ( "
-                      "NEWSITEM_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "NEWSITEM_TITLE NVARCHAR(150), "
-                      "NEWSITEM_HYPERLINK NVARCHAR(150), "
-                      "NEWSITEM_DESCRIPTION NVARCHAR(1000), "
-                      "NEWSITEM_PUBLICATION_DATE DATE, "
-                      "NEWSITEM_AQUISITION_DATE DATE "
-                      ")");
+        query.prepare("CREATE TABLE news_storage ("
+                      "newsitem_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,"
+                      "newsitem_title TEXT NOT NULL,"
+                      "newsitem_hyperlink TEXT,"
+                      "newsitem_description TEXT,"
+                      "newsitem_publication_date DATE,"
+                      "newsitem_aquisition_date DATE)");
 
         query.exec();
     }
@@ -136,11 +132,10 @@ void DatabaseCreator::createNewsSubscriptionsTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE NEWS_SUBSCRIPTIONS ( "
-                      "SUBSCRIPTION_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "SUBSCRIPTION_URL NVARCHAR(150) NOT NULL, "
-                      "SUBSCRIPTION_CHANNEL_NAME NVARCHAR(150) "
-                      ")");
+        query.prepare("CREATE TABLE news_subscriptions ("
+                             "subscription_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,"
+                             "subscription_url TEXT NOT NULL,"
+                             "subcription_channel_name TEXT)");
 
         query.exec();
     }
@@ -159,12 +154,12 @@ void DatabaseCreator::createMangaAuthorsTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE MANGA_AUTHORS ( "
-                      "MANGA_ID INTEGER  NOT NULL, "
-                      "AUTHOR_ID INTEGER  NOT NULL, "
-                      "PRIMARY KEY (MANGA_ID,AUTHOR_ID), "
-                      "FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE, "
-                      "FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHOR_INFO(AUTHOR_ID) ON DELETE CASCADE ON UPDATE CASCADE "
+        query.prepare("CREATE TABLE manga_authors ( "
+                      "manga_id INT,"
+                      "author_id INT,"
+                      "PRIMARY KEY (manga_id,author_id),"
+                      "FOREIGN KEY (manga_id) REFERENCES manga_info(manga_id) ON DELETE CASCADE ON UPDATE CASCADE,"
+                      "FOREIGN KEY (author_id) REFERENCES author_info(author_id) ON DELETE CASCADE ON UPDATE CASCADE "
                       ")");
 
         query.exec();
@@ -184,12 +179,12 @@ void DatabaseCreator::createMangaGenresTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE MANGA_GENRES ( "
-                      "MANGA_ID INTEGER NOT NULL, "
-                      "GENRE_ID INTEGER NOT NULL, "
-                      "PRIMARY KEY (MANGA_ID,GENRE_ID), "
-                      "FOREIGN KEY (GENRE_ID) REFERENCES GENRE_INFO(GENRE_ID) ON DELETE CASCADE ON UPDATE CASCADE, "
-                      "FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE "
+        query.prepare("CREATE TABLE manga_genres ( "
+                      "manga_id INT,"
+                      "genre_id INT,"
+                      "PRIMARY KEY (manga_id,genre_id),"
+                      "FOREIGN KEY (manga_id) REFERENCES manga_info(manga_id) ON DELETE CASCADE ON UPDATE CASCADE,"
+                      "FOREIGN KEY (genre_id) REFERENCES genre_info(genre_id) ON DELETE CASCADE ON UPDATE CASCADE"
                       ")");
 
         query.exec();
@@ -209,16 +204,17 @@ void DatabaseCreator::createReadingListTable()
             database->open();
         }
         QSqlQuery query;
-        query.prepare("CREATE TABLE READING_LIST ( "
-                      "ENTRY_ID INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                      "MANGA_ID INTEGER  NOT NULL, "
-                      "READ_STARTING_CHAPTER INTEGER, "
-                      "READ_CURRENT_CHAPTER INTEGER, "
-                      "READ_ONLINE_URL NVARCHAR(150), "
-                      "READ_IS_FINISHED BOOLEAN, "
-                      "READ_LAST_TIME DATE, "
-                      "READ_NOTE NVARCHAR(400), "
-                      "FOREIGN KEY (MANGA_ID) REFERENCES MANGA_INFO(MANGA_ID) ON DELETE CASCADE ON UPDATE CASCADE "
+        query.prepare("CREATE TABLE reading_list ( "
+                      "entry_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                      "manga_id INT NOT NULL,"
+                      "read_starting_chapter INT,"
+                      "read_current_chapter INT,"
+                      "read_is_finished INT,"
+                      "read_last_time DATETIME,"
+                      "read_note TEXT,"
+                      "user_id INT NOT NULL,"
+                      "FOREIGN KEY (manga_id) REFERENCES manga_info(manga_id) ON DELETE CASCADE ON UPDATE CASCADE,"
+                      "FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE"
                       ")");
 
         query.exec();
@@ -229,8 +225,41 @@ void DatabaseCreator::createReadingListTable()
     }
 }
 
+void DatabaseCreator::createUserTable()
+{
+    if(!database->isOpen())
+    {
+        database->open();
+    }
+    QSqlQuery query;
+    query.prepare("CREATE TABLE users ( "
+                  "user_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                  "username TEXT NOT NULL,"
+                  "password TEXT NOT NULL,"
+                  "UNIQUE (user_id, username)"
+                  ")");
+    query.exec();
+}
+
+void DatabaseCreator::createOnlineReaderList()
+{
+    if(!database->isOpen())
+    {
+        database->open();
+    }
+    QSqlQuery query;
+    query.prepare("CREATE TABLE online_reader_list ( "
+                  "entry_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                  "online_reader_url TEXT NOT NULL,"
+                  "manga_id INT NOT NULL,"
+                  "FOREIGN KEY (manga_id) REFERENCES manga_info(manga_id) ON DELETE CASCADE ON UPDATE CASCADE"
+                  ")");
+    query.exec();
+}
+
 void DatabaseCreator::initializeDatabaseTables()
 {
+    createUserTable();
     createAuthorInfoTable();
     createGenreInfoTable();
     createPublisherInfoTable();
@@ -240,4 +269,5 @@ void DatabaseCreator::initializeDatabaseTables()
     createMangaAuthorsTable();
     createMangaGenresTable();
     createReadingListTable();
+    createOnlineReaderList();
 }

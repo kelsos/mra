@@ -1,4 +1,5 @@
 #include "webBrowser.h"
+#include <QDebug>
 
 webBrowser::webBrowser(QWidget* parent):QMainWindow(parent)
 {
@@ -6,9 +7,10 @@ webBrowser::webBrowser(QWidget* parent):QMainWindow(parent)
     connect(ui.actionGo_To_Previous_Page,SIGNAL(triggered()),this,SLOT(goBack()));
     connect(ui.actionGo_To_Next_Page,SIGNAL(triggered()),this,SLOT(goForward()));
     connect(ui.actionReload_Page,SIGNAL(triggered()),this, SLOT(reload()));
+    connect(ui.webView,SIGNAL(loadFinished(bool)),this,SLOT(loadFinished(bool)));
     ui.webView->installEventFilter(this);
     ui.webView->load(QUrl("http://google.com"));
-    ui.webView->show();
+
 }
 
 webBrowser::~webBrowser()
@@ -31,10 +33,19 @@ void webBrowser::reload()
     ui.webView->reload();
 }
 
+void webBrowser::loadFinished(bool isFinished)
+{
+    if(isFinished)
+    {
+            ui.webView->show();
+            qDebug() << "I WAS HERE";
+    }
+}
+
 void webBrowser::navigateToUrl(QString url)
 {
     ui.webView->load(QUrl(url));
-    ui.webView->show();
+    qDebug() << url;
 }
 
 bool webBrowser::eventFilter(QObject *obj, QEvent *event)
