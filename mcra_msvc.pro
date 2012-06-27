@@ -18,9 +18,11 @@ win32{
     INCLUDEPATH += $(QTDIR)/mkspecs/win32-msvc2010
 }
 
+#-L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers \ #UBUNTU VM SETUP
+#-L/usr/lib/qt/plugins/sqldrivers \ ARCHLINUX LAPTOP SETUP
 unix:!macx{
-    LIBS +=     -L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers \
-                -lqsqlite
+    LIBS += -L/usr/lib/qt/plugins/sqldrivers \
+            -lqsqlite
 }
 
 DEPENDPATH += .
@@ -58,7 +60,10 @@ HEADERS += \
     src/xmlwrapper.h \
     src/views/dataeditorview.h \
     src/form_user_login.h \
-    src/Data/tablecreator.h
+    src/Data/tablecreator.h \
+    src/Controllers/applicationcontroller.h \
+    src/Controllers/usercontroller.h \
+    src/ui/formregistrationdialog.h
 
 SOURCES += \
     src/about.cpp \
@@ -88,7 +93,10 @@ SOURCES += \
     src/xmlwrapper.cpp \
     src/views/dataeditorview.cpp \
     src/form_user_login.cpp \
-    src/Data/tablecreator.cpp
+    src/Data/tablecreator.cpp \
+    src/Controllers/applicationcontroller.cpp \
+    src/Controllers/usercontroller.cpp \
+    src/ui/formregistrationdialog.cpp
 
 FORMS += src/forms_about.ui \
     src/forms_genre_editor.ui \
@@ -96,4 +104,5 @@ FORMS += src/forms_about.ui \
     src/forms_web_browser.ui \
     src/forms_database_editor.ui \
     src/forms_main.ui \
-    src/form_user_login.ui
+    src/form_user_login.ui \
+    src/ui/formregistrationdialog.ui

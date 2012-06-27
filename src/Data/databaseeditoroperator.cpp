@@ -12,7 +12,7 @@ QStringList DatabaseEditorOperator::getAllMangaInfoTitles()
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT MANGA_TITLE FROM MANGA_INFO ORDER BY MANGA_TITLE ASC");
+    query.prepare("SELECT manga_title FROM manga_info ORDER BY manga_title ASC");
 	query.exec();
 	while(query.next())
 		result.append(query.value(0).toString());

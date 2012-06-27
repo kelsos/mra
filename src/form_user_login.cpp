@@ -7,6 +7,7 @@ form_user_login::form_user_login(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(handleCancelButtonClick()));
+    connect(ui->registerPushButton, SIGNAL(clicked()),this,SLOT(handleRegisterButtonClick()));
 }
 
 form_user_login::~form_user_login()
@@ -17,4 +18,10 @@ form_user_login::~form_user_login()
 void form_user_login::handleCancelButtonClick()
 {
     this->close();
+}
+
+void form_user_login::handleRegisterButtonClick()
+{
+    FormRegistrationDialog dialog;
+    dialog.exec();
 }

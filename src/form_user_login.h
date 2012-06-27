@@ -6,6 +6,7 @@
 #else
 #include <QtGui/QDialog>
 #endif
+#include "ui/formregistrationdialog.h"
 
 namespace Ui {
     class form_user_login;
@@ -24,6 +25,7 @@ private:
 
 public slots:
     void handleCancelButtonClick();
+    void handleRegisterButtonClick();
 
 };
 
