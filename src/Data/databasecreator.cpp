@@ -236,6 +236,7 @@ void DatabaseCreator::createUserTable()
                   "user_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
                   "username TEXT NOT NULL,"
                   "password TEXT NOT NULL,"
+                  "salt TEXT NOT NULL,"
                   "UNIQUE (user_id, username)"
                   ")");
     query.exec();

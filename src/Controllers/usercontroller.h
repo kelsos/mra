@@ -7,12 +7,16 @@
 #include <QCryptographicHash>
 #include <QString>
 #include <QVariant>
+#include <QUuid>
+#include "ui/registrationdialog.h"
+#include "ui/userlogindialog.h"
 
 class UserController : public QObject
 {
     Q_OBJECT
 public:
     explicit UserController(QSqlDatabase *database, QObject *parent = 0);
+    void initialize();
 
 private:
     QSqlDatabase *database;
@@ -24,6 +28,7 @@ signals:
 public slots:
     void authenticateUser(QString username, QString password);
     void registerUser(QString username, QString password);
+    void openRegistrationDialog();
     
 };
 

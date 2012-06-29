@@ -2,6 +2,7 @@
 
 #include <QtGui>
 #include <QApplication>
+#include "Controllers/applicationcontroller.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +10,8 @@ int main(int argc, char *argv[])
     a.setApplicationName("Manga & Comic Reading Assistant");
     a.setApplicationVersion("0.01");
     a.setOrganizationName("Kelsos");
-    mcra w;
-    w.show();
+    ApplicationController appControl;
+    appControl.initialize();
+
     return a.exec();
 }

@@ -59,11 +59,11 @@ HEADERS += \
     src/xmlreadinglistparser.h \
     src/xmlwrapper.h \
     src/views/dataeditorview.h \
-    src/form_user_login.h \
     src/Data/tablecreator.h \
     src/Controllers/applicationcontroller.h \
     src/Controllers/usercontroller.h \
-    src/ui/formregistrationdialog.h
+    src/ui/userlogindialog.h \
+    src/ui/registrationdialog.h
 
 SOURCES += \
     src/about.cpp \
@@ -92,11 +92,11 @@ SOURCES += \
     src/xmlreadinglistparser.cpp \
     src/xmlwrapper.cpp \
     src/views/dataeditorview.cpp \
-    src/form_user_login.cpp \
     src/Data/tablecreator.cpp \
     src/Controllers/applicationcontroller.cpp \
     src/Controllers/usercontroller.cpp \
-    src/ui/formregistrationdialog.cpp
+    src/ui/registrationdialog.cpp \
+    src/ui/userlogindialog.cpp
 
 FORMS += src/forms_about.ui \
     src/forms_genre_editor.ui \
@@ -104,5 +104,5 @@ FORMS += src/forms_about.ui \
     src/forms_web_browser.ui \
     src/forms_database_editor.ui \
     src/forms_main.ui \
-    src/form_user_login.ui \
-    src/ui/formregistrationdialog.ui
+    src/ui/registrationdialog.ui \
+    src/ui/userlogindialog.ui
