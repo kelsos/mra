@@ -2,6 +2,7 @@
 
 #include <QtGui>
 #include <QApplication>
+#include <QWindowsVistaStyle>
 #include "Controllers/applicationcontroller.h"
 
 int main(int argc, char *argv[])

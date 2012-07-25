@@ -7,7 +7,6 @@ ApplicationController::ApplicationController(QObject *parent) :
 
 void ApplicationController::initialize()
 {
-
     //TODO: Initialize database if database is not existant.
     db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("data.db");
@@ -18,7 +17,18 @@ void ApplicationController::initialize()
         DatabaseCreator creator(&db);
         creator.initializeDatabaseTables();
     }
+    UserController *uController = new UserController(&db);
+    connect(uController, SIGNAL(authenticationSuccess()), this, SLOT(handleAuthenticationSuccess()));
+    uController->initialize();
+}
 
-    UserController userController(&db);
-    userController.initialize();
+void ApplicationController::quitApplication()
+{
+    QApplication::exit(0);
+}
+
+void ApplicationController::handleAuthenticationSuccess()
+{
+    mcra *applicationWindow = new mcra();
+    applicationWindow->show();
 }

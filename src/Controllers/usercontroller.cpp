@@ -12,6 +12,7 @@ void UserController::initialize()
     UserLoginDialog *uLogD = new UserLoginDialog();
     connect(uLogD, SIGNAL(openRegistrationDialog()), this, SLOT(openRegistrationDialog()));
     connect(uLogD, SIGNAL(authenticateUser(QString,QString)), this, SLOT(authenticateUser(QString,QString)));
+    connect(this, SIGNAL(authenticationResult(bool)), uLogD, SLOT(handleAuthenticationResult(bool)));
     uLogD->exec();
 }
 
@@ -47,8 +48,12 @@ void UserController::authenticateUser(QString username, QString password)
 
     hash.addData(saltedPassword.toUtf8());
     QString hashedPassword = QString(hash.result().toHex());
-
-    emit authenticationResult(storedPasswordHash == hashedPassword);
+    bool authSuccess = (storedPasswordHash == hashedPassword);
+    emit authenticationResult(authSuccess);
+    if(authSuccess)
+    {
+        emit authenticationSuccess();
+    }
 }
 
 void UserController::registerUser(QString username, QString password)
@@ -57,6 +62,8 @@ void UserController::registerUser(QString username, QString password)
 
     QUuid saltGen;
     QString salt = saltGen.createUuid();
+    salt = salt.replace("{","");
+    salt = salt.replace("}","");
     QString saltedPassword = salt + password + salt;
 
     hash.addData(saltedPassword.toUtf8());

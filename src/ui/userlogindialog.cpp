@@ -28,5 +28,18 @@ void UserLoginDialog::handleRegisterButtonClick()
 
 void UserLoginDialog::handleLoginButtonClick()
 {
-    emit(ui->userNameLineEdit->text(), ui->passwordLineEdit->text());
+    emit authenticateUser(ui->userNameLineEdit->text(), ui->passwordLineEdit->text());
+}
+
+void UserLoginDialog::handleAuthenticationResult(bool result)
+{
+    if(!result)
+    {
+        ui->passwordLineEdit->setText("");
+        ui->userNameLineEdit->setText("");
+    }
+    else
+    {
+        this->close();
+    }
 }

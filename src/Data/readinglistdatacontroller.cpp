@@ -16,9 +16,10 @@ MangaSqlQueryModel *ReadingListDataController::getUserReadingList(bool displayFi
 
         MangaSqlQueryModel *model = new MangaSqlQueryModel;
         QString query;
+        QString readIsFinished = displayFinished ? "true" : "false";
         query = "SELECT mi.manga_title, rl.read_starting_chapter, rl.read_current_chapter, rl.read_last_time "
                 "FROM manga_info mi, reading_list rl "
-                "WHERE mi.manga_id = rl.manga_id AND rl.read_is_finished = '" + displayFinished + "'";
+                "WHERE mi.manga_id = rl.manga_id AND rl.read_is_finished = '" + readIsFinished  + "'";
 
         model->setQuery(query,*database);
 

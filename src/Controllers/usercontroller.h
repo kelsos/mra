@@ -23,6 +23,7 @@ private:
 
 signals:
     void authenticationResult(bool result);
+    void authenticationSuccess();
     void registrationResult(bool result);
 
 public slots:

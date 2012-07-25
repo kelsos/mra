@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QApplication>
 #include <QFile>
+#include "mcra.h"
 #include "Data/databasecreator.h"
 #include "Controllers/usercontroller.h"
 
@@ -17,9 +19,12 @@ public:
 private:
     QSqlDatabase db;
 
+
 signals:
     
 public slots:
+    void quitApplication();
+    void handleAuthenticationSuccess();
     
 };
 

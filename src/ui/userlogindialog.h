@@ -27,6 +27,7 @@ public slots:
     void handleCancelButtonClick();
     void handleRegisterButtonClick();
     void handleLoginButtonClick();
+    void handleAuthenticationResult(bool result);
 
 signals:
     void openRegistrationDialog();

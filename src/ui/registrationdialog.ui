@@ -30,7 +30,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="usernamelineEdit"/>
+      <widget class="QLineEdit" name="usernamelineEdit">
+       <property name="maxLength">
+        <number>25</number>
+       </property>
+       <property name="placeholderText">
+        <string>Type Your Desired Username</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -50,7 +57,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="passwordLineEdit"/>
+      <widget class="QLineEdit" name="passwordLineEdit">
+       <property name="maxLength">
+        <number>25</number>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Type Password</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -70,7 +87,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="retypePasswordLineEdit"/>
+      <widget class="QLineEdit" name="retypePasswordLineEdit">
+       <property name="maxLength">
+        <number>25</number>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Retype Password</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
