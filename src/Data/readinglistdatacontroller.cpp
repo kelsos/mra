@@ -16,25 +16,16 @@ MangaSqlQueryModel *ReadingListDataController::getUserReadingList(bool displayFi
 
         MangaSqlQueryModel *model = new MangaSqlQueryModel;
         QString query;
-        if(displayFinished)
-        {
-            query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME, RL.READ_IS_FINISHED "
-                    "FROM MANGA_INFO MI, READING_LIST RL "
-                    "WHERE MI.MANGA_ID = RL.MANGA_ID";
-        }
-        else
-        {
-            query = "SELECT MI.MANGA_TITLE, RL.READ_STARTING_CHAPTER, RL.READ_CURRENT_CHAPTER, RL.READ_ONLINE_URL, RL.READ_LAST_TIME "
-                    "FROM MANGA_INFO MI, READING_LIST RL "
-                    "WHERE MI.MANGA_ID = RL.MANGA_ID AND RL.READ_IS_FINISHED = 'false'";
-        }
+        query = "SELECT mi.manga_title, rl.read_starting_chapter, rl.read_current_chapter, rl.read_last_time "
+                "FROM manga_info mi, reading_list rl "
+                "WHERE mi.manga_id = rl.manga_id AND rl.read_is_finished = '" + displayFinished + "'";
+
         model->setQuery(query,*database);
 
         int i = 0;
         model->setHeaderData(i++,Qt::Horizontal,"Manga Title");
         model->setHeaderData(i++,Qt::Horizontal,"Starting\nChapter");
         model->setHeaderData(i++,Qt::Horizontal,"Current\nChapter");
-        model->setHeaderData(i++,Qt::Horizontal,"Online URL");
         model->setHeaderData(i++,Qt::Horizontal,"Last\nRead");
         if(displayFinished)
             model->setHeaderData(i++,Qt::Horizontal,"Finished\nReading?");
@@ -55,7 +46,7 @@ QPixmap ReadingListDataController::getMangaCover(QString mangaTitle)
             database->open();
 
         QSqlQuery query;
-        query.prepare("SELECT MANGA_COVER FROM MANGA_INFO WHERE MANGA_TITLE = ?");
+        query.prepare("SELECT manga_cover FROM manga_info WHERE manga_title = ?");
         query.bindValue(0,mangaTitle);
         query.exec();
         QByteArray ba;
@@ -85,7 +76,7 @@ QString ReadingListDataController::getMangaDescription(QString mangaTitle)
             database->open();
         QSqlQuery query;
         QString mangaDescription;
-        query.prepare("SELECT MANGA_DESCRIPTION FROM MANGA_INFO WHERE MANGA_TITLE = ?");
+        query.prepare("SELECT manga_description FROM manga_info WHERE manga_title = ?");
         query.bindValue(0,mangaTitle);
         query.exec();
         while(query.next())
@@ -106,7 +97,7 @@ QString ReadingListDataController::getMangaNote(QString mangaTitle)
             database->open();
         QSqlQuery query;
         QString mangaNote;
-        query.prepare("SELECT READ_NOTE FROM READING_LIST WHERE MANGA_TITLE = ?");
+        query.prepare("SELECT read_note FROM reading_list WHERE manga_title = ?");
         query.bindValue(0,mangaTitle);
         query.exec();
         while(query.next())
@@ -128,7 +119,7 @@ QString ReadingListDataController::getMangaUrl(QString mangaTitle)
         QSqlQuery query;
         QString mangaUrl;
         query.prepare("SELECT RL.READ_ONLINE_URL FROM READING_LIST RL, MANGA_INFO MI WHERE MI.MANGA_TITLE = ? "
-                      "AND RL.MANGA_ID = MI.MANGA_ID");
+                      "AND RL.manga_id = MI.manga_id");
         query.bindValue(0,mangaTitle);
         query.exec();
         while(query.next())

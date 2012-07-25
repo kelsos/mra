@@ -13,9 +13,10 @@ INCLUDEPATH += src \
     ./debug/.ui \
     ./GeneratedFiles
 win32{
-    LIBS += -lC:/Tools/Qt/4.8.1/plugins/sqldrivers/qsqlited4
+    LIBS += -L$(QTDIR)/plugins/sqldrivers \
+            -lqsqlited4
     DEFINES += QT_LARGEFILE_SUPPORT _WINDOWS
-    INCLUDEPATH += $(QTDIR)/mkspecs/win32-msvc2010
+    INCLUDEPATH += $(QTDIR)/mkspecs/win32-g++
 }
 
 #-L/usr/lib/x86_64-linux-gnu/qt4/plugins/sqldrivers \ #UBUNTU VM SETUP
@@ -106,3 +107,6 @@ FORMS += src/forms_about.ui \
     src/forms_main.ui \
     src/ui/registrationdialog.ui \
     src/ui/userlogindialog.ui
+
+OTHER_FILES += \
+    src/ui/form_ui_test.qml

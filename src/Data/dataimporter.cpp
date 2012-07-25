@@ -14,9 +14,8 @@ void DataImporter::insertReadItem(ReadItem* readItem)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO READING_LIST (MANGA_ID, READ_STARTING_CHAPTER, READ_CURRENT_CHAPTER, "
-                      "READ_ONLINE_URL, READ_IS_FINISHED, READ_LAST_TIME, READ_NOTE) VALUES "
-					  "((SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?), ?, ?, ?, ?, ?, ?)");
+        query.prepare("INSERT INTO reading_list (manga_id, user_id, read_starting_chapter, read_current_chapter, read_is_finished, read_last_time, read_note) VALUES "
+                      "((SELECT manga_id FROM manga_info WHERE manga_title = ?), ?, ?, ?, ?, ?, ?)");
 
         int i = 0;
         query.bindValue(i++, readItem->getMangaTitle());
@@ -43,8 +42,7 @@ void DataImporter::insertMangaData(MangaInfo* manga)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO MANGA_INFO (MANGA_ID, MANGA_TITLE, MANGA_DESCRIPTION, MANGA_PUBLICATION_DATE, "
-                      "MANGA_PUBLICATION_STATUS, MANGA_PUBLISHER_ID, MANGA_COVER) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        query.prepare("INSERT INTO manga_info (manga_id, manga_title, manga_description, manga_publication_year, manga_publication_status, manga_publisher_id, manga_cover) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) manga->getMangaId());
@@ -71,8 +69,7 @@ void DataImporter::insertAuthorData(AuthorInfo* author)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO AUTHOR_INFO (AUTHOR_ID, AUTHOR_NAME, AUTHOR_NATIONALITY, AUTHOR_BIRTHDAY, "
-                      "AUTHOR_WEBSITE) VALUES (?, ?, ?, ?, ?)");
+        query.prepare("INSERT INTO author_info (author_id, author_name, author_nationality, author_birthday, author_website) VALUES (?, ?, ?, ?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) author->getAuthorId());
@@ -95,7 +92,7 @@ void DataImporter::insertGenreData(GenreInfo* genre)
         if(!database->isOpen())
             database->open();
         QSqlQuery query;
-        query.prepare("INSERT INTO GENRE_INFO (GENRE_ID, GENRE_NAME) VALUES (?, ?)");
+        query.prepare("INSERT INTO genre_info (genre_id, genre_info) VALUES (?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) genre->getGenreId());
@@ -116,8 +113,8 @@ void DataImporter::insertPublisherData(PublisherInfo* publisher)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO PUBLISHER_INFO (PUBLISHER_ID, PUBLISHER_NAME, PUBLISHER_COUNTRY, "
-                      "PUBLISHER_WEBSITE, PUBLISHER_NOTE) values (?, ?, ?, ?, ?)");
+        query.prepare("INSERT INTO publisher_info (publisher_id, publisher_name, publisher_country, "
+                      "publisher_website, publisher_note) values (?, ?, ?, ?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) publisher->getPublisherId());
@@ -142,8 +139,8 @@ void DataImporter::insertNewsItem(NewsStorage* newsItem)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO NEWS_STORAGE (NEWSITEM_ID, NEWSITEM_TITLE, NEWSITEM_HYPERLINK, "
-                      "NEWSITEM_DESCRIPTION, NEWSITEM_PUBLICATION_DATE, NEWSITEM_AQUISITION_DATE ) VALUES "
+        query.prepare("INSERT INTO news_storage (newsitem_id, newsitem_title, newsitem_hyperlink, "
+                      "newsitem_description, newsitem_publication_date, newsitem_aquisition_date ) VALUES "
                       "(?, ?, ?, ?, ?, ?)");
 
         int i = 0;
@@ -168,7 +165,7 @@ void DataImporter::insertNewsSubscription(NewsSubscriptions* subscription)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO NEWS_SUBSCRIPTIONS (SUBSCRIPTION_ID, SUBSCRIPTION_URL, SUBSCRIPTION_CHANNEL_NAME) "
+        query.prepare("INSERT INTO news_subscriptions (subscription_id, subscription_url, subcription_channel_name) "
                       "VALUES (?, ?, ?)");
 
         int i = 0;
@@ -190,7 +187,7 @@ void DataImporter::insertMangaAuthor(MangaAuthors* maAuth)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO MANGA_AUTHORS (MANGA_ID, AUTHOR_ID) VALUES (?, ?)");
+        query.prepare("INSERT INTO manga_authors (manga_id, author_id) VALUES (?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) maAuth->getMangaId());
@@ -212,7 +209,7 @@ void DataImporter::insertMangaGenre(MangaGenres* maGen)
             database->open();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO MANGA_GENRES (MANGA_ID, GENRE_ID) VALUES (?, ?)");
+        query.prepare("INSERT INTO manga_genres (manga_id, genre_id) VALUES (?, ?)");
 
         int i = 0;
         query.bindValue(i++, (int) maGen->getMangaId());

@@ -25,7 +25,7 @@ QString DatabaseEditorOperator::getMangaStatus(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT MANGA_PUBLICATION_STATUS FROM MANGA_INFO WHERE MANGA_TITLE = ?");
+    query.prepare("SELECT manga_publication_status FROM manga_info WHERE manga_title = ?");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -39,8 +39,9 @@ QStringList DatabaseEditorOperator::getAuthorsForManga(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT AI.AUTHOR_NAME FROM AUTHOR_INFO AI, MANGA_AUTHORS MA, MANGA_INFO MI "
-		"WHERE AI.AUTHOR_ID = MA.AUTHOR_ID AND MA.MANGA_ID = MI.MANGA_ID AND MI.MANGA_TITLE = ?");
+    query.prepare("SELECT ai.author_name "
+                  "FROM author_info ai, manga_authors ma, manga_info mi "
+                  "WHERE ai.author_id = ma.author_id AND ma.manga_id = mi.manga_id AND mi.manga_title = ?");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -54,8 +55,8 @@ QStringList DatabaseEditorOperator::getGenresForManga(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT GI.GENRE_NAME FROM GENRE_INFO GI, MANGA_GENRES MG, MANGA_INFO MI "
-		"WHERE GI.GENRE_ID = MG.GENRE_ID AND MG.MANGA_ID = MI.MANGA_ID AND MI.MANGA_TITLE = ?");
+    query.prepare("SELECT gi.genre_name FROM genre_info gi, manga_genres mg, manga_info mi"
+                  "WHERE gi.genre_id = mg.genre_id AND mg.manga_id = mi.manga_id AND mi.manga_title = ?");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -69,8 +70,8 @@ QString DatabaseEditorOperator::getPublisherForManga(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT PI.PUBLISHER_NAME FROM PUBLISHER_INFO PI, MANGA_INFO MI "
-		"WHERE PI.PUBLISHER_ID = MI.MANGA_PUBLISHER_ID AND MI.MANGA_TITLE = ?");
+    query.prepare("SELECT pi.publisher_name FROM publisher_info pi, manga_info mi "
+                  "WHERE pi.publisher_id = mi.manga_publisher_id AND mi.manga_title = ?");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -84,9 +85,9 @@ QStringList DatabaseEditorOperator::getNonSelectedAuthorsForManga(QString mangaT
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT AUTHOR_NAME FROM AUTHOR_INFO WHERE AUTHOR_NAME NOT IN "
-		"(SELECT AI.AUTHOR_NAME FROM AUTHOR_INFO AI, MANGA_AUTHORS MA, MANGA_INFO MI "
-		"WHERE AI.AUTHOR_ID = MA.AUTHOR_ID AND MA.MANGA_ID = MI.MANGA_ID AND MI.MANGA_TITLE = ? )");
+    query.prepare("SELECT author_name FROM author_info WHERE author_name NOT IN "
+                  "(SELECT ai.author_name FROM author_info ai, manga_authors ma, manga_info mi "
+                   "WHERE ai.author_id = ma.author_id AND ma.manga_id = mi.manga_id AND mi.manga_title = ? )");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -100,9 +101,9 @@ QStringList DatabaseEditorOperator::getNonSelectedGenresForManga(QString mangaTi
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT GENRE_NAME FROM GENRE_INFO WHERE GENRE_NAME NOT IN "
-		"(SELECT GI.GENRE_NAME FROM GENRE_INFO GI, MANGA_GENRES MG, MANGA_INFO MI "
-		"WHERE GI.GENRE_ID = MG.GENRE_ID AND MG.MANGA_ID = MI.MANGA_ID AND MI.MANGA_TITLE = ? )");
+    query.prepare("SELECT genre_name FROM genre_info WHERE genre_name NOT IN "
+                  "(SELECT gi.genre_name FROM genre_info gi, manga_genres mg, manga_info mi "
+                  "WHERE gi.genre_id = mg.genre_id AND mg.manga_id = mi.manga_id AND mi.manga_title = ? )");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -116,9 +117,9 @@ QStringList DatabaseEditorOperator::getNonSelectedPublishersForManga(QString man
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT PUBLISHER_NAME FROM PUBLISHER_INFO WHERE PUBLISHER_NAME NOT IN "
-		"(SELECT PI.PUBLISHER_NAME FROM PUBLISHER_INFO PI, MANGA_INFO MI "
-		"WHERE PI.PUBLISHER_ID = MI.MANGA_PUBLISHER_ID AND MI.MANGA_TITLE = ?)");
+    query.prepare("SELECT publisher_name FROM publisher_info WHERE publisher_name NOT IN "
+                  "(SELECT pi.publisher_name FROM publisher_info pi, manga_info mi "
+                  "WHERE pi.publisher_id = mi.manga_publisher_id AND mi.manga_title = ?)");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -132,7 +133,7 @@ QDateTime DatabaseEditorOperator::getPublicationDateForManga(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT MANGA_PUBLICATION_DATE FROM MANGA_INFO WHERE MANGA_TITLE = ? ");
+    query.prepare("SELECT manga_publication_year FROM manga_info WHERE manga_title = ? ");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 	while(query.next())
@@ -147,8 +148,8 @@ void DatabaseEditorOperator::addAuthorForManga(QString mangaTitle, QString autho
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("INSERT INTO MANGA_AUTHORS (MANGA_ID, AUTHOR_ID) VALUES"
-		" ((SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?),(SELECT AUTHOR_ID FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?))");
+    query.prepare("INSERT INTO manga_authors (manga_id, author_id) VALUES "
+                  "((SELECT manga_id FROM manga_info WHERE manga_title = ?),(SELECT author_id FROM author_info WHERE author_name = ?))");
 	query.bindValue(0,mangaTitle);
 	query.bindValue(1,authorName);
 	query.exec();
@@ -161,8 +162,8 @@ void DatabaseEditorOperator::removeAuthorForManga(QString mangaTitle, QString au
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("DELETE FROM MANGA_AUTHORS "
-		"WHERE MANGA_ID IN (SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?) AND AUTHOR_ID IN (SELECT AUTHOR_ID FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?)");
+    query.prepare("DELETE FROM manga_authors "
+                  "WHERE manga_id IN (SELECT manga_id FROM manga_info WHERE manga_title = ?) AND author_id IN (SELECT author_id FROM author_info WHERE author_name = ?)");
 	query.bindValue(0,mangaTitle);
 	query.bindValue(1,authorName);
 	query.exec();
@@ -176,8 +177,8 @@ void DatabaseEditorOperator::addGenreForManga(QString mangaTitle, QString genreN
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("INSERT INTO MANGA_GENRES (MANGA_ID, GENRE_ID) VALUES"
-		" ((SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?),(SELECT GENRE_ID FROM GENRE_INFO WHERE GENRE_NAME = ?))");
+    query.prepare("INSERT INTO manga_genres (manga_id, genre_id) VALUES "
+                  "((SELECT manga_id FROM manga_info WHERE manga_title = ?),(SELECT genre_id FROM genre_info WHERE genre_name = ?))");
 	query.bindValue(0,mangaTitle);
 	query.bindValue(1,genreName);
 	query.exec();
@@ -190,8 +191,8 @@ void DatabaseEditorOperator::removeGenreFromManga(QString mangaTitle, QString ge
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("DELETE FROM MANGA_GENRES "
-		"WHERE MANGA_ID IN (SELECT MANGA_ID FROM MANGA_INFO WHERE MANGA_TITLE = ?) AND GENRE_ID IN (SELECT GENRE_ID FROM GENRE_INFO WHERE GENRE_NAME = ?)");
+    query.prepare("DELETE FROM manga_genres "
+                  "WHERE manga_id IN (SELECT manga_id FROM manga_info WHERE manga_title = ?) AND genre_id IN (SELECT genre_id FROM genre_info WHERE genre_name = ?)");
 	query.bindValue(0,mangaTitle);
 	query.bindValue(1,genreName);
 	query.exec();
@@ -205,7 +206,7 @@ void DatabaseEditorOperator::addPublisherForManga(QString mangaTitle, QString pu
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("UPDATE MANGA_INFO SET MANGA_PUBLISHER_ID = (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?) WHERE MANGA_TITLE = ?");
+    query.prepare("UPDATE manga_info SET manga_publisher_id = (SELECT publisher_id FROM publisher_info WHERE publisher_name = ?) WHERE manga_title = ?");
 	query.bindValue(0,publisherName);
 	query.bindValue(1,mangaTitle);
 	query.exec();
@@ -218,7 +219,7 @@ void DatabaseEditorOperator::removePublisherFromManga(QString mangaTitle)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("UPDATE MANGA_INFO SET MANGA_PUBLISHER_ID = 0 WHERE MANGA_TITLE = ?");
+    query.prepare("UPDATE manga_info SET manga_publisher_id = 0 WHERE manga_title = ?");
 	query.bindValue(0,mangaTitle);
 	query.exec();
 }
@@ -230,7 +231,7 @@ void DatabaseEditorOperator::updateCoverForManga(QString mangaTitle, QByteArray 
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("UPDATE MANGA_INFO SET MANGA_COVER = ? WHERE MANGA_TITLE = ?");
+    query.prepare("UPDATE manga_info SET manga_cover = ? WHERE manga_title = ?");
 	query.bindValue(0,cover);
 	query.bindValue(1,mangaTitle);
 	query.exec();
@@ -243,8 +244,8 @@ void DatabaseEditorOperator::insertNewMangaInfo(QString title, QString descripti
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("INSERT INTO MANGA_INFO (MANGA_TITLE, MANGA_DESCRIPTION, MANGA_PUBLICATION_DATE, "
-			"MANGA_PUBLICATION_STATUS, MANGA_PUBLISHER_ID, MANGA_COVER) VALUES (?, ?, ?, ?, (SELECT PUBLISHER_ID FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?), ?)");
+        query.prepare("INSERT INTO manga_info (manga_title, manga_description, manga_publication_year, manga_publication_status, manga_publisher_id, manga_cover) "
+                      "VALUES (?, ?, ?, ?, (SELECT publisher_id FROM publisher_info WHERE publisher_name = ?), ?)");
 
 		int i = 0;
 		query.bindValue(i++, title);
@@ -270,7 +271,7 @@ int DatabaseEditorOperator::getMangaCount()
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("SELECT COUNT(*) FROM MANGA_INFO");
+        query.prepare("SELECT COUNT(*) FROM manga_info");
 		query.exec();
 		while(query.next())
 			result = query.value(0).toInt();
@@ -290,7 +291,7 @@ void DatabaseEditorOperator::deleteManga(QString mangaTitle)
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("DELETE FROM MANGA_INFO WHERE MANGA_TITLE = ?");
+        query.prepare("DELETE FROM manga_info WHERE manga_title = ?");
 		query.bindValue(0,mangaTitle);
 		query.exec();
 	}
@@ -308,8 +309,9 @@ void DatabaseEditorOperator::updateNewMangaInfo(QString oldTitle, QString newTit
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("UPDATE MANGA_INFO SET MANGA_TITLE = ?, MANGA_DESCRIPTION = ?, MANGA_PUBLICATION_DATE = ?, "
-			"MANGA_PUBLICATION_STATUS = ? WHERE MANGA_TITLE = ?");
+        query.prepare("UPDATE manga_info "
+                      "SET manga_title = ?, manga_description = ?, manga_publication_year = ?, manga_publication_status = ?"
+                      "WHERE manga_title = ?");
 		int i = 0;
 		query.bindValue(i++, newTitle);
 		query.bindValue(i++, description);
@@ -332,7 +334,7 @@ QStringList DatabaseEditorOperator::getAllAuthorNames()
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("SELECT AUTHOR_NAME FROM AUTHOR_INFO ORDER BY AUTHOR_NAME ASC");
+        query.prepare("SELECT author_name FROM author_info ORDER BY author_name ASC");
 		query.exec();
 		while(query.next())
 			result.append(query.value(0).toString());
@@ -352,7 +354,7 @@ QStringList DatabaseEditorOperator::getAllPublisherNames()
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("SELECT PUBLISHER_NAME FROM PUBLISHER_INFO ORDER BY PUBLISHER_NAME ASC");
+        query.prepare("SELECT publisher_name FROM publisher_info ORDER BY publisher_name ASC");
 		query.exec();
 		while(query.next())
 			result.append(query.value(0).toString());
@@ -373,7 +375,7 @@ int DatabaseEditorOperator::getAuthorCount()
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("SELECT COUNT(*) FROM AUTHOR_INFO");
+        query.prepare("SELECT COUNT(*) FROM author_info");
 		query.exec();
 		while(query.next())
 			result = query.value(0).toInt();
@@ -394,7 +396,7 @@ int DatabaseEditorOperator::getPublisherCount()
 		if(!database->isOpen())
 			database->open();
 		QSqlQuery query;
-		query.prepare("SELECT COUNT(*) FROM PUBLISHER_INFO");
+        query.prepare("SELECT COUNT(*) FROM publisher_info");
 		query.exec();
 		while(query.next())
 			result = query.value(0).toInt();
@@ -412,7 +414,7 @@ QString DatabaseEditorOperator::getAuthorCountryOfBirth(QString authorName)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT AUTHOR_NATIONALITY FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+    query.prepare("SELECT author_nationality FROM author_info WHERE author_name = ?");
 	query.bindValue(0,authorName);
 	query.exec();
 	while(query.next())
@@ -426,7 +428,7 @@ QDateTime DatabaseEditorOperator::getAuthorBirthday(QString authorName)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT AUTHOR_BIRTHDAY FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+    query.prepare("SELECT author_birthday FROM author_info WHERE author_name = ?");
 	query.bindValue(0,authorName);
 	query.exec();
 	while(query.next())
@@ -440,7 +442,7 @@ QString DatabaseEditorOperator::getAuthorWebsite(QString authorName)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT AUTHOR_WEBSITE FROM AUTHOR_INFO WHERE AUTHOR_NAME = ?");
+    query.prepare("SELECT author_website FROM author_info WHERE author_name = ?");
 	query.bindValue(0,authorName);
 	query.exec();
 	while(query.next())
@@ -454,7 +456,7 @@ QString DatabaseEditorOperator::getPublisherCountry(QString publisher)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT PUBLISHER_COUNTRY FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+    query.prepare("SELECT publisher_country FROM publisher_info WHERE publisher_name = ?");
 	query.bindValue(0,publisher);
 	query.exec();
 	while(query.next())
@@ -468,7 +470,7 @@ QString DatabaseEditorOperator::getPublisherWebsite(QString publisher)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT PUBLISHER_WEBSITE FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+    query.prepare("SELECT publisher_website FROM publisher_info WHERE publisher_name = ?");
 	query.bindValue(0,publisher);
 	query.exec();
 	while(query.next())
@@ -482,7 +484,7 @@ QString DatabaseEditorOperator::getPublisherNote(QString publisher)
 	if(!database->isOpen())
 		database->open();
 	QSqlQuery query;
-	query.prepare("SELECT PUBLISHER_NOTE FROM PUBLISHER_INFO WHERE PUBLISHER_NAME = ?");
+    query.prepare("");
 	query.bindValue(0,publisher);
 	query.exec();
 	while(query.next())
