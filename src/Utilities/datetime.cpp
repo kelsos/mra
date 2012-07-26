@@ -10,14 +10,11 @@ QDateTime DateTime::parseRFC822DateTime(QString rfc822)
     if(rfc822.length()==31)
     {
         timeZoneHours = rfc822.right(5).toInt()/100;
-        //qDebug() << timeZoneHours;
     }
     else
     {
         timeZoneString = rfc822.right(rfc822.length()-25).trimmed();
-        //qDebug() << timeZoneString;
         timeZoneHours = convertTimeZoneToHours(timeZoneString);
-        //qDebug() << timeZoneHours << "From ABBR";
     }
 
     dateTimeString = rfc822.left(25).right(20);
@@ -25,7 +22,6 @@ QDateTime DateTime::parseRFC822DateTime(QString rfc822)
     internalDateTime = QDateTime::fromString(dateTimeString, "dd MM yyyy hh:mm:ss");
     internalDateTime = internalDateTime.addSecs(timeZoneHours*60*60*-1);
     internalDateTime.setTimeSpec(Qt::UTC);
-    //qDebug() << internalDateTime.toUTC().toString(Qt::ISODate);
     return internalDateTime.toLocalTime();
 }
 

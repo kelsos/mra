@@ -34,79 +34,85 @@ RCC_DIR += ./GeneratedFiles
 QMAKE_CXXFLAGS += -std=c++0x
 
 HEADERS += \
-    src/version.h \
-    src/mcra.h \
-    src/webBrowser.h \
-    src/Data/databasemanager.h \
-    src/Data/databasecreator.h \
-    src/Data/databaseeraser.h \
-    src/Data/dataimporter.h \
-    src/Data/readinglistdatacontroller.h \
-    src/Data/databaseeditoroperator.h \
-    src/DataClasses/authorinfo.h \
-    src/DataClasses/genreinfo.h \
-    src/DataClasses/mangaauthors.h \
-    src/DataClasses/mangagenres.h \
-    src/DataClasses/mangainfo.h \
-    src/DataClasses/newsstorage.h \
-    src/DataClasses/newssubscriptions.h \
-    src/DataClasses/publisherinfo.h \
-    src/DataClasses/readitem.h \
-    src/Utilities/datetime.h \
-    src/about.h \
-    src/mangasqlquerymodel.h \
-    src/rssfetcher.h \
-    src/xmldataparser.h \
-    src/xmlreadinglistparser.h \
-    src/xmlwrapper.h \
+    src/controllers/usercontroller.h \
+    src/controllers/applicationcontroller.h \
+    src/controllers/applicationcontroller.cpp.autosave \
+    src/entities/readitem.h \
+    src/entities/publisherinfo.h \
+    src/entities/newssubscriptions.h \
+    src/entities/newsstorage.h \
+    src/entities/mangainfo.h \
+    src/entities/mangagenres.h \
+    src/entities/mangaauthors.h \
+    src/entities/genreinfo.h \
+    src/entities/authorinfo.h \
+    src/models/mangasqlquerymodel.h \
+    src/services/database/readinglistdatacontroller.h \
+    src/services/database/dataimporter.h \
+    src/services/database/databasetablecreator.h \
+    src/services/database/databasemanagerservice.h \
+    src/services/database/databaseeraser.h \
+    src/services/database/databaseeditoroperator.h \
+    src/services/xml/xmlwrapper.h \
+    src/services/xml/xmlreadinglistparser.h \
+    src/services/xml/xmldataparser.h \
+    src/services/xml/rssfetcher.h \
+    src/utilities/datetime.h \
+    src/views/webBrowser.h \
+    src/views/userlogindialog.h \
+    src/views/registrationdialog.h \
+    src/views/mcra.h \
+    src/views/genresinfoeditor.h \
     src/views/dataeditorview.h \
-    src/Data/tablecreator.h \
-    src/Controllers/applicationcontroller.h \
-    src/Controllers/usercontroller.h \
-    src/ui/userlogindialog.h \
-    src/ui/registrationdialog.h
+    src/views/databaseeditor.h \
+    src/views/about.h
+
 
 SOURCES += \
-    src/about.cpp \
     src/main.cpp \
-    src/mcra.cpp \
-    src/webBrowser.cpp \
-    src/Data/databasemanager.cpp \
-    src/Data/databasecreator.cpp \
-    src/Data/databaseeraser.cpp \
-    src/Data/dataimporter.cpp \
-    src/Data/readinglistdatacontroller.cpp \
-    src/Data/databaseeditoroperator.cpp \
-    src/DataClasses/newsstorage.cpp \
-    src/DataClasses/mangainfo.cpp \
-    src/DataClasses/mangagenres.cpp \
-    src/DataClasses/mangaauthors.cpp \
-    src/DataClasses/genreinfo.cpp \
-    src/DataClasses/authorinfo.cpp \
-    src/DataClasses/newssubscriptions.cpp \
-    src/DataClasses/publisherinfo.cpp \
-    src/DataClasses/readitem.cpp \
-    src/Utilities/datetime.cpp \
-    src/mangasqlquerymodel.cpp \
-    src/rssfetcher.cpp \
-    src/xmldataparser.cpp \
-    src/xmlreadinglistparser.cpp \
-    src/xmlwrapper.cpp \
+    src/controllers/usercontroller.cpp \
+    src/controllers/applicationcontroller.cpp \
+    src/entities/readitem.cpp \
+    src/entities/publisherinfo.cpp \
+    src/entities/newssubscriptions.cpp \
+    src/entities/newsstorage.cpp \
+    src/entities/mangainfo.cpp \
+    src/entities/mangagenres.cpp \
+    src/entities/mangaauthors.cpp \
+    src/entities/genreinfo.cpp \
+    src/entities/authorinfo.cpp \
+    src/models/mangasqlquerymodel.cpp \
+    src/services/database/readinglistdatacontroller.cpp \
+    src/services/database/dataimporter.cpp \
+    src/services/database/databasetablecreator.cpp \
+    src/services/database/databasemanagerservice.cpp \
+    src/services/database/databaseeraser.cpp \
+    src/services/database/databaseeditoroperator.cpp \
+    src/services/xml/xmlwrapper.cpp \
+    src/services/xml/xmlreadinglistparser.cpp \
+    src/services/xml/xmldataparser.cpp \
+    src/services/xml/rssfetcher.cpp \
+    src/utilities/datetime.cpp \
+    src/views/webBrowser.cpp \
+    src/views/userlogindialog.cpp \
+    src/views/registrationdialog.cpp \
+    src/views/mcra.cpp \
+    src/views/genresinfoeditor.cpp \
     src/views/dataeditorview.cpp \
-    src/Data/tablecreator.cpp \
-    src/Controllers/applicationcontroller.cpp \
-    src/Controllers/usercontroller.cpp \
-    src/ui/registrationdialog.cpp \
-    src/ui/userlogindialog.cpp
+    src/views/databaseeditor.cpp \
+    src/views/about.cpp
 
-FORMS += src/forms_about.ui \
-    src/forms_genre_editor.ui \
-    src/forms_subscription_manager.ui \
-    src/forms_web_browser.ui \
-    src/forms_database_editor.ui \
-    src/forms_main.ui \
+
+
+FORMS += \
+    src/ui/userlogindialog.ui \
     src/ui/registrationdialog.ui \
-    src/ui/userlogindialog.ui
+    src/ui/forms_web_browser.ui \
+    src/ui/forms_subscription_manager.ui \
+    src/ui/forms_main.ui \
+    src/ui/forms_genre_editor.ui \
+    src/ui/forms_database_editor.ui \
+    src/ui/forms_about.ui
 
-OTHER_FILES += \
-    src/ui/form_ui_test.qml
+
+

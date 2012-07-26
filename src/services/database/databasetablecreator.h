@@ -1,15 +1,15 @@
-#ifndef DATABASECREATOR_H
-#define DATABASECREATOR_H
+#ifndef DATABASETABLECREATOR_H
+#define DATABASETABLECREATOR_H
 
 #include <QObject>
 #include <QSqlQuery>
 #include <QSqlDatabase>
 
-class DatabaseCreator : public QObject
+class DatabaseTableCreator : public QObject
 {
     Q_OBJECT
 public:
-    explicit DatabaseCreator(QSqlDatabase *database, QObject *parent = 0);
+    explicit DatabaseTableCreator(QSqlDatabase *database, QObject *parent = 0);
     void initializeDatabaseTables();
 private:
     void createAuthorInfoTable();
@@ -33,4 +33,4 @@ public slots:
     
 };
 
-#endif // DATABASECREATOR_H
+#endif // DATABASETABLECREATOR_H

@@ -1,11 +1,11 @@
-#include "databasecreator.h"
+#include "databasetablecreator.h"
 
-DatabaseCreator::DatabaseCreator(QSqlDatabase *database, QObject *parent) :
+DatabaseTableCreator::DatabaseTableCreator(QSqlDatabase *database, QObject *parent) :
     QObject(parent)
 {
     this->database=database;
 }
-void DatabaseCreator::createMangaInfoTable()
+void DatabaseTableCreator::createMangaInfoTable()
 {
     try
     {
@@ -33,7 +33,7 @@ void DatabaseCreator::createMangaInfoTable()
     }
 }
 
-void DatabaseCreator::createPublisherInfoTable()
+void DatabaseTableCreator::createPublisherInfoTable()
 {
     try
     {
@@ -57,7 +57,7 @@ void DatabaseCreator::createPublisherInfoTable()
     }
 }
 
-void DatabaseCreator::createAuthorInfoTable()
+void DatabaseTableCreator::createAuthorInfoTable()
 {
     try
     {
@@ -81,7 +81,7 @@ void DatabaseCreator::createAuthorInfoTable()
     }
 }
 
-void DatabaseCreator::createGenreInfoTable()
+void DatabaseTableCreator::createGenreInfoTable()
 {
     try
     {
@@ -98,7 +98,7 @@ void DatabaseCreator::createGenreInfoTable()
     }
 }
 
-void DatabaseCreator::createNewsStorageTable()
+void DatabaseTableCreator::createNewsStorageTable()
 {
     try
     {
@@ -123,7 +123,7 @@ void DatabaseCreator::createNewsStorageTable()
     }
 }
 
-void DatabaseCreator::createNewsSubscriptionsTable()
+void DatabaseTableCreator::createNewsSubscriptionsTable()
 {
     try
     {
@@ -145,7 +145,7 @@ void DatabaseCreator::createNewsSubscriptionsTable()
     }
 }
 
-void DatabaseCreator::createMangaAuthorsTable()
+void DatabaseTableCreator::createMangaAuthorsTable()
 {
     try
     {
@@ -170,7 +170,7 @@ void DatabaseCreator::createMangaAuthorsTable()
     }
 }
 
-void DatabaseCreator::createMangaGenresTable()
+void DatabaseTableCreator::createMangaGenresTable()
 {
     try
     {
@@ -195,7 +195,7 @@ void DatabaseCreator::createMangaGenresTable()
     }
 }
 
-void DatabaseCreator::createReadingListTable()
+void DatabaseTableCreator::createReadingListTable()
 {
     try
     {
@@ -225,7 +225,7 @@ void DatabaseCreator::createReadingListTable()
     }
 }
 
-void DatabaseCreator::createUserTable()
+void DatabaseTableCreator::createUserTable()
 {
     if(!database->isOpen())
     {
@@ -242,7 +242,7 @@ void DatabaseCreator::createUserTable()
     query.exec();
 }
 
-void DatabaseCreator::createOnlineReaderList()
+void DatabaseTableCreator::createOnlineReaderList()
 {
     if(!database->isOpen())
     {
@@ -258,7 +258,7 @@ void DatabaseCreator::createOnlineReaderList()
     query.exec();
 }
 
-void DatabaseCreator::initializeDatabaseTables()
+void DatabaseTableCreator::initializeDatabaseTables()
 {
     createUserTable();
     createAuthorInfoTable();

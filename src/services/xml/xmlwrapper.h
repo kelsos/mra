@@ -5,14 +5,14 @@
 #include <xmldataparser.h>
 #include "xmlreadinglistparser.h"
 //Data classes included.
-#include "DataClasses/authorinfo.h"
-#include "DataClasses/genreinfo.h"
-#include "DataClasses/mangaauthors.h"
-#include "DataClasses/mangagenres.h"
-#include "DataClasses/mangainfo.h"
-#include "DataClasses/publisherinfo.h"
-#include "DataClasses/mangagenres.h"
-#include "DataClasses/mangaauthors.h"
+#include "entities/authorinfo.h"
+#include "entities/genreinfo.h"
+#include "entities/mangaauthors.h"
+#include "entities/mangagenres.h"
+#include "entities/mangainfo.h"
+#include "entities/publisherinfo.h"
+#include "entities/mangagenres.h"
+#include "entities/mangaauthors.h"
 
 using namespace std;
 
