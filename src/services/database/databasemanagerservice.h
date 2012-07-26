@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QFile>
+
+#include "databasetablecreator.h"
 
 class DatabaseManagerService : public QObject
 {
@@ -21,7 +24,7 @@ signals:
 public slots:
 
 private:
-    QSqlDatabase *db;
+    QSqlDatabase db;
 
     
 };

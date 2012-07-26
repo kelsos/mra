@@ -6,14 +6,13 @@
 #include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
-#include "Data/databasemanager.h"
 //Data classes included.
-#include "DataClasses/authorinfo.h"
-#include "DataClasses/genreinfo.h"
-#include "DataClasses/mangaauthors.h"
-#include "DataClasses/mangagenres.h"
-#include "DataClasses/mangainfo.h"
-#include "DataClasses/publisherinfo.h"
+#include "../../entities/authorinfo.h"
+#include "../../entities/genreinfo.h"
+#include "../../entities/mangaauthors.h"
+#include "../../entities/mangagenres.h"
+#include "../../entities/mangainfo.h"
+#include "../../entities/publisherinfo.h"
 
 class XmlDataParser
 {

@@ -6,7 +6,7 @@
 #else
 #include <QtGui/QDialog>
 #endif
-#include "ui/registrationdialog.h"
+#include "views/registrationdialog.h"
 
 namespace Ui {
     class UserLoginDialog;

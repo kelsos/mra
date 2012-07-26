@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dataeditorview</class>
- <widget class="QDialog" name="dataeditorview">
+ <class>DatabaseEditor</class>
+ <widget class="QDialog" name="DatabaseEditor">
   <property name="geometry">
    <rect>
     <x>0</x>

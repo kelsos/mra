@@ -7,9 +7,6 @@
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
 #include <QMessageBox>
-#include "Data/databasemanager.h"
-#include "xmlwrapper.h"
-#include "rssfetcher.h"
 #include "ui_forms_main.h"
 #include "about.h"
 #include "webBrowser.h"
@@ -24,9 +21,7 @@ public:
 
 private:
     Ui::mainForm ui;
-    XmlWrapper* xmlWrap;
     QGraphicsScene* scene;
-    RssFetcher *rss;
     webBrowser *browserWindow;
     QString selectedMangaTitle;
     QSortFilterProxyModel *sortModel;

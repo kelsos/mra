@@ -1,4 +1,4 @@
-#include "ui/userlogindialog.h"
+#include "views/userlogindialog.h"
 #include "ui_userlogindialog.h"
 
 UserLoginDialog::UserLoginDialog(QWidget *parent) :

@@ -9,9 +9,9 @@ QT += core gui sql network xml xmlpatterns webkit
 CONFIG += debug
 DEFINES += QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
 INCLUDEPATH += src \
-    ./debug/.moc \
-    ./debug/.ui \
-    ./GeneratedFiles
+    ./build/debug/.moc \
+    ./build/debug/.ui \
+    ./build/GeneratedFiles
 win32{
     LIBS += -L$(QTDIR)/plugins/sqldrivers \
             -lqsqlited4
@@ -27,10 +27,10 @@ unix:!macx{
 }
 
 DEPENDPATH += .
-MOC_DIR += debug/.moc
-OBJECTS_DIR += debug/.obj
-UI_DIR += ./GeneratedFiles
-RCC_DIR += ./GeneratedFiles
+MOC_DIR += ./build/debug/.moc
+OBJECTS_DIR += ./build/debug/.obj
+UI_DIR += ./build/GeneratedFiles
+RCC_DIR += ./build/GeneratedFiles
 QMAKE_CXXFLAGS += -std=c++0x
 
 HEADERS += \
@@ -65,7 +65,8 @@ HEADERS += \
     src/views/genresinfoeditor.h \
     src/views/dataeditorview.h \
     src/views/databaseeditor.h \
-    src/views/about.h
+    src/views/about.h \
+    src/services/database/mangainfoservice.h
 
 
 SOURCES += \
@@ -100,7 +101,8 @@ SOURCES += \
     src/views/genresinfoeditor.cpp \
     src/views/dataeditorview.cpp \
     src/views/databaseeditor.cpp \
-    src/views/about.cpp
+    src/views/about.cpp \
+    src/services/database/mangainfoservice.cpp
 
 
 

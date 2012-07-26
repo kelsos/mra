@@ -35,17 +35,17 @@ void XmlDataParser::parseData(QString fileName)
         {
             if(xmlStreamReader.name()=="Publisher")
             {
-				DatabaseManager::Instance()->getImporter()->insertPublisherData(&pub);
+                //DatabaseManager::Instance()->getImporter()->insertPublisherData(&pub);
                 pub.clear();
             }
             else if(xmlStreamReader.name()=="Genre")
             {
-                DatabaseManager::Instance()->getImporter()->insertGenreData(&gen);
+                //DatabaseManager::Instance()->getImporter()->insertGenreData(&gen);
                 gen.clear();
             }
             else if(xmlStreamReader.name()=="Author")
             {
-                DatabaseManager::Instance()->getImporter()->insertAuthorData(&auth);
+                //DatabaseManager::Instance()->getImporter()->insertAuthorData(&auth);
                 auth.clear();
             }
             else if (xmlStreamReader.name()=="Manga")
@@ -53,7 +53,7 @@ void XmlDataParser::parseData(QString fileName)
 
                 ba.append(coverString);
                 mInfo.setMangaCover(QByteArray::fromBase64(ba));
-                DatabaseManager::Instance()->getImporter()->insertMangaData(&mInfo);
+                //DatabaseManager::Instance()->getImporter()->insertMangaData(&mInfo);
                 coverString.clear();
                 mInfo.clear();
                 ba.clear();
@@ -61,12 +61,12 @@ void XmlDataParser::parseData(QString fileName)
             }
             else if (xmlStreamReader.name()=="MangaGenre")
             {
-                DatabaseManager::Instance()->getImporter()->insertMangaGenre(&mGen);
+                //DatabaseManager::Instance()->getImporter()->insertMangaGenre(&mGen);
                 mGen.clear();
             }
             else if(xmlStreamReader.name()=="MangaAuthors")
             {
-                DatabaseManager::Instance()->getImporter()->insertMangaAuthor(&mAuth);
+                //DatabaseManager::Instance()->getImporter()->insertMangaAuthor(&mAuth);
                 mAuth.clear();
             }
         }

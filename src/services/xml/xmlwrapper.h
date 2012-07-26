@@ -2,8 +2,8 @@
 #define XMLWRAPPER_H
 
 #include <QDebug>
-#include <xmldataparser.h>
 #include "xmlreadinglistparser.h"
+#include "xmldataparser.h"
 //Data classes included.
 #include "entities/authorinfo.h"
 #include "entities/genreinfo.h"

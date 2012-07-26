@@ -5,8 +5,7 @@
 #include <QSqlDatabase>
 #include <QApplication>
 #include <QFile>
-#include "mcra.h"
-#include "Data/databasecreator.h"
+#include "views/mcra.h"
 #include "Controllers/usercontroller.h"
 
 class ApplicationController : public QObject
@@ -17,9 +16,7 @@ public:
     void initialize();
 
 private:
-    QSqlDatabase db;
-
-
+    
 signals:
     
 public slots:

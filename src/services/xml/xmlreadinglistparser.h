@@ -5,8 +5,7 @@
 #include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
-#include "DataClasses/readitem.h"
-#include "Data/databasemanager.h"
+#include "../../entities/readitem.h"
 
 class XmlReadingListParser
 {

@@ -10,7 +10,7 @@
 #include <QUrl>
 #include <QDateTime>
 
-#include "Utilities/datetime.h"
+#include "utilities/datetime.h"
 
 class RssFetcher : public QObject
 {

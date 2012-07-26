@@ -1,5 +1,5 @@
 #include "databaseeditor.h"
-#include "ui_databaseeditor.h"
+#include "ui_forms_database_editor.h"
 
 DatabaseEditor::DatabaseEditor(QWidget *parent) :
     QDialog(parent),
@@ -43,9 +43,9 @@ DatabaseEditor::DatabaseEditor(QWidget *parent) :
     ui->mangaPublicationStatusCombobox->addItem("Hiatus");
 
 	//Populate all the comboboxes with the available data
-    ui->mangaInfoAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllMangaInfoTitles());
-	ui->authorsAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllAuthorNames());
-	ui->publishersAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllPublisherNames());
+//    ui->mangaInfoAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllMangaInfoTitles());
+//	ui->authorsAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllAuthorNames());
+//	ui->publishersAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllPublisherNames());
 
 	//Initialize the new entry lock variable
     isNewMangaEntryInProgress=false;
@@ -53,9 +53,9 @@ DatabaseEditor::DatabaseEditor(QWidget *parent) :
 	isNewPublisherEntryInProgress=false;
 
 	//Load the totals
-    ui->totalMangaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getMangaCount()) + " Total");
-	ui->authorsTotaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getAuthorCount()) + " Total");
-	ui->publishersTotalLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getPublisherCount()) + " Total");
+//    ui->totalMangaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getMangaCount()) + " Total");
+//	ui->authorsTotaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getAuthorCount()) + " Total");
+//	ui->publishersTotalLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getPublisherCount()) + " Total");
 }
 
 DatabaseEditor::~DatabaseEditor()
@@ -69,38 +69,38 @@ DatabaseEditor::~DatabaseEditor()
 
 void DatabaseEditor::openGenresEdit()
 {
-    genresInfoEditor edit;
-    edit.exec();
+//    genresInfoEditor edit;
+//    edit.exec();
 
 }
 
 void DatabaseEditor::retrieveCover(QString selectionTitle)
 {
-    scene->clear();
-    scene->addPixmap(DatabaseManager::Instance()->getReadDataController()->getMangaCover(selectionTitle));
-    ui->mangaCoverGraphicView->setScene(scene);
-    ui->mangaCoverGraphicView->show();
+//    scene->clear();
+//    scene->addPixmap(DatabaseManager::Instance()->getReadDataController()->getMangaCover(selectionTitle));
+//    ui->mangaCoverGraphicView->setScene(scene);
+//    ui->mangaCoverGraphicView->show();
 }
 
 void  DatabaseEditor::handleMangaComboIndexChanged(QString text)
 {
-    retrieveCover(text);
-    ui->mangaDescriptionTextEdit->setText(DatabaseManager::Instance()->getReadDataController()->getMangaDescription(text));
-    ui->mangaTitleLineEdit->setText(text);
-    updateStatusCombobox(DatabaseManager::Instance()->getOperator()->getMangaStatus(text));
-    updateMangaAuthorData(text);
-    updateMangaGenreData(text);
-    updatePublisherData(text);
-    ui->mangaPublicationDateEdit->setDate(QDate::fromString("01/01/1800","dd/MM/yyyy"));
-    ui->mangaPublicationDateEdit->setDateTime(DatabaseManager::Instance()->getOperator()->getPublicationDateForManga(text));
+//    retrieveCover(text);
+//    ui->mangaDescriptionTextEdit->setText(DatabaseManager::Instance()->getReadDataController()->getMangaDescription(text));
+//    ui->mangaTitleLineEdit->setText(text);
+//    updateStatusCombobox(DatabaseManager::Instance()->getOperator()->getMangaStatus(text));
+//    updateMangaAuthorData(text);
+//    updateMangaGenreData(text);
+//    updatePublisherData(text);
+//    ui->mangaPublicationDateEdit->setDate(QDate::fromString("01/01/1800","dd/MM/yyyy"));
+//    ui->mangaPublicationDateEdit->setDateTime(DatabaseManager::Instance()->getOperator()->getPublicationDateForManga(text));
 }
 
 void DatabaseEditor::listAllManga()
 {
-    ui->totalMangaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getMangaCount()) + " Total");
-    ui->mangaInfoAllComboBox->clear();
-    ui->mangaInfoAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllMangaInfoTitles());
-    ui->mangaTitleLineEdit->setText(ui->mangaInfoAllComboBox->currentText());
+//    ui->totalMangaLabel->setText(QString::number(DatabaseManager::Instance()->getOperator()->getMangaCount()) + " Total");
+//    ui->mangaInfoAllComboBox->clear();
+//    ui->mangaInfoAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllMangaInfoTitles());
+//    ui->mangaTitleLineEdit->setText(ui->mangaInfoAllComboBox->currentText());
 }
 
 void DatabaseEditor::updateStatusCombobox(QString status)
@@ -120,14 +120,14 @@ void DatabaseEditor::updateStatusCombobox(QString status)
 
 void DatabaseEditor::addSelecteGenreToManga()
 {
-    DatabaseManager::Instance()->getOperator()->addGenreForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresComboBox->currentText());
-    updateMangaGenreData(ui->mangaInfoAllComboBox->currentText());
+    //DatabaseManager::Instance()->getOperator()->addGenreForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresComboBox->currentText());
+    //updateMangaGenreData(ui->mangaInfoAllComboBox->currentText());
 }
 
 void DatabaseEditor::addSelectAuthorToManga()
 {
-    DatabaseManager::Instance()->getOperator()->addAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsComboBox->currentText());
-    updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
+    //DatabaseManager::Instance()->getOperator()->addAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsComboBox->currentText());
+    //updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
 }
 
 void DatabaseEditor::addSelectPublisherToManga()
@@ -139,7 +139,7 @@ void DatabaseEditor::addSelectPublisherToManga()
     }
     else
     {
-        DatabaseManager::Instance()->getOperator()->addPublisherForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaPublishersComboBox->currentText());
+       // DatabaseManager::Instance()->getOperator()->addPublisherForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaPublishersComboBox->currentText());
         updatePublisherData(ui->mangaInfoAllComboBox->currentText());
     }
 }
@@ -147,30 +147,30 @@ void DatabaseEditor::addSelectPublisherToManga()
 void DatabaseEditor::updateMangaAuthorData(QString selection)
 {
     ui->mangaAuthorsComboBox->clear();
-    ui->mangaAuthorsComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedAuthorsForManga(selection));
-    qModel->setStringList(DatabaseManager::Instance()->getOperator()->getAuthorsForManga(selection));
+    //ui->mangaAuthorsComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedAuthorsForManga(selection));
+    //qModel->setStringList(DatabaseManager::Instance()->getOperator()->getAuthorsForManga(selection));
     ui->mangaAuthorsListView->setModel(qModel);
 }
 
 void DatabaseEditor::removeSelectedAuthorFromManga()
 {
-    DatabaseManager::Instance()->getOperator()->removeAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsListView->currentIndex().data
-                               (Qt::DisplayRole).toString());
+    //DatabaseManager::Instance()->getOperator()->removeAuthorForManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaAuthorsListView->currentIndex().data
+      //                         (Qt::DisplayRole).toString());
     updateMangaAuthorData(ui->mangaInfoAllComboBox->currentText());
 }
 
 void DatabaseEditor::updateMangaGenreData(QString selection)
 {
     ui->mangaGenresComboBox->clear();
-    ui->mangaGenresComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedGenresForManga(selection));
-    genresModel->setStringList(DatabaseManager::Instance()->getOperator()->getGenresForManga(selection));
+    //ui->mangaGenresComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedGenresForManga(selection));
+    ///genresModel->setStringList(DatabaseManager::Instance()->getOperator()->getGenresForManga(selection));
     ui->mangaGenresListView->setModel(genresModel);
 }
 
 void DatabaseEditor::removeSelectedGenreFromManga()
 {
-    DatabaseManager::Instance()->getOperator()->removeGenreFromManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresListView->currentIndex().data
-                               (Qt::DisplayRole).toString());
+    //DatabaseManager::Instance()->getOperator()->removeGenreFromManga(ui->mangaInfoAllComboBox->currentText(),ui->mangaGenresListView->currentIndex().data
+       //                        (Qt::DisplayRole).toString());
     updateMangaGenreData(ui->mangaInfoAllComboBox->currentText());
 }
 
@@ -217,21 +217,21 @@ void DatabaseEditor::openImageSelectionDialog()
     }
     else
     {
-        DatabaseManager::Instance()->getOperator()->updateCoverForManga(ui->mangaInfoAllComboBox->currentText(),ba);
+      //  DatabaseManager::Instance()->getOperator()->updateCoverForManga(ui->mangaInfoAllComboBox->currentText(),ba);
     }
 
 }
 
 void DatabaseEditor::updatePublisherData(QString selection)
 {
-    ui->mangaPublisherLineEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherForManga(selection));
+    //ui->mangaPublisherLineEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherForManga(selection));
     ui->mangaPublishersComboBox->clear();
-    ui->mangaPublishersComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedPublishersForManga(selection));
+   // ui->mangaPublishersComboBox->addItems(DatabaseManager::Instance()->getOperator()->getNonSelectedPublishersForManga(selection));
 }
 
 void DatabaseEditor::removeSelectedPublisherFromManga()
 {
-    DatabaseManager::Instance()->getOperator()->removePublisherFromManga(ui->mangaInfoAllComboBox->currentText());
+    //DatabaseManager::Instance()->getOperator()->removePublisherFromManga(ui->mangaInfoAllComboBox->currentText());
     updatePublisherData(ui->mangaInfoAllComboBox->currentText());
 }
 
@@ -259,7 +259,7 @@ void DatabaseEditor::saveManga()
         QDateTime datetime;
         if(ui->mangaPublicationDateEdit->date()!=QDate::fromString("01/01/1800","dd/MM/yyyy"))
             datetime=ui->mangaPublicationDateEdit->dateTime();
-        DatabaseManager::Instance()->getOperator()->insertNewMangaInfo(ui->mangaTitleLineEdit->text(),ui->mangaDescriptionTextEdit->toPlainText(),ui->mangaPublisherLineEdit->text(),datetime,ui->mangaPublicationStatusCombobox->currentText(),coverArray);
+      //  DatabaseManager::Instance()->getOperator()->insertNewMangaInfo(ui->mangaTitleLineEdit->text(),ui->mangaDescriptionTextEdit->toPlainText(),ui->mangaPublisherLineEdit->text(),datetime,ui->mangaPublicationStatusCombobox->currentText(),coverArray);
 
         coverArray.clear();
         listAllManga();
@@ -280,7 +280,7 @@ void DatabaseEditor::saveManga()
         QDateTime datetime;
         if(ui->mangaPublicationDateEdit->date()!=QDate::fromString("01/01/1800","dd/MM/yyyy"))
             datetime=ui->mangaPublicationDateEdit->dateTime();
-        DatabaseManager::Instance()->getOperator()->updateNewMangaInfo(ui->mangaInfoAllComboBox->currentText(),ui->mangaTitleLineEdit->text(),ui->mangaDescriptionTextEdit->toPlainText(),datetime,ui->mangaPublicationStatusCombobox->currentText());
+        //DatabaseManager::Instance()->getOperator()->updateNewMangaInfo(ui->mangaInfoAllComboBox->currentText(),ui->mangaTitleLineEdit->text(),ui->mangaDescriptionTextEdit->toPlainText(),datetime,ui->mangaPublicationStatusCombobox->currentText());
     }
 }
 
@@ -304,7 +304,7 @@ void DatabaseEditor::deleteManga()
     {
         if(ui->mangaInfoAllComboBox->currentText().isNull()||ui->mangaInfoAllComboBox->currentText().isEmpty())
             return;
-        DatabaseManager::Instance()->getOperator()->deleteManga(ui->mangaInfoAllComboBox->currentText());
+        //DatabaseManager::Instance()->getOperator()->deleteManga(ui->mangaInfoAllComboBox->currentText());
     }
 
 }
@@ -343,27 +343,27 @@ void DatabaseEditor::handleAuthorComboIndexChanged(QString text)
 {
 	ui->authorFullNameTextEdit->setText(text);
 	ui->authorBirthDateEdit->setDate(QDate::fromString("01/01/2000","dd/MM/yyyy"));
-	ui->authorBirthDateEdit->setDateTime(DatabaseManager::Instance()->getOperator()->getAuthorBirthday(text));
-	ui->authorCountryTextEdit->setText(DatabaseManager::Instance()->getOperator()->getAuthorCountryOfBirth(text));
-	ui->authorWebsiteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getAuthorWebsite(text));
+    //ui->authorBirthDateEdit->setDateTime(DatabaseManager::Instance()->getOperator()->getAuthorBirthday(text));
+    //ui->authorCountryTextEdit->setText(DatabaseManager::Instance()->getOperator()->getAuthorCountryOfBirth(text));
+//	ui->authorWebsiteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getAuthorWebsite(text));
 }
 
 void DatabaseEditor::handlePublisherComboIndexChanged(QString text) 
 {
 	ui->publisherNameTextEdit->setText(text);
-	ui->publisherCountryTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherCountry(text));
-	ui->publisherWebsiteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherWebsite(text));
-	ui->publisherNoteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherNote(text));
+    //ui->publisherCountryTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherCountry(text));
+//	ui->publisherWebsiteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherWebsite(text));
+    //ui->publisherNoteTextEdit->setText(DatabaseManager::Instance()->getOperator()->getPublisherNote(text));
 }
 
 void DatabaseEditor::listAllAuthors()
 {
 	ui->authorsAllComboBox->clear();
-	ui->authorsAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllAuthorNames());	
+    //ui->authorsAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllAuthorNames());
 }
 
 void DatabaseEditor::listAllPublishers()
 {
 	ui->publishersAllComboBox->clear();
-	ui->publishersAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllPublisherNames());
+    //ui->publishersAllComboBox->addItems(DatabaseManager::Instance()->getOperator()->getAllPublisherNames());
 }

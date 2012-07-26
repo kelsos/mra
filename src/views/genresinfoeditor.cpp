@@ -1,14 +1,14 @@
 #include "genresinfoeditor.h"
-#include "ui_genresinfoeditor.h"
+#include "ui_forms_genre_editor.h"
 
-genresInfoEditor::genresInfoEditor(QWidget *parent) :
+GenresInfoEditor::GenresInfoEditor(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::genresInfoEditor)
+    ui(new Ui::GenresInfoEditorForm)
 {
     ui->setupUi(this);
 }
 
-genresInfoEditor::~genresInfoEditor()
+GenresInfoEditor::~GenresInfoEditor()
 {
     delete ui;
 }

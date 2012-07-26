@@ -5,19 +5,19 @@
 
 namespace Ui
 {
-class genresInfoEditor;
+class GenresInfoEditorForm;
 }
 
-class genresInfoEditor : public QDialog
+class GenresInfoEditor : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit genresInfoEditor(QWidget *parent = 0);
-    ~genresInfoEditor();
+    explicit GenresInfoEditor(QWidget *parent = 0);
+    ~GenresInfoEditor();
 
 private:
-    Ui::genresInfoEditor *ui;
+    Ui::GenresInfoEditorForm *ui;
 };
 
 #endif // GENRESINFOEDITOR_H

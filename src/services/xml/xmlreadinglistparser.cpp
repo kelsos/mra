@@ -27,7 +27,7 @@ void XmlReadingListParser::parseReadingList(QString fileName)
             if(xmlStreamReader.name()=="manga")
             {
                 qDebug() << readItem.getMangaTitle();
-                DatabaseManager::Instance()->getImporter()->insertReadItem(&readItem);
+                //DatabaseManager::Instance()->getImporter()->insertReadItem(&readItem);
                 readItem.clear();
             }
         }

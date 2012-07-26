@@ -8,8 +8,8 @@
 #include <QString>
 #include <QVariant>
 #include <QUuid>
-#include "ui/registrationdialog.h"
-#include "ui/userlogindialog.h"
+#include "../views/registrationdialog.h"
+#include "../views/userlogindialog.h"
 
 class UserController : public QObject
 {

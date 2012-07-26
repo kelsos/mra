@@ -1,4 +1,4 @@
-#include "mcra.h"
+#include "views/mcra.h"
 
 #include <QtGui>
 #include <QApplication>
