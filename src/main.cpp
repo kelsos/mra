@@ -3,7 +3,7 @@
 #include <QtGui>
 #include <QApplication>
 #include <QWindowsVistaStyle>
-#include "Controllers/applicationcontroller.h"
+#include "controllers/applicationcontroller.h"
 
 int main(int argc, char *argv[])
 {
