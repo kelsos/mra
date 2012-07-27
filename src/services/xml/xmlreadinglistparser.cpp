@@ -42,7 +42,8 @@ void XmlReadingListParser::parseReadingList(QString fileName)
             else if (currentTag=="dateRead")
                 readItem.setLastRead(QDateTime::fromString(xmlStreamReader.text().toString(),Qt::ISODate));
             else if (currentTag=="onlineURL")
-                readItem.setOnlineUrl(xmlStreamReader.text().toString());
+                //readItem.setOnlineUrl(xmlStreamReader.text().toString());
+            	qDebug();
             else if (currentTag=="finishedReading")
                 readItem.setReadFinished(QString::compare(xmlStreamReader.text().toString(),"true",Qt::CaseInsensitive)?true:false);
             else if(currentTag=="mangaNote")

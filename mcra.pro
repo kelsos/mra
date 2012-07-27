@@ -52,8 +52,6 @@ HEADERS += \
     src/services/database/databasetablecreator.h \
     src/services/database/databasemanagerservice.h \
     src/services/database/databaseeraser.h \
-    src/services/database/databaseeditoroperator.h \
-    src/services/xml/xmlwrapper.h \
     src/services/xml/xmlreadinglistparser.h \
     src/services/xml/xmldataparser.h \
     src/services/xml/rssfetcher.h \
@@ -66,7 +64,11 @@ HEADERS += \
     src/views/dataeditorview.h \
     src/views/databaseeditor.h \
     src/views/about.h \
-    src/services/database/mangainfoservice.h
+    src/services/database/mangainfoservice.h \
+    src/services/database/userservice.h \
+    src/services/database/authorinfoservice.h \
+    src/services/database/dataservicebase.h \
+    src/services/database/publisherinfoservice.h
 
 
 SOURCES += \
@@ -88,8 +90,6 @@ SOURCES += \
     src/services/database/databasetablecreator.cpp \
     src/services/database/databasemanagerservice.cpp \
     src/services/database/databaseeraser.cpp \
-    src/services/database/databaseeditoroperator.cpp \
-    src/services/xml/xmlwrapper.cpp \
     src/services/xml/xmlreadinglistparser.cpp \
     src/services/xml/xmldataparser.cpp \
     src/services/xml/rssfetcher.cpp \
@@ -102,7 +102,11 @@ SOURCES += \
     src/views/dataeditorview.cpp \
     src/views/databaseeditor.cpp \
     src/views/about.cpp \
-    src/services/database/mangainfoservice.cpp
+    src/services/database/mangainfoservice.cpp \
+    src/services/database/userservice.cpp \
+    src/services/database/authorinfoservice.cpp \
+    src/services/database/dataservicebase.cpp \
+    src/services/database/publisherinfoservice.cpp
 
 
 

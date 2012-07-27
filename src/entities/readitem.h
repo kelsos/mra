@@ -2,6 +2,7 @@
 #define READITEM_H
 
 #include <QString>
+#include <QStringList>
 #include <QDateTime>
 
 class ReadItem
@@ -11,7 +12,7 @@ public:
     ReadItem();
     /** Full Parameter Constructor */
     ReadItem(unsigned int entryId, QString mangaTitle, unsigned int startingChapter,
-             unsigned int currentChapter, QString onlineUrl,
+             unsigned int currentChapter, QStringList onlineUrlList,
              QDateTime lastRead, bool readFinished);
     /** Default destructor */
     virtual ~ReadItem();
@@ -60,16 +61,16 @@ public:
     /** Access onlineUrl
      * \return The current value of onlineUrl
      */
-    QString getOnlineUrl()
+    QStringList getOnlineUrlList()
     {
-        return onlineUrl;
+        return onlineUrlList;
     }
     /** Set onlineUrl
      * \param val New value to set
      */
-    void setOnlineUrl(QString val)
+    void setOnlineUrlList(QStringList val)
     {
-        onlineUrl = val;
+        onlineUrlList = val;
     }
     /** Access lastRead
      * \return The current value of lastRead
@@ -149,7 +150,7 @@ private:
     QString mangaTitle; //!< Member variable "mangaTitle"
     unsigned int startingChapter; //!< Member variable "startingChapter"
     unsigned int currentChapter; //!< Member variable "currentChapter"
-    QString onlineUrl; //!< Member variable "onlineUrl"
+    QStringList onlineUrlList; //!< Member variable "onlineUrlList"
     QDateTime lastRead; //!< Member variable "lastRead"
     bool readFinished; //!< Member variable "readFinished"
     QString mangaNote; //!< Member variable "mangaNote"

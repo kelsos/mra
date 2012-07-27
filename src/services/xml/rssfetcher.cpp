@@ -23,7 +23,7 @@ void RssFetcher::get(const QUrl &url)
 void RssFetcher::fetch(QString urlString)
 {
     QUrl feedUrl;
-    feedUrl.setUrl(urlString,QUrl::ParsingMode::TolerantMode);
+    feedUrl.setUrl(urlString,QUrl::TolerantMode);
     xmlStreamReader.clear();
     get(feedUrl);
     //qDebug() << feedUrl.toString();

@@ -2,12 +2,8 @@
 #define USERCONTROLLER_H
 
 #include <QObject>
-#include <QSqlQuery>
 #include <QSqlDatabase>
-#include <QCryptographicHash>
-#include <QString>
-#include <QVariant>
-#include <QUuid>
+
 #include "../views/registrationdialog.h"
 #include "../views/userlogindialog.h"
 

@@ -2,7 +2,7 @@
 
 PublisherInfo::PublisherInfo()
 {
-    //ctor
+	this->publisherId = 0;
 }
 
 PublisherInfo::PublisherInfo(unsigned int publisherId, QString publisherName,

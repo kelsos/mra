@@ -21,7 +21,7 @@ void DataImporter::insertReadItem(ReadItem* readItem)
         query.bindValue(i++, readItem->getMangaTitle());
         query.bindValue(i++, (int) readItem->getStartingChapter());
         query.bindValue(i++, (int) readItem->getCurrentChapter());
-        query.bindValue(i++, readItem->getOnlineUrl());
+        //query.bindValue(i++, readItem->getOnlineUrl());
         query.bindValue(i++, readItem->getReadFinished());
         query.bindValue(i++, readItem->getLastRead());
         query.bindValue(i++, readItem->getMangaNote());

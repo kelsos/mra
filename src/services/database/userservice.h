@@ -3,6 +3,11 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QCryptographicHash>
+#include <QSqlQuery>
+#include <QString>
+#include <QVariant>
+#include <QUuid>
 
 class UserService : public QObject {
 	Q_OBJECT

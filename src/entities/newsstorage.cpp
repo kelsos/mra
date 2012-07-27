@@ -2,7 +2,7 @@
 
 NewsStorage::NewsStorage()
 {
-    //ctor
+   this->newsItemId = 0;
 }
 NewsStorage::NewsStorage(unsigned int newsItemId, QString newsItemTitle,
                          QString newsItemHyperLink, QString newsItemDescription,

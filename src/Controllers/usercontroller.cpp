@@ -19,66 +19,12 @@ void UserController::initialize()
 
 void UserController::authenticateUser(QString username, QString password)
 {
-    QCryptographicHash hash(QCryptographicHash::Sha1);
-    QSqlQuery retrieveSalt;
 
-    if(!database->isOpen())
-        database->open();
-
-    retrieveSalt.prepare("SELECT salt FROM users WHERE username = ?");
-    retrieveSalt.bindValue(0, username);
-    retrieveSalt.exec();
-    QString salt;
-
-    while(retrieveSalt.next())
-    {
-        salt = retrieveSalt.value(0).toString();
-    }
-
-    QSqlQuery query;
-    query.prepare("SELECT password FROM users WHERE username = ?");
-    query.bindValue(0, username);
-    query.exec();
-
-    QString storedPasswordHash;
-    while(query.next())
-        storedPasswordHash = query.value(0).toString();
-
-    QString saltedPassword = salt + password + salt;
-
-    hash.addData(saltedPassword.toUtf8());
-    QString hashedPassword = QString(hash.result().toHex());
-    bool authSuccess = (storedPasswordHash == hashedPassword);
-    emit authenticationResult(authSuccess);
-    if(authSuccess)
-    {
-        emit authenticationSuccess();
-    }
 }
 
 void UserController::registerUser(QString username, QString password)
 {
-    QCryptographicHash hash(QCryptographicHash::Sha1);
 
-    QUuid saltGen;
-    QString salt = saltGen.createUuid();
-    salt = salt.replace("{","");
-    salt = salt.replace("}","");
-    QString saltedPassword = salt + password + salt;
-
-    hash.addData(saltedPassword.toUtf8());
-    QString hashedPassword = QString(hash.result().toHex());
-
-    if(!database->isOpen())
-        database->open();
-
-    QSqlQuery query;
-    query.prepare("INSERT INTO users (username, password, salt) VALUES (?,?,?)");
-    query.bindValue(0, username);
-    query.bindValue(1, hashedPassword);
-    query.bindValue(2, salt);
-
-    emit registrationResult(query.exec());
 }
 
 void UserController::openRegistrationDialog()

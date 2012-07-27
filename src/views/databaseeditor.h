@@ -8,7 +8,7 @@
 #include <QBuffer>
 #include <QGraphicsScene>
 #include "genresinfoeditor.h"
-#include "entities/mangainfo.h"
+#include "../entities/mangainfo.h"
 
 namespace Ui
 {

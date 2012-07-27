@@ -2,7 +2,7 @@
 
 NewsSubscriptions::NewsSubscriptions()
 {
-    //ctor
+    this->subscriptionId = 0;
 }
 
 NewsSubscriptions::NewsSubscriptions(unsigned int subscriptionId,
