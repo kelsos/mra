@@ -8,9 +8,10 @@
 #include <QVariant>
 #include <QDateTime>
 
-class MangaInfoService : public QObject
+#include "dataservicebase.h"
+
+class MangaInfoService : public DataServiceBase
 {
-    Q_OBJECT
 public:
     explicit MangaInfoService(QSqlDatabase *db, QObject *parent = 0);
 	QStringList getAllMangaInfoTitles();
@@ -33,13 +34,6 @@ public:
 	int getMangaCount();
     void deleteManga(QString mangaTitle);
     void updateNewMangaInfo(QString oldTitle, QString newTitle, QString description, QDateTime publicationDate, QString publicationStatus);
-    
-signals:
-    
-public slots:
-
-private:
-    QSqlDatabase *db;
     
 };
 

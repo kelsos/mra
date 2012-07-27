@@ -49,7 +49,48 @@ int DataServiceBase::getCountFromDatabase(QString queryString)
     return result;
 }
 
-QSqlDatabase *DataServiceBase::getDatabasePtr()
+QDateTime DataServiceBase::getDateTimeFromDatabase(QString queryString, QString parameter)
 {
-    return this->db;
+	QDateTime result;
+	if(!db->isOpen())
+		db->open();
+	QSqlQuery query;
+	query.prepare(queryString);
+	if(!parameter.isEmpty())
+		query.bindValue(0,parameter);
+	query.exec();
+	while(query.next())
+		result = query.value(0).toDateTime();
+	return result;
+
+}
+
+
+void DataServiceBase::executeNonQuery( QString sqlString, QString parameter /*= ""*/ )
+{
+	if(!db->isOpen())
+		db->open();
+	QSqlQuery query;
+	query.prepare(sqlString);
+	if(!parameter.isEmpty())
+		query.bindValue(0,parameter);
+	query.exec();
+}
+
+void DataServiceBase::executeNonQuery( QString sqlString, QString firstParameter, QString secondParameter )
+{
+	if(!db->isOpen())
+		db->open();
+	QSqlQuery query;
+	query.prepare(sqlString);
+	query.bindValue(0,firstParameter);
+	query.bindValue(1,secondParameter);
+	query.exec();
+}
+
+void DataServiceBase::executeNonQuery( QSqlQuery query )
+{
+	if(!db->isOpen())
+		db->open();
+	query.exec();
 }
