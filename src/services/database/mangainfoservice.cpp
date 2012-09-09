@@ -162,8 +162,8 @@ int MangaInfoService::getMangaCount()
 
 void MangaInfoService::deleteManga(QString mangaTitle)
 {
-	QString sqlString = "DELETE FROM manga_info WHERE manga_title = ?";
-	this->executeNonQuery(sqlString,mangaTitle);
+    QString sqlString = "DELETE FROM manga_info WHERE manga_title = ?";
+    this->executeNonQuery(sqlString,mangaTitle);
 }
 
 void MangaInfoService::updateNewMangaInfo(QString oldTitle, QString newTitle, QString description, QDateTime publicationDate, QString publicationStatus)
@@ -179,6 +179,6 @@ void MangaInfoService::updateNewMangaInfo(QString oldTitle, QString newTitle, QS
         query.bindValue(i++, publicationDate);
         query.bindValue(i++, publicationStatus);
         query.bindValue(i++, oldTitle);
-		this->executeNonQuery(query);
+        this->executeNonQuery(query);
 
 }

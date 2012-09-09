@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mainForm</class>
- <widget class="QMainWindow" name="mainForm">
+ <class>MainWindowView</class>
+ <widget class="QMainWindow" name="MainWindowView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -140,7 +140,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QTabWidget" name="listAndWikieTabWidget">
+       <widget class="QTabWidget" name="listAndWikiTabWidget">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
@@ -157,7 +157,7 @@
          <enum>QTabWidget::Triangular</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="readingListTab">
          <attribute name="title">
@@ -235,14 +235,14 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="rssTitleLabel">
            <property name="text">
             <string>Title</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextBrowser" name="textBrowser_2">
+          <widget class="QTextBrowser" name="rssDescriptionText">
            <property name="styleSheet">
             <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
            </property>
@@ -255,7 +255,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="rssHyperlinkLabel">
            <property name="text">
             <string>hyperlink</string>
            </property>
@@ -323,15 +323,13 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuTest">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionMenuFileList"/>
-    <addaction name="actionMenuFileData"/>
     <addaction name="actionMenuFileQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -350,9 +348,9 @@
     <property name="title">
      <string>Tools</string>
     </property>
-    <addaction name="actionDatabase_Editor"/>
+    <addaction name="actionMenuToolsDbEditor"/>
    </widget>
-   <addaction name="menuTest"/>
+   <addaction name="menuFile"/>
    <addaction name="menuTools"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
@@ -372,53 +370,12 @@
    <addaction name="actionToolbarChapterFinished"/>
    <addaction name="actionToolbarRefresh"/>
   </widget>
-  <action name="actionMenuFileList">
+  <action name="actionMenuToolsDbEditor">
    <property name="text">
-    <string>Load Reading List Data</string>
+    <string>Database Editor</string>
    </property>
-  </action>
-  <action name="actionMenuFileData">
-   <property name="text">
-    <string>Load Manga Data</string>
-   </property>
-  </action>
-  <action name="actionMenuFileQuit">
-   <property name="text">
-    <string>Quit</string>
-   </property>
-  </action>
-  <action name="actionMenuHelpAbout">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionMenuSettingsDisplayFinished">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Display Finished</string>
-   </property>
-  </action>
-  <action name="actionToolbarOpenToRead">
-   <property name="icon">
-    <iconset>
-     <normaloff>../resources/icons/globe.png</normaloff>../resources/icons/globe.png</iconset>
-   </property>
-   <property name="text">
-    <string>Open To Read</string>
-   </property>
-  </action>
-  <action name="actionToolbarRefresh">
-   <property name="icon">
-    <iconset>
-     <normaloff>../resources/icons/reload.png</normaloff>../resources/icons/reload.png</iconset>
-   </property>
-   <property name="text">
-    <string>Refresh</string>
+   <property name="toolTip">
+    <string>Database Editor</string>
    </property>
   </action>
   <action name="actionToolbarChapterFinished">
@@ -433,12 +390,43 @@
     <string>Another Chapter finished.</string>
    </property>
   </action>
-  <action name="actionDatabase_Editor">
-   <property name="text">
-    <string>Database Editor</string>
+  <action name="actionToolbarRefresh">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/reload.png</normaloff>../resources/icons/reload.png</iconset>
    </property>
-   <property name="toolTip">
-    <string>Database Editor</string>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionToolbarOpenToRead">
+   <property name="icon">
+    <iconset>
+     <normaloff>../resources/icons/globe.png</normaloff>../resources/icons/globe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open To Read</string>
+   </property>
+  </action>
+  <action name="actionMenuSettingsDisplayFinished">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Display Finished</string>
+   </property>
+  </action>
+  <action name="actionMenuHelpAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionMenuFileQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

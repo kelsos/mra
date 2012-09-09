@@ -36,7 +36,6 @@ QMAKE_CXXFLAGS += -std=c++0x
 HEADERS += \
     src/controllers/usercontroller.h \
     src/controllers/applicationcontroller.h \
-    src/controllers/applicationcontroller.cpp.autosave \
     src/entities/readitem.h \
     src/entities/publisherinfo.h \
     src/entities/newssubscriptions.h \
@@ -59,7 +58,6 @@ HEADERS += \
     src/views/webBrowser.h \
     src/views/userlogindialog.h \
     src/views/registrationdialog.h \
-    src/views/mcra.h \
     src/views/genresinfoeditor.h \
     src/views/dataeditorview.h \
     src/views/databaseeditor.h \
@@ -68,7 +66,8 @@ HEADERS += \
     src/services/database/userservice.h \
     src/services/database/authorinfoservice.h \
     src/services/database/dataservicebase.h \
-    src/services/database/publisherinfoservice.h
+    src/services/database/publisherinfoservice.h \
+    src/views/mainwindowview.h
 
 
 SOURCES += \
@@ -97,7 +96,6 @@ SOURCES += \
     src/views/webBrowser.cpp \
     src/views/userlogindialog.cpp \
     src/views/registrationdialog.cpp \
-    src/views/mcra.cpp \
     src/views/genresinfoeditor.cpp \
     src/views/dataeditorview.cpp \
     src/views/databaseeditor.cpp \
@@ -106,7 +104,8 @@ SOURCES += \
     src/services/database/userservice.cpp \
     src/services/database/authorinfoservice.cpp \
     src/services/database/dataservicebase.cpp \
-    src/services/database/publisherinfoservice.cpp
+    src/services/database/publisherinfoservice.cpp \
+    src/views/mainwindowview.cpp
 
 
 
@@ -115,10 +114,12 @@ FORMS += \
     src/ui/registrationdialog.ui \
     src/ui/forms_web_browser.ui \
     src/ui/forms_subscription_manager.ui \
-    src/ui/forms_main.ui \
     src/ui/forms_genre_editor.ui \
     src/ui/forms_database_editor.ui \
-    src/ui/forms_about.ui
+    src/ui/forms_about.ui \
+    src/ui/mainwindowview.ui
+
+OTHER_FILES +=
 
 
 

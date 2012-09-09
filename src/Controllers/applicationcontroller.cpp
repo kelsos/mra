@@ -10,6 +10,9 @@ void ApplicationController::initialize()
 //    UserController *uController = new UserController(&db);
 //    connect(uController, SIGNAL(authenticationSuccess()), this, SLOT(handleAuthenticationSuccess()));
 //    uController->initialize();
+
+    //TEMP
+    this->handleAuthenticationSuccess();
 }
 
 void ApplicationController::quitApplication()
@@ -19,6 +22,7 @@ void ApplicationController::quitApplication()
 
 void ApplicationController::handleAuthenticationSuccess()
 {
-    mcra *applicationWindow = new mcra();
+    MainWindowView *applicationWindow = new MainWindowView();
+    connect(applicationWindow, SIGNAL(quitApplication()), this, SLOT(quitApplication()));
     applicationWindow->show();
 }

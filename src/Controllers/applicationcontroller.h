@@ -5,7 +5,7 @@
 #include <QSqlDatabase>
 #include <QApplication>
 #include <QFile>
-#include "../views/mcra.h"
+#include "../views/mainwindowview.h"
 #include "usercontroller.h"
 
 class ApplicationController : public QObject

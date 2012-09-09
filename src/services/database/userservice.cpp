@@ -13,7 +13,7 @@ void UserService::registerNewUser(QString username, QString password) {
     QCryptographicHash hash(QCryptographicHash::Sha1);
 
     QUuid saltGen;
-    QString salt = saltGen.createUuid();
+    QString salt = ;//saltGen.createUuid();
     salt = salt.replace("{","");
     salt = salt.replace("}","");
     QString saltedPassword = salt + password + salt;

@@ -1,6 +1,6 @@
 #include "publisherinfoservice.h"
 
-PublisherInfoService::PublisherInfoService(QSqlDatabase *db, QObject *parent = 0):DataServiceBase(db, parent)
+PublisherInfoService::PublisherInfoService(QSqlDatabase *db, QObject *parent):DataServiceBase(db, parent)
 {
 
 }

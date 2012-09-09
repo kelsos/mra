@@ -13,7 +13,7 @@ QString DataServiceBase::getStringFromDatabase( QString queryString, QString par
         db->open();
     QSqlQuery query;
     query.prepare(queryString);
-	if(!parameter.isEmpty)
+    if(!parameter.isEmpty())
 		query.bindValue(0, parameter);
     query.exec();
     while(query.next())
@@ -28,7 +28,7 @@ QStringList DataServiceBase::getStringListFromDatabase( QString queryString, QSt
         db->open();
     QSqlQuery query;
     query.prepare(queryString);
-	if(!parameter.isEmpty)
+    if(!parameter.isEmpty())
 		query.bindValue(0,parameter);
     query.exec();
     while(query.next())
