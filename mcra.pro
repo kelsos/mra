@@ -1,12 +1,12 @@
 # ----------------------------------------------------
 # Project: MCRA
 # ------------------------------------------------------
-
+lessThan(QT_MAJOR_VERSION, 5): error(This project requires Qt 5 or later)
 TEMPLATE = app
-TARGET = mcra_msvc
+TARGET = mra
 DESTDIR = ./debug
-QT += core widgets sql network xml xmlpatterns webkitwidgets
-CONFIG += debug
+QT += core widgets qml quick sql network xml xmlpatterns webkitwidgets
+CONFIG += debug c++11
 DEFINES += QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
 INCLUDEPATH += src \
     ./build/debug/.moc \
@@ -119,7 +119,7 @@ FORMS += \
     src/ui/forms_about.ui \
     src/ui/mainwindowview.ui
 
-OTHER_FILES +=
-
+OTHER_FILES += main.qml \
+    main.qml
 
 
