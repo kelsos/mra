@@ -1,11 +1,7 @@
 #ifndef USERLOGINDIALOG_H
 #define USERLOGINDIALOG_H
 
-#if QT_VERSION >= 0x050000
 #include <QtWidgets/QDialog>
-#else
-#include <QtGui/QDialog>
-#endif
 #include "registrationdialog.h"
 
 namespace Ui {

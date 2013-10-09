@@ -1,7 +1,7 @@
 #ifndef WEBBROWSER_H
 #define WEBBROWSER_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include <QMouseEvent>
 #include "ui_forms_web_browser.h"
 

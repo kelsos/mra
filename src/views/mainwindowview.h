@@ -1,7 +1,7 @@
 #ifndef MAINWINDOWVIEW_H
 #define MAINWINDOWVIEW_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include <QSortFilterProxyModel>
 #include <QSqlTableModel>
 

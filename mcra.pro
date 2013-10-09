@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET = mcra_msvc
 DESTDIR = ./debug
-QT += core gui sql network xml xmlpatterns webkit
+QT += core widgets sql network xml xmlpatterns webkitwidgets
 CONFIG += debug
 DEFINES += QT_DLL QT_WEBKIT_LIB QT_SQL_LIB QT_XMLPATTERNS_LIB QT_XML_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2
 INCLUDEPATH += src \
